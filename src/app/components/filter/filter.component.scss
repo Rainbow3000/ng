@@ -1,0 +1,31 @@
+.filter-container{
+    width: 100%;
+    height: auto;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    .filter-form{
+        display: flex;
+        justify-content: space-between;
+        .ant-form-item{
+            margin-bottom: 10px;    
+            height: 75px;
+            padding: 10px;
+            label{
+                font-weight: 600;
+            }
+        }
+        .filter-btn-wrapper{
+            height: 75px;
+            display: flex;
+            align-items: flex-end;
+            button{
+                height: 33px;
+                margin-left: 20px;
+                border-radius: 5px;
+            }
+        }
+    }
+}

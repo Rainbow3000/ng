@@ -1,0 +1,18 @@
+.sidebar-wrapper{
+    height: calc(100vh - 69px);
+    background-color: #001529;
+    .sidebar-menu{
+        width: 100%;
+        height: auto;
+        font-weight: 500;
+        color: #FFFFFF;
+        .side-menu-item{
+            li{
+                color: #FFFFFF;
+                &:hover{
+                    background-color: #40A9FF;
+                }
+            }
+        }
+    }
+}

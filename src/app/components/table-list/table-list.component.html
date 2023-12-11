@@ -1,0 +1,88 @@
+<div nz-row class="table-wrapper">
+    <div nz-col nzSpan="24">
+        <h3>Danh sách nhân viên</h3>
+    </div>
+
+    <div nz-col nzSpan="24">
+        <nz-table
+        #rowSelectionTable
+        nzShowSizeChanger
+        [nzData]="listOfData"
+        (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+        nzBordered 
+      >
+        <thead nz-row>
+          <tr>
+            <th></th>
+            <th>STT</th>
+            <th>Mã nhân viên</th>
+            <th>Thông tin nhân viên</th>
+            <th>Chức vụ</th>
+            <th>Người quản lý</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of rowSelectionTable.data ; index as i">
+            <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+            <td>{{ i + 1 }}</td>
+            <td>{{ data.employeeCode }}</td>
+            <td>
+                <div class="table-user-wrapper">
+                    <div class="avatar">
+                        NN
+                    </div>
+                    <div class="info-wrapper">
+                        <span>{{data.employeeName}}</span>
+                        <span class="info-item">
+                            <span nz-icon>
+                                <svg>
+                                    <path d="M928 224H768v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56H548v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56H328v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56H96c-17.7 0-32 14.3-32 32v576c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V256c0-17.7-14.3-32-32-32zm-40 568H136V296h120v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56h148v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56h148v56c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-56h120v496zM416 496H232c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zm0 136H232c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zm308.2-177.4L620.6 598.3l-52.8-73.1c-3-4.2-7.8-6.6-12.9-6.6H500c-6.5 0-10.3 7.4-6.5 12.7l114.1 158.2a15.9 15.9 0 0025.8 0l165-228.7c3.8-5.3 0-12.7-6.5-12.7H737c-5-.1-9.8 2.4-12.8 6.5z"></path>
+                                </svg>
+                            </span>
+                            &nbsp;
+                            {{data.dob}} - {{data.gender}}
+                        </span>
+                        <span class="info-item">
+                            <span nz-icon>
+                                <svg>
+                                    <path d="M877.1 238.7L770.6 132.3c-13-13-30.4-20.3-48.8-20.3s-35.8 7.2-48.8 20.3L558.3 246.8c-13 13-20.3 30.5-20.3 48.9 0 18.5 7.2 35.8 20.3 48.9l89.6 89.7a405.46 405.46 0 01-86.4 127.3c-36.7 36.9-79.6 66-127.2 86.6l-89.6-89.7c-13-13-30.4-20.3-48.8-20.3a68.2 68.2 0 00-48.8 20.3L132.3 673c-13 13-20.3 30.5-20.3 48.9 0 18.5 7.2 35.8 20.3 48.9l106.4 106.4c22.2 22.2 52.8 34.9 84.2 34.9 6.5 0 12.8-.5 19.2-1.6 132.4-21.8 263.8-92.3 369.9-198.3C818 606 888.4 474.6 910.4 342.1c6.3-37.6-6.3-76.3-33.3-103.4zm-37.6 91.5c-19.5 117.9-82.9 235.5-178.4 331s-213 158.9-330.9 178.4c-14.8 2.5-30-2.5-40.8-13.2L184.9 721.9 295.7 611l119.8 120 .9.9 21.6-8a481.29 481.29 0 00285.7-285.8l8-21.6-120.8-120.7 110.8-110.9 104.5 104.5c10.8 10.8 15.8 26 13.3 40.8z"></path>
+                                </svg>
+                            </span>
+                            &nbsp;
+                            {{data.phoneNumber}} - &nbsp; 
+                            <span nz-icon>
+                                <svg>
+                                    <path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5zM833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6a55.99 55.99 0 0068.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z"></path>
+                                </svg>
+                            </span>
+                             &nbsp;
+                            {{data.email}}
+                        </span>
+                    </div>
+                </div>
+            </td>
+            <td>{{ data.position }}</td>
+            <td>{{ data.manager }}</td>
+            <td>{{ data.status }}</td>
+            <td class="table-icon-list">
+                <div class="icon-wrapper">
+                    <span nz-icon nzType="eye" nzTheme="outline"></span>
+                </div>
+                <div class="icon-wrapper">
+                    <span nz-icon>
+                        <svg>
+                            <path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path>
+                        </svg>
+                    </span>
+                </div>
+                <div class="icon-wrapper">
+                    <span nz-icon nzType="dash" nzTheme="outline"></span>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+</div>
