@@ -1,0 +1,408 @@
+<div nz-row class="action-wrapper">
+    <div  nz-col nzSpan="24" class="action-title">
+        <span>Thêm mới nhân viên</span>
+    </div>
+    <nz-tabset nz-col nzSpan="24" class="action-nav">
+        <nz-tab nzTitle="Thông tin cơ bản">
+            <div class="action-form-wrapper">
+                <div nz-row class="form-item-wrapper">
+                    <div  nz-col nzSpan="24" class="form-title">
+                        <img src="../../../assets/images/overviewInfo.png" alt="">
+                        <h3>Thông tin chung</h3>
+                    </div>
+                    <div  nz-col nzSpan="24" class="form-container">
+                        <form nz-form nz-row  class="form-item">
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label><span>*</span> Mã nhân viên</label>
+                                <nz-form-control>
+                                  <input nz-input name="email" type="text" id="email" placeholder="">
+                                </nz-form-control>
+                            </nz-form-item >
+        
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label><span>*</span> Họ và tên</label>
+                                <nz-form-control>
+                                    <input nz-input name="email" type="text" id="email" placeholder="">
+                                </nz-form-control>
+                            </nz-form-item >
+        
+        
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label class="date-lable">Ngày sinh</label>
+                                <nz-date-picker nzPlaceHolder="Ngày/Tháng/Năm" nz-row ></nz-date-picker>
+                            </nz-form-item >
+                            
+                            <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+                                <label nzFor="">Giới tính</label>
+                                <nz-form-control >
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                  </nz-select>
+                                </nz-form-control>
+                            </nz-form-item >
+        
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label><span>*</span>Điện thoại</label>
+                                <nz-form-control>
+                                    <input nz-input name="email" type="text" id="email" placeholder="">
+                                </nz-form-control>
+                            </nz-form-item >
+        
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label>Email cơ quan</label>
+                                <nz-form-control>
+                                    <input nz-input name="email" type="text" id="email" placeholder="">
+                                </nz-form-control>
+                            </nz-form-item >
+        
+                          </form>
+                    </div>
+                </div>
+        
+                <div nz-row class="form-item-wrapper">
+                    <div  nz-col nzSpan="24" class="form-title">
+                        <img src="../../../assets/images/overviewInfo.png" alt="">
+                        <h3>Thông tin công việc</h3>
+                    </div>
+                    <div  nz-col nzSpan="24" class="form-container">
+                        <form nz-form nz-row class="form-item">
+                            <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+                                <label nzFor="">Chức vụ</label>
+                                <nz-form-control >
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                  </nz-select>
+                                </nz-form-control>
+                            </nz-form-item >
+                            <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+                                <label nzFor="">Đơn vị</label>
+                                <nz-form-control >
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                  </nz-select>
+                                </nz-form-control>
+                            </nz-form-item >
+                            <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+                                <label nzFor="">Người quản lý trực tiếp</label>
+                                <nz-form-control >
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                  </nz-select>
+                                </nz-form-control>
+                            </nz-form-item >
+                            <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+                                <label nzFor="">Trạng thái lao động</label>
+                                <nz-form-control >
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                  </nz-select>
+                                </nz-form-control>
+                            </nz-form-item >
+                            <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+                                <label nzFor="">Loại hợp đồng</label>
+                                <nz-form-control >
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                  </nz-select>
+                                </nz-form-control>
+                            </nz-form-item >
+                            <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+                                <label nzFor="">Tính chất công việc</label>
+                                <nz-form-control >
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                  </nz-select>
+                                </nz-form-control>
+                            </nz-form-item >
+        
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label>Mã số chấm công</label>
+                                <nz-form-control>
+                                  <input nz-input name="email" type="text" id="email" placeholder="">
+                                </nz-form-control>
+                            </nz-form-item >
+        
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label>Miễn chấm công</label>
+                                <nz-form-control>
+                                    <nz-switch></nz-switch> 
+                                </nz-form-control>
+                            </nz-form-item >
+        
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label>ID Google lịch</label>
+                                <nz-form-control>
+                                  <input nz-input name="email" type="text" id="email" placeholder="">
+                                </nz-form-control>
+                            </nz-form-item >
+                          </form>
+                    </div>
+                </div>
+        
+                <div nz-row class="form-item-wrapper">
+                    <div  nz-col nzSpan="24" class="form-title">
+                        <img src="../../../assets/images/identifyNumber.png" alt="">
+                        <h3>Thông tin khác</h3>
+                    </div>
+                    <div  nz-col nzSpan="24" class="form-container">
+                        <form nz-form nz-row class="form-item">
+                            <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+                                <label nzFor="">Loại giấy tờ</label>
+                                <nz-form-control >
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                  </nz-select>
+                                </nz-form-control>
+                            </nz-form-item >
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label>Số giấy tờ</label>
+                                <nz-form-control>
+                                    <input nz-input name="email" type="text" id="email" placeholder="">
+                                </nz-form-control>
+                            </nz-form-item >
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label class="date-lable">Ngày cấp</label>
+                                <nz-date-picker nzPlaceHolder="Ngày/Tháng/Năm" nz-row ></nz-date-picker>
+                            </nz-form-item >
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label>Nơi cấp</label>
+                                <nz-form-control>
+                                    <input nz-input name="email" type="text" id="email" placeholder="">
+                                </nz-form-control>
+                            </nz-form-item >
+        
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label>Mã số thuế</label>
+                                <nz-form-control>
+                                    <input nz-input name="email" type="text" id="email" placeholder="">
+                                </nz-form-control>
+                            </nz-form-item >
+        
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label class="date-lable">Ngày cấp MST</label>
+                                <nz-date-picker nzPlaceHolder="Ngày/Tháng/Năm" nz-row ></nz-date-picker>
+                            </nz-form-item >
+        
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label>Nơi cấp MST</label>
+                                <nz-form-control>
+                                    <input nz-input name="email" type="text" id="email" placeholder="">
+                                </nz-form-control>
+                            </nz-form-item >
+        
+                            <nz-form-item  nz-col nzSpan="6" class="input-item">
+                                <label>Email cá nhân</label>
+                                <nz-form-control>
+                                    <input nz-input name="email" type="text" id="email" placeholder="">
+                                </nz-form-control>
+                            </nz-form-item >
+        
+                            <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+                                <label nzFor="">Ngân hàng</label>
+                                <nz-form-control >
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                  </nz-select>
+                                </nz-form-control>
+                            </nz-form-item >
+        
+                        
+                                <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+                                    <label nzFor="">Số tài khoản ngân hàng</label>
+                                    <nz-form-control >
+                                      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                                        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                                        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                      </nz-select>
+                                    </nz-form-control>
+                                </nz-form-item >
+                            
+        
+                          </form>
+                    </div>
+                </div>
+        
+        
+                <div nz-row class="form-item-wrapper">
+                    <div  nz-col nzSpan="24" class="form-title">
+                        <img src="../../../assets/images/educationInfo.png" alt="">
+                        <h3>Trình độ học vấn</h3>
+                    </div>
+                    <div nz-col nzSpan="24" class="form-container">
+                        <table nz-row class="education-table">              
+                              <tr nz-row class="education-table-head">
+                                <th nz-col nzSpan="3">Từ năm</th>
+                                <th nz-col nzSpan="3">Đến năm</th>
+                                <th nz-col nzSpan="3">Nơi đào tạo</th>
+                                <th nz-col nzSpan="3">Chuyên ngành</th>
+                                <th nz-col nzSpan="3">Bằng cấp</th>
+                                <th nz-col nzSpan="3">Xếp loại</th>
+                                <th nz-col nzSpan="3">Năm tốt nghiệp</th>
+                                <th nz-col nzSpan="3"></th>
+                              </tr>        
+                              <div nz-col nzSpan="24" *ngFor="let control of educations.controls; index as i">                               
+                                    <form nz-form nz-row class="education-form">
+                                        <nz-form-item nz-col nzSpan="3">                                 
+                                          <nz-form-control>
+                                            <input nz-input name="email" type="email" id="email">
+                                          </nz-form-control>
+                                        </nz-form-item >
+                                        <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control>
+                                              <input nz-input name="email" type="email" id="email">
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control>
+                                              <input nz-input name="email" type="email" id="email">
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control>
+                                              <input nz-input name="email" type="email" id="email">
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control>
+                                              <input nz-input name="email" type="email" id="email">
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control>
+                                              <input nz-input name="email" type="email" id="email">
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control>
+                                              <input nz-input name="email" type="email" id="email">
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control>
+                                                <div class="delete-icon">
+                                                    <span nz-icon nzType="delete" nzTheme="outline"></span>
+                                                </div>
+                                            </nz-form-control>
+                                          </nz-form-item >                                      
+                                    </form>
+                                </div>
+                                <tfoot nz-col nzSpan="24">
+                                    <div nz-row class="education-table-footer">
+                                        <div class="education-add-btn" (click)="handleAddForm()">
+                                            <span nz-icon nzType="plus" nzTheme="outline"></span>
+                                            <span>
+                                                Thêm mới trình độ học vấn
+                                            </span>
+                                        </div>
+                                       
+                                    </div>
+                                </tfoot>
+                                                        
+                          </table>
+                    </div>
+                </div>
+
+
+                <div nz-row class="form-item-wrapper">
+                    <div  nz-col nzSpan="20" class="form-title">
+                        <img src="../../../assets/images/educationInfo.png" alt="">
+                        <h3>Kinh nghiệm làm việc</h3>
+                    </div>
+
+                    <div nz-col nzSpan="4" class="exp-add-btn">
+                        <button nz-button nzDanger nzType="primary">
+                            <span nz-icon></span>
+                            Thêm mới
+                          </button>
+                    </div>
+                    <div nz-col nzSpan="24" class="form-container">
+                        <table nz-row class="education-table">              
+                              <tr nz-row class="education-table-head">
+                                <th nz-col nzSpan="3">Từ ngày</th>
+                                <th nz-col nzSpan="3">Đến ngày</th>
+                                <th nz-col nzSpan="3">Nơi làm việc</th>
+                                <th nz-col nzSpan="3">Vị trí công việc</th>
+                                <th nz-col nzSpan="3">Thông tin người đối chiếu</th>
+                                <th nz-col nzSpan="3">Đã kiểm tra đối chiếu</th>
+                                <th nz-col nzSpan="3">Ghi chú</th>
+                                <th nz-col nzSpan="3">Thao tác</th>
+                               
+                              </tr>        
+                              <div nz-col nzSpan="24">                               
+                                    <form nz-form nz-row class="education-form">
+                                        <nz-form-item nz-col nzSpan="3">                                 
+                                          <nz-form-control class="text-area-wrapper">
+                                            <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                          </nz-form-control>
+                                        </nz-form-item >
+                                        <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control class="text-area-wrapper">
+                                              <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control class="text-area-wrapper">
+                                              <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control class="text-area-wrapper">
+                                              <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control class="text-area-wrapper">
+                                              <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control class="text-area-wrapper">
+                                              <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control class="text-area-wrapper">
+                                              <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control class="text-area-wrapper">
+                                                <div class="delete-icon">
+                                                    <span nz-icon nzType="delete" nzTheme="outline"></span>
+                                                </div>
+                                            </nz-form-control>
+                                          </nz-form-item >                                      
+                                    </form>
+                             </div>
+                                
+                                                        
+                          </table>
+                    </div>
+                </div>
+               
+            </div>
+        </nz-tab>
+        <nz-tab nzTitle="Thông tin nhân sự">Content of Tab Pane 2</nz-tab>
+        <nz-tab nzTitle="Thông tin hợp đồng lao động">Content of Tab Pane 3</nz-tab>
+      </nz-tabset>
+
+</div>

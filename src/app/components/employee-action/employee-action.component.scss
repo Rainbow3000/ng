@@ -1,0 +1,132 @@
+.action-wrapper{
+    height: auto;
+    background-color: #FFFFFF;
+    .action-title{
+        padding-left: 20px;
+        display: flex;
+        align-items: center;
+        height: 69px;
+        border-bottom: 0.5px solid #EEEEEE;
+        span{
+            font-size: 25px;
+            font-weight: 500;
+        }
+    }
+    .action-nav{
+        padding: 0 20px;
+    }
+    .action-form-wrapper{
+        width: 100%;
+        .form-item-wrapper{
+            width: 100%;
+            .form-title{
+                height: 50px;
+                display: flex;
+                align-items: center;
+                h3{
+                    margin: 0;
+                    line-height: none;
+                    margin-left: 10px;
+                    color: #00948a;
+                }
+            }
+            .form-item{
+                .input-item{
+                    padding: 0 5px;
+                    // &:nth-child(4n + 1) {
+                    //     padding-left: 0;
+                    // }
+                   &:last-child{
+                    float: left;
+                   }
+                    label{
+                        
+                        span{
+                            color: red;
+                        }
+                        font-weight: 700;
+                    }
+                    .date-lable{
+                        padding-left: 0;
+                    }
+                }
+            }
+            .form-container{
+                width: 100%;         
+                .education-table{
+                    margin-bottom: 20px;  
+                    .education-table-head{
+                        border-bottom: 2px solid rgba(128, 128, 128, 0.452);
+                        padding: 10px 0;
+                    }
+                    tr{
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        th{
+                            text-align: left;
+                            padding: 0 10px;
+                        }
+                    }
+                }
+                .education-form{
+                    height: max-content;
+                    padding: 10px 0;
+                    nz-form-item{
+                        nz-form-control{
+                            &:last-child{
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+                        }
+                        .delete-icon{
+                            width: max-content;
+                            border: 1px solid gray;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 5px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            border-radius: 50%;
+                        }
+                        
+                    }
+                }
+                .education-table-footer{
+                    width: 100%;
+                    border-bottom: 1px solid rgba(128, 128, 128, 0.452);
+                    .education-add-btn{
+                        border: 1px solid rgba(128, 128, 128, 0.459);
+                        border-radius: 5px;
+                        padding: 3px 10px;
+                        margin: 10px;
+                        cursor: pointer;
+                        span{
+                            &:first-child{
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+
+            }
+            .exp-add-btn{
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+            .text-area-wrapper{
+               display: flex;
+               align-items: flex-start !important;
+            }
+            .text-area-item{
+                overflow: hidden;
+            }
+
+        }
+    }
+    }
+
+
