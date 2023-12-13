@@ -3,7 +3,7 @@
       <div nz-row>
         <h2 nz-col nzSpan="4">Hồ sơ nhân viên</h2>
         <div nz-col nzSpan="20">
-          <button nz-button nzDanger  nzType="primary" class="home-add-btn">
+          <button nz-button nzDanger  nzType="primary" class="home-add-btn"  (click)="handleShowComponentCreate(2)">
             <span nz-icon>
               <svg>
                 <path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path>
@@ -17,6 +17,4 @@
     </div>
    <app-filter nz-col nzSpan="24"></app-filter>
    <app-table-list nz-col nzSpan="24"></app-table-list>
-   <ng-content select="app-filter"></ng-content>
-   <ng-content select="app-table-list"></ng-content>
 </div>

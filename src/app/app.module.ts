@@ -28,6 +28,12 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { EmployeeActionComponent } from './components/employee-action/employee-action.component';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { AddressFormComponent } from './components/address-form/address-form.component';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { EmployeeTitlePipe } from '../custom/pipe/employeeTitle';
 registerLocaleData(vi);
 
 @NgModule({ 
@@ -39,6 +45,8 @@ registerLocaleData(vi);
     FilterComponent,
     TableListComponent,
     EmployeeActionComponent,
+    AddressFormComponent,
+    EmployeeTitlePipe
   ],
   imports: [
     BrowserModule,
@@ -58,7 +66,11 @@ registerLocaleData(vi);
     NzDatePickerModule,
     NzSwitchModule,
     NzTabsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzCheckboxModule,
+    NzUploadModule,
+    NzInputNumberModule,
+    NzToolTipModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

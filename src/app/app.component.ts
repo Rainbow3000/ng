@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ComponentRedering } from '../services/componentRedering.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-app';
+  componentRendering:number; 
+  constructor(private cr:ComponentRedering){
+
+    this.componentRendering = cr.getComponentRendering;
+
+    this.cr.$_componentRenderValue.subscribe((newValue) => {
+      this.componentRendering = newValue;
+    });
+  }
+
 }

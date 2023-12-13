@@ -4,29 +4,13 @@
   <div nz-col nzSpan="24" class="main-wrapper">
     <div nz-row class="main">
         <app-sidebar nz-col nzSpan="3"></app-sidebar>
-        <ng-content select="app-sidebar"></ng-content>
       <div nz-col nzSpan="21" class="content-wrapper">
-          <div nz-col nzSpan="24">
-            <!-- <div nz-col nzSpan="24">
-              <div nz-row>
-                <h2 nz-col nzSpan="4">Hồ sơ nhân viên</h2>
-                <div nz-col nzSpan="20">
-                  <button nz-button nzDanger  nzType="primary" class="app-add-btn">
-                    <span nz-icon>
-                      <svg>
-                        <path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path>
-                        <path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path>
-                      </svg>
-                    </span>
-                     Thêm mới
-                  </button>
-                </div>
-              </div>
-            </div> -->
-            <!-- <app-home nz-col nzSpan="24"></app-home>
-            <ng-template select="app-home"></ng-template> -->
-            <app-employee-action nz-col nzSpan="24"></app-employee-action>
-            <ng-template select="app-employee-action"></ng-template> 
+          <div nz-col nzSpan="24" *ngIf="componentRendering === 1">
+            <app-home nz-col nzSpan="24"></app-home>         
+          </div>
+
+          <div nz-col nzSpan="24" *ngIf="componentRendering === 2">
+            <app-employee-action nz-col nzSpan="24"></app-employee-action>        
           </div>
       </div>
     </div>

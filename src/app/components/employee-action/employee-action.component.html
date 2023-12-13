@@ -1,6 +1,7 @@
 <div nz-row class="action-wrapper">
     <div  nz-col nzSpan="24" class="action-title">
-        <span>Thêm mới nhân viên</span>
+        <span nz-col nzSpan="23">{{formMode | employeeTitle:"Nguyễn Thành Đạt"}}</span>
+        <span (click)="handleSetComponentRendering(1)" nz-col nzSpan="1" nz-icon nzType="close" nzTheme="outline"></span>
     </div>
     <nz-tabset nz-col nzSpan="24" class="action-nav">
         <nz-tab nzTitle="Thông tin cơ bản">
@@ -298,7 +299,7 @@
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control>
-                                                <div class="delete-icon">
+                                                <div class="wrapper-icon">
                                                     <span nz-icon nzType="delete" nzTheme="outline"></span>
                                                 </div>
                                             </nz-form-control>
@@ -307,7 +308,7 @@
                                 </div>
                                 <tfoot nz-col nzSpan="24">
                                     <div nz-row class="education-table-footer">
-                                        <div class="education-add-btn" (click)="handleAddForm()">
+                                        <div class="education-add-btn" (click)="handleAddForm('education')">
                                             <span nz-icon nzType="plus" nzTheme="outline"></span>
                                             <span>
                                                 Thêm mới trình độ học vấn
@@ -329,14 +330,14 @@
                     </div>
 
                     <div nz-col nzSpan="4" class="exp-add-btn">
-                        <button nz-button nzDanger nzType="primary">
+                        <button nz-button nzDanger nzType="primary" (click)="handleAddForm('experience')">
                             <span nz-icon></span>
                             Thêm mới
                           </button>
                     </div>
                     <div nz-col nzSpan="24" class="form-container">
                         <table nz-row class="education-table">              
-                              <tr nz-row class="education-table-head">
+                              <tr nz-row class="experience-table-head">
                                 <th nz-col nzSpan="3">Từ ngày</th>
                                 <th nz-col nzSpan="3">Đến ngày</th>
                                 <th nz-col nzSpan="3">Nơi làm việc</th>
@@ -347,46 +348,46 @@
                                 <th nz-col nzSpan="3">Thao tác</th>
                                
                               </tr>        
-                              <div nz-col nzSpan="24">                               
+                              <div nz-col nzSpan="24"  *ngFor="let control of experiences.controls; index as i" >                               
                                     <form nz-form nz-row class="education-form">
                                         <nz-form-item nz-col nzSpan="3">                                 
                                           <nz-form-control class="text-area-wrapper">
-                                            <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                            <textarea class="text-area-item" nz-input placeholder="" nzAutosize></textarea>
                                           </nz-form-control>
                                         </nz-form-item >
                                         <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize></textarea>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize></textarea>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize></textarea>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize></textarea>
+                                            </nz-form-control>
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
+                                            <nz-form-control class="text-area-wrapper">                                           
+                                              <div nz-checkbox></div>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize></textarea>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
-                                            <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
-                                            </nz-form-control>
-                                          </nz-form-item >
-                                          <nz-form-item nz-col nzSpan="3">                                 
-                                            <nz-form-control class="text-area-wrapper">
-                                                <div class="delete-icon">
+                                            <nz-form-control class="text-area-wrapper icon">
+                                                <div class="wrapper-icon">
                                                     <span nz-icon nzType="delete" nzTheme="outline"></span>
                                                 </div>
                                             </nz-form-control>
@@ -398,11 +399,362 @@
                           </table>
                     </div>
                 </div>
+
+                <div nz-row class="form-item-wrapper">
+                  <div  nz-col nzSpan="20" class="form-title">
+                      <h3>File đính kèm</h3>
+                  </div>
+
+                  <div nz-col nzSpan="24" class="form-container">
+                    <nz-table #borderedTable nzBordered class="upload-file-table">
+                      <thead>
+                        <tr>
+                          <th>STT</th>
+                          <th>Tên file</th>
+                          <th>Ngày upload</th>
+                          <th>Thao tác</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr >
+                          <td>1</td>
+                          <td>nguyenducthinh.pdf</td>
+                          <td>20/12/2023</td>
+                          <td class="table-file-action">                         
+                            <div class="wrapper-icon">
+                              <span nz-icon nzType="eye" nzTheme="outline"></span> 
+                          </div>                  
+                          </td>
+                        </tr>
+                      </tbody>
+                    </nz-table>
+                  </div>
+              </div>
+
+              <nz-upload
+              nzType="drag"
+              [nzMultiple]="true"
+              nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              
+            >
+                <p class="ant-upload-drag-icon">
+                  <span nz-icon nzType="inbox"></span>
+                </p>
+                <p class="ant-upload-text">Chỉ hỗ trợ đính kèm tài liệu(.doc, .excel, .pdf) và file ảnh với dung lượng tối đa 20Mb</p>
+             
+            </nz-upload>
+
+            <div nz-col nzSpan="24" class="footer-btn">
+                <button nz-button >
+                  <span nz-icon nzType="close"></span>
+                  Hủy bỏ
+                </button>
+                <button nz-button nzDanger nzType="primary">
+                  <span nz-icon nzType="save"></span>
+                  Lưu
+                </button>
+            </div>
                
             </div>
         </nz-tab>
-        <nz-tab nzTitle="Thông tin nhân sự">Content of Tab Pane 2</nz-tab>
-        <nz-tab nzTitle="Thông tin hợp đồng lao động">Content of Tab Pane 3</nz-tab>
+        <nz-tab nzTitle="Thông tin nhân sự">
+          <div class="action-form-wrapper">
+            <div nz-row class="form-item-wrapper">
+                <div  nz-col nzSpan="24" class="form-title">
+                    <img src="../../../assets/images/permanentResident.png" alt="">
+                    <h3>Hộ khẩu thường trú</h3>
+                </div>
+                <div nz-col nzSpan="24" class="form-container">
+                   <app-address-form></app-address-form>
+                </div>
+            </div>
+
+            <div nz-row class="form-item-wrapper">
+              <div  nz-col nzSpan="24" class="form-title">
+                  <img src="../../../assets/images/contactAddress.png" alt="">
+                  <h3>Địa chỉ hiện tại</h3>
+              </div>
+              <div nz-col nzSpan="24" class="form-container">
+                 <app-address-form></app-address-form>
+              </div>
+          </div>
+
+
+          <div nz-row class="form-item-wrapper">
+            <div  nz-col nzSpan="24" class="form-title">
+                <img src="../../../assets/images/contactAddress.png" alt="">
+                <h3>Quê quán</h3>
+            </div>
+            <div nz-col nzSpan="24" class="form-container">
+               <app-address-form></app-address-form>
+            </div>
+        </div>
+
+        <div nz-row class="form-item-wrapper">
+          <div  nz-col nzSpan="24" class="form-title">
+              <img src="../../../assets/images/contactUrgent.png" alt="">
+              <h3>Liên hệ khẩn cấp</h3>
+          </div>
+          <div  nz-col nzSpan="24" class="form-container">
+              <form nz-form nz-row  class="form-item">
+                  <nz-form-item  nz-col nzSpan="6" class="input-urgent-item">
+                      <label>Họ và tên</label>
+                      <nz-form-control>
+                        <input nz-input name="email" type="text" id="email" placeholder="">
+                      </nz-form-control>
+                  </nz-form-item >
+                  
+                  <nz-form-item  nz-col nzSpan="6" class="input-urgent-item"  >
+                      <label nzFor="">Quan hệ</label>
+                      <nz-form-control >
+                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                          <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                          <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                          <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                        </nz-select>
+                      </nz-form-control>
+                  </nz-form-item >
+
+                  <nz-form-item  nz-col nzSpan="6" class="input-urgent-item">
+                      <label>Điện thoại</label>
+                      <nz-form-control>
+                          <input nz-input name="email" type="text" id="email" placeholder="">
+                      </nz-form-control>
+                  </nz-form-item >
+                </form>
+          </div>
+      </div>
+    
+  
+
+        <div nz-col nzSpan="24" class="footer-btn">
+            <button nz-button >
+              <span nz-icon nzType="close"></span>
+              Hủy bỏ
+            </button>
+            <button nz-button nzDanger nzType="primary">
+              <span nz-icon nzType="save"></span>
+              Lưu
+            </button>
+        </div>
+           
+          </div>
+
+        </nz-tab>
+        <nz-tab nzTitle="Thông tin hợp đồng lao động">
+          <div class="action-form-wrapper">
+            <div nz-row class="form-item-wrapper">
+                <div  nz-col nzSpan="24" class="form-title">
+                    <img src="../../../assets/images/employeeSalary.png" alt="">
+                    <h3>Thông tin lương</h3>
+                </div>
+                <div  nz-col nzSpan="24" class="form-container">
+                    <form nz-form nz-row  class="form-item">
+                        <nz-form-item  nz-col nzSpan="6" class="input-item">
+                            <label>Bậc lương</label>
+                            <nz-form-control>
+                              <input nz-input name="email" type="text" id="email" placeholder="">
+                            </nz-form-control>
+                        </nz-form-item >
+    
+                        <nz-form-item  nz-col nzSpan="6" class="input-item">
+                            <label>Lương gross</label>
+                            <nz-form-control>
+                              <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                            </nz-form-control>
+                        </nz-form-item >
+    
+    
+                        <nz-form-item  nz-col nzSpan="6" class="input-item">
+                            <label class="date-lable">Lương Net</label>
+                            <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                        </nz-form-item >
+                        
+                        <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+                            <label nzFor="">Lương cơ bản</label>
+                            <nz-form-control >
+                              <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                            </nz-form-control>
+                        </nz-form-item >
+    
+                  
+    
+                        <nz-form-item  nz-col nzSpan="6" class="input-item">
+                            <label>Lương đóng bảo hiểm</label>
+                            <nz-form-control>
+                              <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                            </nz-form-control>
+                        </nz-form-item >
+    
+                        <nz-form-item  nz-col nzSpan="6" class="input-item">
+                          <label>Lương tổng</label>
+                          <nz-form-control>
+                            <input nz-input value="16,234923" name="email" disabled="true" type="text" id="email" placeholder="" class="disable-input">
+                          </nz-form-control>
+                      </nz-form-item >
+                      </form>
+                </div>
+            </div>
+    
+         
+           
+            <div nz-row class="form-item-wrapper">
+                <div  nz-col nzSpan="24" class="form-title">
+                    <img src="../../../assets/images/employeeAllowanceList.png" alt="">
+                    <h3>Các khoản phụ cấp</h3>
+                </div>
+                <div nz-col nzSpan="24" class="form-container">
+                    <table nz-row class="education-table ">              
+                          <tr nz-row class="education-table-head salary-table-head">
+                            <th nz-col nzSpan="1">STT</th>
+                            <th nz-col nzSpan="5">Tên khoản phụ cấp</th>
+                            <th nz-col nzSpan="9">Giá trị</th>
+                            <th nz-col nzSpan="9"></th>
+                          </tr>    
+                          
+                           <div nz-col nzSpan="24" *ngFor="let control of allowanceSalarys.controls; index as i">
+                             <form nz-row nz-form class="salary-form">
+                                 <td nz-col nzSpan="1">
+                                   <nz-form-item class="input-item">
+                                     <nz-form-control>
+                                       {{i +1}}
+                                     </nz-form-control>
+                                 </nz-form-item >
+                                 </td>
+                                 <td nz-col nzSpan="5">
+                                   <nz-form-item class="input-urgent-item"  >         
+                                       <nz-form-control >
+                                         <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                           <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                                           <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                                           <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                         </nz-select>
+                                       </nz-form-control>
+                                 </nz-form-item >
+                                 </td>
+                                 <td nz-col nzSpan="9">
+                                   <nz-form-item class="input-item">
+                                     <nz-form-control>
+                                       <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                                     </nz-form-control>
+                                   </nz-form-item >
+                                 </td>
+   
+                                 <td nz-col nzSpan="9">
+                                   <nz-form-item class="input-item">
+                                     <nz-form-control>
+                                       <div class="wrapper-icon" style="float: right;">
+                                         <span nz-icon nzType="delete" nzTheme="outline"></span>
+                                       </div>
+                                     </nz-form-control>
+                                   </nz-form-item >                
+                                 </td>
+   
+                                </form>
+                           </div>
+
+                        
+                         
+
+                          <tfoot nz-col nzSpan="24">
+                              <div nz-row class="education-table-footer">
+                                  <div class="education-add-btn" (click)="handleAddForm('allowenceSalary')">
+                                      <span nz-icon nzType="plus" nzTheme="outline"></span>
+                                      <span>
+                                          Thêm phụ cấp
+                                      </span>
+                                  </div>
+                                  
+                              </div>
+                          </tfoot>
+                                                    
+                      </table>
+                </div>
+            </div>
+
+            <div nz-row class="form-item-wrapper">
+              <div  nz-col nzSpan="24" class="form-title">
+                  <img src="../../../assets/images/employeeDeductibleList.png" alt="">
+                  <h3>Các khoản khấu trừ</h3>
+              </div>
+              <div nz-col nzSpan="24" class="form-container">
+                  <table nz-row class="education-table ">              
+                        <tr nz-row class="education-table-head salary-table-head">
+                          <th nz-col nzSpan="1">STT</th>
+                          <th nz-col nzSpan="5">Tên khoản khấu trừ</th>
+                          <th nz-col nzSpan="9">Giá trị</th>
+                          <th nz-col nzSpan="9"></th>
+                        </tr>        
+                        <div nz-col nzSpan="24" *ngFor="let control of deductibleSalarys.controls; index as i">
+                          <form nz-row nz-form class="salary-form">
+                              <td nz-col nzSpan="1">
+                                <nz-form-item class="input-item">
+                                  <nz-form-control>
+                                    {{i + 1}}
+                                  </nz-form-control>
+                              </nz-form-item >
+                              </td>
+                              <td nz-col nzSpan="5">
+                                <nz-form-item class="input-urgent-item"  >         
+                                    <nz-form-control >
+                                      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                                        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                                        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                      </nz-select>
+                                    </nz-form-control>
+                              </nz-form-item >
+                              </td>
+                              <td nz-col nzSpan="9">
+                                <nz-form-item class="input-item">
+                                  <nz-form-control>
+                                    <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                                  </nz-form-control>
+                              </nz-form-item >
+                              </td>
+  
+                              <td nz-col nzSpan="9">
+                                <nz-form-item class="input-item">
+                                  <nz-form-control>
+                                    <div class="wrapper-icon" style="float: right;">
+                                      <span nz-icon nzType="delete" nzTheme="outline"></span>
+                                    </div>
+                                  </nz-form-control>
+                                </nz-form-item >       
+                              </td>
+  
+                            </form>
+                        </div>
+
+                        <tfoot nz-col nzSpan="24">
+                            <div nz-row class="education-table-footer">
+                                <div class="education-add-btn" (click)="handleAddForm('deductibleSalary')">
+                                    <span nz-icon nzType="plus" nzTheme="outline"></span>
+                                    <span>
+                                        Thêm khấu trừ
+                                    </span>
+                                </div>
+                                
+                            </div>
+                        </tfoot>
+                                                  
+                    </table>
+              </div>
+          </div>
+
+        <div nz-col nzSpan="24" class="footer-btn">
+            <button nz-button >
+              <span nz-icon nzType="close"></span>
+              Hủy bỏ
+            </button>
+            <button nz-button nzDanger nzType="primary">
+              <span nz-icon nzType="save"></span>
+              Lưu
+            </button>
+        </div>
+           
+        </div>
+        </nz-tab>
       </nz-tabset>
 
 </div>

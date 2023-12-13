@@ -1,18 +1,35 @@
+
 .sidebar-wrapper{
-    height: calc(100vh - 69px);
     background-color: #001529;
-    .sidebar-menu{
+    height: 100%;
+    .wrapper {
         width: 100%;
-        height: auto;
-        font-weight: 500;
-        color: #FFFFFF;
-        .side-menu-item{
-            li{
-                color: #FFFFFF;
-                &:hover{
-                    background-color: #40A9FF;
-                }
+        height: 100%;
+        padding: 10px;
+        .menu-item{
+            position: relative;
+            color: #FFFFFF;
+            font-weight: bold;
+            .person-icon{
+                
             }
         }
     }
+    
+    button {
+        margin-bottom: 12px;
+    }
+}
+
+.ant-menu-inline.ant-menu-sub{
+    background-color: transparent;
+}
+
+.ng-star-inserted{
+    font-weight: 500;
+}
+
+.ant-menu-item-selected{
+    background-color: orangered !important;
+    border-radius: 5px;
 }

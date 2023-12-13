@@ -10,6 +10,9 @@
         span{
             font-size: 25px;
             font-weight: 500;
+            &:last-child{
+                cursor: pointer;
+            }
         }
     }
     .action-nav{
@@ -23,6 +26,7 @@
                 height: 50px;
                 display: flex;
                 align-items: center;
+                padding-left: 5px;
                 h3{
                     margin: 0;
                     line-height: none;
@@ -59,16 +63,46 @@
                         border-bottom: 2px solid rgba(128, 128, 128, 0.452);
                         padding: 10px 0;
                     }
+
+                    .education-table-head.salary-table-head{
+                        display: flex;
+                        justify-content: flex-start;
+                    }
+
+                    .salary-form{
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                        margin: 10px 0;
+
+                        nz-form-item{
+                            padding: 0 5px;
+                        }
+                       
+                    }
+                    .experience-table-head{
+                        th{
+                            font-weight: 500;
+                            color: rgba(0, 0, 0, 0.85);
+                        }
+                    }
                     tr{
                         width: 100%;
                         display: flex;
                         justify-content: space-between;
                         th{
                             text-align: left;
-                            padding: 0 10px;
+                            padding: 0 5px;
+                            &:last-child{
+                                text-align: center;
+                            }
                         }
                     }
                 }
+
+
+               
+                
                 .education-form{
                     height: max-content;
                     padding: 10px 0;
@@ -80,19 +114,15 @@
                                 align-items: center;
                             }
                         }
-                        .delete-icon{
-                            width: max-content;
-                            border: 1px solid gray;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            padding: 5px;
-                            font-weight: bold;
-                            cursor: pointer;
-                            border-radius: 50%;
-                        }
+                       
                         
                     }
+                }
+
+                .table-file-action{
+                   display: flex;
+                   justify-content: center;
+                   align-items: center;
                 }
                 .education-table-footer{
                     width: 100%;
@@ -110,6 +140,13 @@
                         }
                     }
                 }
+                .upload-file-table{
+                    th{
+                        &:last-child{
+                            text-align: center;
+                        }
+                    }
+                }
 
             }
             .exp-add-btn{
@@ -120,13 +157,53 @@
             .text-area-wrapper{
                display: flex;
                align-items: flex-start !important;
+               padding-left: 5px;
             }
+            .text-area-wrapper.icon{
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+            
             .text-area-item{
                 overflow: hidden;
             }
 
+            .wrapper-icon{
+                width: 100%;
+                width: max-content;
+                border: 1px solid gray;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 5px;
+                font-weight: bold;
+                cursor: pointer;
+                border-radius: 50%;
+            }
+
+            .disable-input{
+                font-weight: 500;
+                color: gray;
+            }
+
+        }
+        .input-urgent-item{
+            font-weight: 500;
+            padding: 0 5px;
         }
     }
+    }
+
+    .footer-btn{
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        button{
+            margin: 0 10px;
+        }
     }
 
 

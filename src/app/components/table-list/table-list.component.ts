@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ComponentRedering } from '../../../services/componentRedering.service';
 
 
 interface IEmployee{
@@ -22,8 +23,20 @@ interface IEmployee{
 })
 export class TableListComponent implements OnInit {
     ngOnInit(): void {
-      throw new Error('Method not implemented.');
+     
     }
+
+    constructor(private cr:ComponentRedering){
+
+    }
+
+
+    handleShowComponentCreate(value:number){
+      this.cr.setComponentRendering = value; 
+      this.cr.setFormMode = "UPDATE"
+    }
+    
+
     listOfData:IEmployee[] = [
       {
         id:1,
