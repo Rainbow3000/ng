@@ -16,9 +16,12 @@ export class EmployeeActionComponent implements OnInit {
     this.formMode = cr.getFormMode; 
   }
 
-
+  formater(inputNumberValue:number){
+    return `${inputNumberValue}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  }
+  
   ngOnInit(): void {
-     this.employeeForm = this.fb.group({
+      this.employeeForm = this.fb.group({
       id:'',
       code:'',
       fullName:'',
@@ -102,21 +105,15 @@ export class EmployeeActionComponent implements OnInit {
           createdBy:'',
           modifiedBy:''
       }),
-      allowanceSalaryDto:this.fb.group({
-          employeeId:'',
-          allowanceName:'',
-          value:'',
-          createdBy:'',
-          modifiedBy:''            
-      }),
+      allowanceSalaryDto:this.allowanceSalarys,
 
-      deductibleSalaryDto:this.fb.group({
-          employeeId:'',
-          deductibleName:'',
-          value:'',
-          createdBy:'',
-          modifiedBy:''
-      })
+      deductibleSalaryDto:this.deductibleSalarys
+     })
+
+
+     const salaryInfo = this.employeeForm.get('salaryInfoDto'); 
+     salaryInfo?.valueChanges.subscribe((x)=>{
+        this.formater(x); 
      })
   }
 
@@ -166,15 +163,6 @@ export class EmployeeActionComponent implements OnInit {
   }
 
 
-  get getAllowanceSalaryDto():any{
-    return this.employeeForm.get('allowanceSalaryDto')
-  }
-
-  get getDeductibleSalaryDto():any{
-    return this.employeeForm.get('deductibleSalaryDto')
-  }
-
-
   handleAddForm(type:string){
     if(type === 'education'){
       this.educationForm = this.fb.group({
@@ -203,13 +191,11 @@ export class EmployeeActionComponent implements OnInit {
 
     if(type === 'allowenceSalary'){
       this.allowanceSalaryForm = this.fb.group({
-        fromYear: 0,
-        toYear: 0,
-        workPlace: '',
-        workPosition: '',
-        personCompare: '',
-        isCheckedCompare: false,
-        note: ''
+        employeeId:'',
+        allowanceName:'',
+        value:'',
+        createdBy:'',
+        modifiedBy:''     
       });
       this.allowanceSalarys.push(this.allowanceSalaryForm); 
     }
@@ -217,13 +203,11 @@ export class EmployeeActionComponent implements OnInit {
 
     if(type === 'deductibleSalary'){
       this.deductibleSalaryForm = this.fb.group({
-        fromYear: 0,
-        toYear: 0,
-        workPlace: '',
-        workPosition: '',
-        personCompare: '',
-        isCheckedCompare: false,
-        note: ''
+        employeeId:'',
+        deductibleName:'',
+        value:'',
+        createdBy:'',
+        modifiedBy:''
       });
       this.deductibleSalarys.push(this.deductibleSalaryForm); 
     }
