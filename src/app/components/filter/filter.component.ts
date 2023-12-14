@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent {
-
+  inputValue: string | null = null;
+  textValue: string | null = null;
 }

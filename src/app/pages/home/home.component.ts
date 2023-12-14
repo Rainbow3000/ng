@@ -12,5 +12,6 @@ export class HomeComponent {
   }
   handleShowComponentCreate(value:number){
      this.cr.setComponentRendering = value; 
+     this.cr.setFormMode = 'CREATE'
   }
 }

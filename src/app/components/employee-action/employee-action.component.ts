@@ -1,17 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ComponentRedering } from '../../../services/componentRedering.service';
-
-
-interface IEducation{
-  fromYear:number,
-  toYear:number,
-  educationPlace:string,
-  specialized:string,
-  degree:string,
-  classification:string,
-  graduationYear:number
-}
+import { EmployeeService } from '../../../services/employee.service';
 
 
 @Component({
@@ -19,48 +9,196 @@ interface IEducation{
   templateUrl: './employee-action.component.html',
   styleUrl: './employee-action.component.scss',
 })
-export class EmployeeActionComponent {
+export class EmployeeActionComponent implements OnInit {
 
-  constructor(private fb : FormBuilder, private cr : ComponentRedering){
+  constructor(private fb : FormBuilder, private cr : ComponentRedering, private employeeService:EmployeeService){
     this.componentRendering = cr.getComponentRendering; 
     this.formMode = cr.getFormMode; 
   }
 
-  componentRendering:number;
-  formMode:string; 
 
+  ngOnInit(): void {
+     this.employeeForm = this.fb.group({
+      id:'',
+      code:'',
+      fullName:'',
+      dob:'',
+      gender:'',
+      phoneNumber:'',
+      organEmail:'',
+      identifyType:'',
+      identifyNumber:'',
+      identifyDateRange:'',
+      identifyIssuedBy:'',
+      taxtCode:'',
+      taxtCodeDateRange:'',
+      taxtCodeIssuedBy:'',
+      personalEmail:'',
+      bank:'',
+      bankAccount:'',
+      createdBy:'',
+      modifiedBy:'',
+      workInfoDto: this.fb.group({
+          employeeId:'',
+          positionId:'',
+          unitId:'',
+          managerId:'',
+          status:'',
+          contractType:'',
+          workType:'',
+          timeKeeperCode:'',
+          isExemptTimeKeeper:false,
+          googleCalendarId:'',
+          createdBy:'',
+          modifiedBy:''
+      }),
+      educationDto:this.educations,
+      experienceDto:this.experiences,
+      fileDto:[],
+      permanentResidenceDto:this.fb.group({
+          employeeId:'',
+          city:'',
+          district:'',
+          wards:'',
+          houseNumber:'',
+          createdBy:'',
+          modifiedBy:''
+      }),
+
+      nowAddressDto:this.fb.group({
+          employeeId:'',
+          city:'',
+          district:'',
+          wards:'',
+          houseNumber:'',
+          createdBy:'',
+          modifiedBy:''
+      }),
+      hometownDto:this.fb.group({
+          employeeId:'',
+          city:'',
+          district:'',
+          wards:'',
+          houseNumber:'',
+          createdBy:'',
+          modifiedBy:''
+      }),
+      urgentContactDto:this.fb.group({
+          employeeId:'',
+          fullName:'',
+          relational:'',
+          phoneNumber:'',
+          createdBy:'',
+          modifiedBy:''
+      }),
+      salaryInfoDto:this.fb.group({
+          employeeId:'',
+          levelSalary:'',
+          grossSalary:'',
+          netSalary:'',
+          basicSalary:'',
+          insuranceSalary:'',
+          totalSalary:'',
+          createdBy:'',
+          modifiedBy:''
+      }),
+      allowanceSalaryDto:this.fb.group({
+          employeeId:'',
+          allowanceName:'',
+          value:'',
+          createdBy:'',
+          modifiedBy:''            
+      }),
+
+      deductibleSalaryDto:this.fb.group({
+          employeeId:'',
+          deductibleName:'',
+          value:'',
+          createdBy:'',
+          modifiedBy:''
+      })
+     })
+  }
+
+  componentRendering:number;
+  formMode:string;
+  inputValue: string | null = null;
+  textValue: string | null = null;
   educations = new FormArray<FormGroup>([])
   experiences = new FormArray<FormGroup>([]); 
   allowanceSalarys = new FormArray<FormGroup>([]); 
   deductibleSalarys = new FormArray<FormGroup>([]); 
-  educationForm:FormGroup
   experienceForm: FormGroup
   allowanceSalaryForm:FormGroup
   deductibleSalaryForm:FormGroup
+  workInfoForm:FormGroup
+  educationForm:FormGroup
+  employeeForm:FormGroup
+  
+
+  get getWorkInfoDto():any{
+    return this.employeeForm.get('workInfoDto')
+  }
+
+  get getFileDto():any{
+    return this.employeeForm.get('fileDto')
+  }
+
+  get getPermanentResidenceDto():any{
+    return this.employeeForm.get('permanentResidenceDto')
+  }
+
+  get getNowAddressDto():any{
+    return this.employeeForm.get('nowAddressDto')
+  }
+
+
+  get getHometownDto():any{
+    return this.employeeForm.get('hometownDto')
+  }
+
+  get getUrgentContactDto():any{
+    return this.employeeForm.get('urgentContactDto')
+  }
+
+  get getSalaryInfoDto():any{
+    return this.employeeForm.get('salaryInfoDto')
+  }
+
+
+  get getAllowanceSalaryDto():any{
+    return this.employeeForm.get('allowanceSalaryDto')
+  }
+
+  get getDeductibleSalaryDto():any{
+    return this.employeeForm.get('deductibleSalaryDto')
+  }
+
+
   handleAddForm(type:string){
     if(type === 'education'){
       this.educationForm = this.fb.group({
-        fromYear: 0,
-        toYear: 0,
+        fromYear: '',
+        toYear: '',
         educationPlace: '',
         specialized: '',
         degree: '',
         classification: '',
-        graduationYear: 0
+        graduationYear: ''
       });
       this.educations.push(this.educationForm); 
     }
     if(type === 'experience'){
       this.experienceForm = this.fb.group({
-        fromYear: 0,
-        toYear: 0,
+        fromYear: '',
+        toYear: '',
         workPlace: '',
         workPosition: '',
         personCompare: '',
         isCheckedCompare: false,
         note: ''
       });
-      this.experiences.push(this.educationForm); 
+      this.experiences.push(this.experienceForm); 
     }
 
     if(type === 'allowenceSalary'){
@@ -93,6 +231,10 @@ export class EmployeeActionComponent {
 
   handleSetComponentRendering(value:number){
     this.cr.setComponentRendering = value; 
+  }
+
+  handleSaveForm(){
+    console.log(this.employeeForm.value);
   }
 
 }

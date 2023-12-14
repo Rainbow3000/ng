@@ -1,8 +1,8 @@
-<form nz-form nz-row>
+<form nz-form nz-row [formGroup]="formGroupItem">
     <nz-form-item  nz-col nzSpan="6" class="input-item"  >
         <label nzFor="">Tỉnh/Thành phố</label>
         <nz-form-control >
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="city">
             <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
             <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
             <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -13,7 +13,7 @@
     <nz-form-item  nz-col nzSpan="6" class="input-item"  >
         <label nzFor="">Quận/Huyện</label>
         <nz-form-control >
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="district">
             <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
             <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
             <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -24,7 +24,7 @@
     <nz-form-item  nz-col nzSpan="6" class="input-item"  >
         <label nzFor="">Xã/Phường</label>
         <nz-form-control >
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="wards">
             <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
             <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
             <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -34,18 +34,16 @@
 
     <nz-form-item  nz-col nzSpan="6" class="input-item"  >
         <label nzFor="">Số nhà đường phố</label>
-        <nz-input-group nz-col [nzSuffix]="inputClearTpl">
-            <input type="text" nz-input  />
+          <nz-input-group [nzSuffix]="inputClearTpl">
+            <input type="text" nz-input  placeholder="" name="house-number" formControlName="houseNumber"/>
           </nz-input-group>
           <ng-template #inputClearTpl>
             <span
               nz-icon
               class="ant-input-clear-icon"
               nzTheme="fill"
-              nzType="close-circle"        
-            ></span>
-          </ng-template>
-    </nz-form-item>
-
-      
+              nzType="close-circle"
+              ></span>
+         </ng-template>
+      </nz-form-item>
   </form>

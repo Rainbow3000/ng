@@ -3,10 +3,21 @@
         <form nz-form nz-row nzJustify="space-between" class="filter-form">
             <nz-form-item nz-col nzSpan="5">
               <label>Từ khóa tìm kiếm</label>
-              <nz-form-control>
-                <input nz-input name="email" type="text" id="email" placeholder="Nhập họ tên, mã nhân viên">
-              </nz-form-control>
+              <nz-input-group [nzSuffix]="inputClearTpl">
+                <input type="text" nz-input [(ngModel)]="inputValue" placeholder="Nhập họ tên, mã nhân viên" name="email"/>
+              </nz-input-group>
             </nz-form-item >
+
+            <ng-template #inputClearTpl>
+              <span
+                nz-icon
+                class="ant-input-clear-icon"
+                nzTheme="fill"
+                nzType="close-circle"
+                *ngIf="inputValue !== null"
+                (click)="inputValue = null"
+              ></span>
+            </ng-template>
 
             <nz-form-item nz-col nzSpan="4"  >
                 <label nzFor="email">Chức vụ</label>

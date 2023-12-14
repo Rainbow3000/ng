@@ -1,6 +1,6 @@
 <div nz-row class="action-wrapper">
     <div  nz-col nzSpan="24" class="action-title">
-        <span nz-col nzSpan="23">{{formMode | employeeTitle:"Nguyễn Thành Đạt"}}</span>
+        <span nz-col nzSpan="23">{{formMode | employeeTitle:"Nguyễn Đức Thịnh"}}</span>
         <span (click)="handleSetComponentRendering(1)" nz-col nzSpan="1" nz-icon nzType="close" nzTheme="outline"></span>
     </div>
     <nz-tabset nz-col nzSpan="24" class="action-nav">
@@ -10,33 +10,33 @@
                     <div  nz-col nzSpan="24" class="form-title">
                         <img src="../../../assets/images/overviewInfo.png" alt="">
                         <h3>Thông tin chung</h3>
-                    </div>
-                    <div  nz-col nzSpan="24" class="form-container">
-                        <form nz-form nz-row  class="form-item">
+                    </div>                  
+                    <div nz-col nzSpan="24" class="form-container">
+                        <form nz-form nz-row  class="form-item" [formGroup]="this.employeeForm">
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label><span>*</span> Mã nhân viên</label>
-                                <nz-form-control>
-                                  <input nz-input name="email" type="text" id="email" placeholder="">
-                                </nz-form-control>
+                                <nz-input-group [nzSuffix]="inputClearTpl">
+                                  <input type="text" nz-input  name="code" formControlName="code" />
+                                </nz-input-group>                  
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label><span>*</span> Họ và tên</label>
-                                <nz-form-control>
-                                    <input nz-input name="email" type="text" id="email" placeholder="">
-                                </nz-form-control>
+                                <nz-input-group [nzSuffix]="inputClearTpl">
+                                  <input type="text" nz-input name="fullName" formControlName="fullName" />
+                                </nz-input-group>       
                             </nz-form-item >
         
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label class="date-lable">Ngày sinh</label>
-                                <nz-date-picker nzPlaceHolder="Ngày/Tháng/Năm" nz-row ></nz-date-picker>
+                                <nz-date-picker nzPlaceHolder="Ngày/Tháng/Năm" nz-row formControlName="dob"></nz-date-picker>
                             </nz-form-item >
                             
                             <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                                 <label nzFor="">Giới tính</label>
                                 <nz-form-control >
-                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                  <nz-select formControlName="gender" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
                                     <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
                                     <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
                                     <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -46,16 +46,16 @@
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label><span>*</span>Điện thoại</label>
-                                <nz-form-control>
-                                    <input nz-input name="email" type="text" id="email" placeholder="">
-                                </nz-form-control>
+                                <nz-input-group [nzSuffix]="inputClearTpl">
+                                  <input type="text" nz-input name="phoneNumber" formControlName="phoneNumber" />
+                                </nz-input-group>       
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label>Email cơ quan</label>
-                                <nz-form-control>
-                                    <input nz-input name="email" type="text" id="email" placeholder="">
-                                </nz-form-control>
+                                <nz-input-group [nzSuffix]="inputClearTpl">
+                                  <input type="email" nz-input name="organEmail" formControlName="organEmail" />
+                                </nz-input-group>       
                             </nz-form-item >
         
                           </form>
@@ -66,13 +66,14 @@
                     <div  nz-col nzSpan="24" class="form-title">
                         <img src="../../../assets/images/overviewInfo.png" alt="">
                         <h3>Thông tin công việc</h3>
+    
                     </div>
                     <div  nz-col nzSpan="24" class="form-container">
-                        <form nz-form nz-row class="form-item">
+                        <form nz-form nz-row class="form-item form-group" [formGroup]="getWorkInfoDto">
                             <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                                 <label nzFor="">Chức vụ</label>
                                 <nz-form-control >
-                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="positionId" >
                                     <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
                                     <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
                                     <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -82,7 +83,7 @@
                             <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                                 <label nzFor="">Đơn vị</label>
                                 <nz-form-control >
-                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="unitId">
                                     <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
                                     <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
                                     <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -92,7 +93,7 @@
                             <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                                 <label nzFor="">Người quản lý trực tiếp</label>
                                 <nz-form-control >
-                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="managerId">
                                     <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
                                     <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
                                     <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -102,7 +103,7 @@
                             <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                                 <label nzFor="">Trạng thái lao động</label>
                                 <nz-form-control >
-                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="status">
                                     <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
                                     <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
                                     <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -112,7 +113,7 @@
                             <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                                 <label nzFor="">Loại hợp đồng</label>
                                 <nz-form-control >
-                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="contractType">
                                     <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
                                     <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
                                     <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -122,7 +123,7 @@
                             <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                                 <label nzFor="">Tính chất công việc</label>
                                 <nz-form-control >
-                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="workType">
                                     <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
                                     <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
                                     <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -132,23 +133,23 @@
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label>Mã số chấm công</label>
-                                <nz-form-control>
-                                  <input nz-input name="email" type="text" id="email" placeholder="">
-                                </nz-form-control>
+                                <nz-input-group [nzSuffix]="inputClearTpl">
+                                  <input type="text" nz-input name="employeeTimekeeping" formControlName="timeKeeperCode" />
+                                </nz-input-group>       
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label>Miễn chấm công</label>
                                 <nz-form-control>
-                                    <nz-switch></nz-switch> 
+                                    <nz-switch formControlName="isExemptTimeKeeper"></nz-switch> 
                                 </nz-form-control>
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label>ID Google lịch</label>
-                                <nz-form-control>
-                                  <input nz-input name="email" type="text" id="email" placeholder="">
-                                </nz-form-control>
+                                <nz-input-group [nzSuffix]="inputClearTpl">
+                                  <input type="text" nz-input name="employeeGgId" formControlName="googleCalendarId" />
+                                </nz-input-group>       
                             </nz-form-item >
                           </form>
                     </div>
@@ -160,11 +161,11 @@
                         <h3>Thông tin khác</h3>
                     </div>
                     <div  nz-col nzSpan="24" class="form-container">
-                        <form nz-form nz-row class="form-item">
+                        <form nz-form nz-row class="form-item" [formGroup]="this.employeeForm">
                             <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                                 <label nzFor="">Loại giấy tờ</label>
                                 <nz-form-control >
-                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="identifyType">
                                     <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
                                     <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
                                     <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -173,51 +174,51 @@
                             </nz-form-item >
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label>Số giấy tờ</label>
-                                <nz-form-control>
-                                    <input nz-input name="email" type="text" id="email" placeholder="">
-                                </nz-form-control>
+                                <nz-input-group [nzSuffix]="inputClearTpl">
+                                  <input type="text" nz-input name="employeePapperNum" formControlName="identifyNumber" />
+                                </nz-input-group>       
                             </nz-form-item >
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label class="date-lable">Ngày cấp</label>
-                                <nz-date-picker nzPlaceHolder="Ngày/Tháng/Năm" nz-row ></nz-date-picker>
+                                <nz-date-picker nzPlaceHolder="Ngày/Tháng/Năm" nz-row formControlName="identifyDateRange" ></nz-date-picker>
                             </nz-form-item >
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label>Nơi cấp</label>
-                                <nz-form-control>
-                                    <input nz-input name="email" type="text" id="email" placeholder="">
-                                </nz-form-control>
+                                <nz-input-group [nzSuffix]="inputClearTpl">
+                                  <input type="text" nz-input name="employeeIssuedBy" formControlName="identifyIssuedBy"/>
+                                </nz-input-group>       
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label>Mã số thuế</label>
-                                <nz-form-control>
-                                    <input nz-input name="email" type="text" id="email" placeholder="">
-                                </nz-form-control>
+                                <nz-input-group [nzSuffix]="inputClearTpl">
+                                  <input type="text" nz-input name="TaxCode" formControlName="taxtCode"/>
+                                </nz-input-group>       
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label class="date-lable">Ngày cấp MST</label>
-                                <nz-date-picker nzPlaceHolder="Ngày/Tháng/Năm" nz-row ></nz-date-picker>
+                                <nz-date-picker nzPlaceHolder="Ngày/Tháng/Năm" nz-row formControlName="taxtCodeDateRange" ></nz-date-picker>
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label>Nơi cấp MST</label>
-                                <nz-form-control>
-                                    <input nz-input name="email" type="text" id="email" placeholder="">
-                                </nz-form-control>
+                                <nz-input-group [nzSuffix]=" ">
+                                  <input type="text" nz-input name="employeeIssuedByTaxtCode" formControlName="taxtCodeIssuedBy"/>
+                                </nz-input-group>       
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
                                 <label>Email cá nhân</label>
-                                <nz-form-control>
-                                    <input nz-input name="email" type="text" id="email" placeholder="">
-                                </nz-form-control>
+                                <nz-input-group [nzSuffix]="inputClearTpl">
+                                  <input type="text" nz-input name="employee-personal-email" formControlName="personalEmail" />
+                                </nz-input-group>       
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                                 <label nzFor="">Ngân hàng</label>
                                 <nz-form-control >
-                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="bank">
                                     <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
                                     <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
                                     <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -226,15 +227,11 @@
                             </nz-form-item >
         
                         
-                                <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+                                <nz-form-item  nz-col nzSpan="6" class="input-item" >
                                     <label nzFor="">Số tài khoản ngân hàng</label>
-                                    <nz-form-control >
-                                      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
-                                        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-                                      </nz-select>
-                                    </nz-form-control>
+                                    <nz-input-group [nzSuffix]=" ">
+                                      <input type="text" nz-input name="bankAccount" formControlName="bankAccount"/>
+                                    </nz-input-group>       
                                 </nz-form-item >
                             
         
@@ -261,40 +258,54 @@
                                 <th nz-col nzSpan="3"></th>
                               </tr>        
                               <div nz-col nzSpan="24" *ngFor="let control of educations.controls; index as i">                               
-                                    <form nz-form nz-row class="education-form">
-                                        <nz-form-item nz-col nzSpan="3">                                 
+                                    <form nz-form nz-row class="education-form" [formGroup]="control">
+                                        <nz-form-item nz-col nzSpan="3">    
                                           <nz-form-control>
-                                            <input nz-input name="email" type="email" id="email">
-                                          </nz-form-control>
+                                            <nz-input-group [nzSuffix]="inputClearTpl">
+                                              <input type="number" nz-input name="fromYear" formControlName="fromYear"/>
+                                            </nz-input-group>    
+                                          </nz-form-control>                             
                                         </nz-form-item >
-                                        <nz-form-item nz-col nzSpan="3">                                 
+                                        <nz-form-item nz-col nzSpan="3">    
+                                          <nz-form-control>
+                                            <nz-input-group [nzSuffix]="inputClearTpl">
+                                              <input type="number" nz-input name="toYear" formControlName="toYear"/>
+                                            </nz-input-group>    
+                                          </nz-form-control>                             
+                                          </nz-form-item >
+                                          <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control>
-                                              <input nz-input name="email" type="email" id="email">
+                                              <nz-input-group [nzSuffix]="inputClearTpl">
+                                              <input type="text" nz-input name="educationPlace" formControlName="educationPlace"/>
+                                            </nz-input-group>    
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control>
-                                              <input nz-input name="email" type="email" id="email">
+                                              <nz-input-group [nzSuffix]="inputClearTpl">
+                                              <input type="text" nz-input name="specialize" formControlName="specialized"/>
+                                            </nz-input-group>    
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control>
-                                              <input nz-input name="email" type="email" id="email">
+                                              <nz-input-group [nzSuffix]="inputClearTpl">
+                                              <input type="text" nz-input name="degree" formControlName="degree"/>
+                                            </nz-input-group>    
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control>
-                                              <input nz-input name="email" type="email" id="email">
+                                              <nz-input-group [nzSuffix]="inputClearTpl">
+                                              <input type="text" nz-input name="classification" formControlName="classification"/>
+                                            </nz-input-group>    
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control>
-                                              <input nz-input name="email" type="email" id="email">
-                                            </nz-form-control>
-                                          </nz-form-item >
-                                          <nz-form-item nz-col nzSpan="3">                                 
-                                            <nz-form-control>
-                                              <input nz-input name="email" type="email" id="email">
+                                              <nz-input-group [nzSuffix]="inputClearTpl">
+                                              <input type="text" nz-input name="gaduationYear" formControlName="graduationYear"/>
+                                            </nz-input-group>    
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
@@ -349,40 +360,40 @@
                                
                               </tr>        
                               <div nz-col nzSpan="24"  *ngFor="let control of experiences.controls; index as i" >                               
-                                    <form nz-form nz-row class="education-form">
+                                    <form nz-form nz-row class="education-form" [formGroup]="control">
                                         <nz-form-item nz-col nzSpan="3">                                 
                                           <nz-form-control class="text-area-wrapper">
-                                            <textarea class="text-area-item" nz-input placeholder="" nzAutosize></textarea>
+                                            <textarea class="text-area-item" nz-input placeholder="" nzAutosize formControlName="fromYear"></textarea>
                                           </nz-form-control>
                                         </nz-form-item >
                                         <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize></textarea>
+                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize formControlName="toYear"></textarea>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize></textarea>
+                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize formControlName="workPlace"></textarea>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize></textarea>
+                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize formControlName="workPosition"></textarea>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize></textarea>
+                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize formControlName="personCompare"></textarea>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">                                           
-                                              <div nz-checkbox></div>
+                                              <div nz-checkbox formControlName="isCheckedCompare"></div>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize></textarea>
+                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize formControlName="note"></textarea>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
@@ -465,7 +476,9 @@
                     <h3>Hộ khẩu thường trú</h3>
                 </div>
                 <div nz-col nzSpan="24" class="form-container">
-                   <app-address-form></app-address-form>
+                   <app-address-form [formGroupItem]="getPermanentResidenceDto">
+
+                   </app-address-form>
                 </div>
             </div>
 
@@ -475,7 +488,7 @@
                   <h3>Địa chỉ hiện tại</h3>
               </div>
               <div nz-col nzSpan="24" class="form-container">
-                 <app-address-form></app-address-form>
+                 <app-address-form [formGroupItem]="getNowAddressDto"></app-address-form>
               </div>
           </div>
 
@@ -486,7 +499,7 @@
                 <h3>Quê quán</h3>
             </div>
             <div nz-col nzSpan="24" class="form-container">
-               <app-address-form></app-address-form>
+               <app-address-form [formGroupItem]="getHometownDto"></app-address-form>
             </div>
         </div>
 
@@ -496,18 +509,18 @@
               <h3>Liên hệ khẩn cấp</h3>
           </div>
           <div  nz-col nzSpan="24" class="form-container">
-              <form nz-form nz-row  class="form-item">
+              <form nz-form nz-row  class="form-item" [formGroup]="getUrgentContactDto">
                   <nz-form-item  nz-col nzSpan="6" class="input-urgent-item">
                       <label>Họ và tên</label>
                       <nz-form-control>
-                        <input nz-input name="email" type="text" id="email" placeholder="">
+                        <input nz-input name="email" type="text" id="email" placeholder="" formControlName="fullName">
                       </nz-form-control>
                   </nz-form-item >
                   
                   <nz-form-item  nz-col nzSpan="6" class="input-urgent-item"  >
                       <label nzFor="">Quan hệ</label>
                       <nz-form-control >
-                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="relational">
                           <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
                           <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
                           <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -518,7 +531,7 @@
                   <nz-form-item  nz-col nzSpan="6" class="input-urgent-item">
                       <label>Điện thoại</label>
                       <nz-form-control>
-                          <input nz-input name="email" type="text" id="email" placeholder="">
+                          <input nz-input name="email" type="text" id="email" placeholder="" formControlName="phoneNumber">
                       </nz-form-control>
                   </nz-form-item >
                 </form>
@@ -549,31 +562,31 @@
                     <h3>Thông tin lương</h3>
                 </div>
                 <div  nz-col nzSpan="24" class="form-container">
-                    <form nz-form nz-row  class="form-item">
+                    <form nz-form nz-row  class="form-item" [formGroup]="getSalaryInfoDto">
                         <nz-form-item  nz-col nzSpan="6" class="input-item">
                             <label>Bậc lương</label>
-                            <nz-form-control>
-                              <input nz-input name="email" type="text" id="email" placeholder="">
-                            </nz-form-control>
+                            <nz-input-group [nzSuffix]="inputClearTpl">
+                              <input type="text" nz-input name="wage" formControlName="levelSalary" />
+                            </nz-input-group>    
                         </nz-form-item >
     
                         <nz-form-item  nz-col nzSpan="6" class="input-item">
-                            <label>Lương gross</label>
+                            <label>Lương Gross</label>
                             <nz-form-control>
-                              <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                              <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="grossSalary"></nz-input-number>
                             </nz-form-control>
                         </nz-form-item >
     
     
                         <nz-form-item  nz-col nzSpan="6" class="input-item">
                             <label class="date-lable">Lương Net</label>
-                            <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                            <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName ="netSalary"></nz-input-number>
                         </nz-form-item >
                         
                         <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                             <label nzFor="">Lương cơ bản</label>
                             <nz-form-control >
-                              <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                              <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="basicSalary"></nz-input-number>
                             </nz-form-control>
                         </nz-form-item >
     
@@ -582,7 +595,7 @@
                         <nz-form-item  nz-col nzSpan="6" class="input-item">
                             <label>Lương đóng bảo hiểm</label>
                             <nz-form-control>
-                              <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                              <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="insuranceSalary"></nz-input-number>
                             </nz-form-control>
                         </nz-form-item >
     
@@ -613,18 +626,18 @@
                           </tr>    
                           
                            <div nz-col nzSpan="24" *ngFor="let control of allowanceSalarys.controls; index as i">
-                             <form nz-row nz-form class="salary-form">
+                             <form nz-row nz-form class="salary-form" [formGroup]="getAllowanceSalaryDto">
                                  <td nz-col nzSpan="1">
                                    <nz-form-item class="input-item">
                                      <nz-form-control>
-                                       {{i +1}}
+                                       {{i + 1}}
                                      </nz-form-control>
                                  </nz-form-item >
                                  </td>
                                  <td nz-col nzSpan="5">
                                    <nz-form-item class="input-urgent-item"  >         
                                        <nz-form-control >
-                                         <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                         <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="allowanceName">
                                            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
                                            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
                                            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -635,7 +648,7 @@
                                  <td nz-col nzSpan="9">
                                    <nz-form-item class="input-item">
                                      <nz-form-control>
-                                       <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                                       <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="value"></nz-input-number>
                                      </nz-form-control>
                                    </nz-form-item >
                                  </td>
@@ -652,9 +665,6 @@
    
                                 </form>
                            </div>
-
-                        
-                         
 
                           <tfoot nz-col nzSpan="24">
                               <div nz-row class="education-table-footer">
@@ -686,7 +696,7 @@
                           <th nz-col nzSpan="9"></th>
                         </tr>        
                         <div nz-col nzSpan="24" *ngFor="let control of deductibleSalarys.controls; index as i">
-                          <form nz-row nz-form class="salary-form">
+                          <form nz-row nz-form class="salary-form" [formGroup]="getDeductibleSalaryDto">
                               <td nz-col nzSpan="1">
                                 <nz-form-item class="input-item">
                                   <nz-form-control>
@@ -697,7 +707,7 @@
                               <td nz-col nzSpan="5">
                                 <nz-form-item class="input-urgent-item"  >         
                                     <nz-form-control >
-                                      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="deductibleName">
                                         <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
                                         <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
                                         <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
@@ -708,7 +718,7 @@
                               <td nz-col nzSpan="9">
                                 <nz-form-item class="input-item">
                                   <nz-form-control>
-                                    <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+                                    <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="value"></nz-input-number>
                                   </nz-form-control>
                               </nz-form-item >
                               </td>
@@ -747,7 +757,7 @@
               <span nz-icon nzType="close"></span>
               Hủy bỏ
             </button>
-            <button nz-button nzDanger nzType="primary">
+            <button nz-button nzDanger nzType="primary" (click)="handleSaveForm()">
               <span nz-icon nzType="save"></span>
               Lưu
             </button>
@@ -758,3 +768,15 @@
       </nz-tabset>
 
 </div>
+
+
+<ng-template #inputClearTpl>
+  <span
+    nz-icon
+    class="ant-input-clear-icon"
+    nzTheme="fill"
+    nzType="close-circle"
+    *ngIf="inputValue"
+    (click)="inputValue = null"
+  ></span>
+</ng-template>

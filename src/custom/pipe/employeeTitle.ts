@@ -4,7 +4,6 @@ interface PipeTransform {
     transform(value: any, ...args: any[]): any;
 }
 
-
 @Pipe({
   name: "employeeTitle",
 })
