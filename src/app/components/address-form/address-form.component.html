@@ -1,11 +1,9 @@
-<form nz-form nz-row [formGroup]="formGroupItem">
+<form nz-form nz-row [formGroup]="formGroupItem" >
     <nz-form-item  nz-col nzSpan="6" class="input-item"  >
         <label nzFor="">Tỉnh/Thành phố</label>
         <nz-form-control >
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="city">
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+          <nz-select (ngModelChange)="handleChangeCity($event)" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="city">
+            <nz-option *ngFor="let item of provinces" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>      
           </nz-select>
         </nz-form-control>
     </nz-form-item >
@@ -13,10 +11,9 @@
     <nz-form-item  nz-col nzSpan="6" class="input-item"  >
         <label nzFor="">Quận/Huyện</label>
         <nz-form-control >
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="district">
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+          <nz-select (ngModelChange)="handleChageDistrict($event)" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="district">
+            <nz-option *ngFor="let item of districts" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>
+           
           </nz-select>
         </nz-form-control>
     </nz-form-item >
@@ -25,9 +22,8 @@
         <label nzFor="">Xã/Phường</label>
         <nz-form-control >
           <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="wards">
-            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+            <nz-option *ngFor="let item of wards" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>
+          
           </nz-select>
         </nz-form-control>
     </nz-form-item >

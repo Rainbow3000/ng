@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ComponentRedering } from '../../../services/componentRedering.service';
 import { EmployeeService } from '../../../services/employee.service';
+import { EmployeeDto } from '../../../dtos/employeeDto';
 
 
 @Component({
@@ -15,7 +16,6 @@ export class EmployeeActionComponent implements OnInit {
     this.componentRendering = cr.getComponentRendering; 
     this.formMode = cr.getFormMode; 
   }
-
 
   ngOnInit(): void {
      this.employeeForm = this.fb.group({
@@ -120,6 +120,12 @@ export class EmployeeActionComponent implements OnInit {
      })
   }
 
+  errorsMessage = {
+    employeeCode:"sadf",
+    fullName:"",
+    phoneNumber:""
+  }
+
   componentRendering:number;
   formMode:string;
   inputValue: string | null = null;
@@ -134,8 +140,6 @@ export class EmployeeActionComponent implements OnInit {
   workInfoForm:FormGroup
   educationForm:FormGroup
   employeeForm:FormGroup
-  
-
   get getWorkInfoDto():any{
     return this.employeeForm.get('workInfoDto')
   }
@@ -234,7 +238,33 @@ export class EmployeeActionComponent implements OnInit {
   }
 
   handleSaveForm(){
-    console.log(this.employeeForm.value);
+
+    console.log('142145');
+    
+
+    let flag = 0;  
+    if(this.employeeForm.value.code.trim().length === 0){
+      this.errorsMessage.employeeCode = "Mã nhân viên không được để trống"
+      flag = 1;
+    }
+
+    if(this.employeeForm.value.fullName.trim().length === 0){
+      this.errorsMessage.fullName = "Tên không được để trống"
+      flag = 1;
+    }
+
+    if(this.employeeForm.value.code.trim().length === 0){
+      this.errorsMessage.phoneNumber = "Số điện thoại không được để trống"
+      flag = 1;
+    }
+
+    if(flag === 1) return;
+
+    this.employeeService.createEmployee(this.employeeForm.value).subscribe(data =>{
+      console.log(data);
+    })
+    
+
   }
 
 }

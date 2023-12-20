@@ -34,6 +34,8 @@ import { AddressFormComponent } from './components/address-form/address-form.com
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { EmployeeTitlePipe } from '../custom/pipe/employeeTitle';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
+import { TreeSelectComponent } from './components/tree-select/tree-select.component';
 registerLocaleData(vi);
 
 @NgModule({ 
@@ -46,7 +48,8 @@ registerLocaleData(vi);
     TableListComponent,
     EmployeeActionComponent,
     AddressFormComponent,
-    EmployeeTitlePipe
+    EmployeeTitlePipe,
+    TreeSelectComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ registerLocaleData(vi);
     NzCheckboxModule,
     NzUploadModule,
     NzInputNumberModule,
-    NzToolTipModule
+    NzToolTipModule,
+    NzTreeSelectModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

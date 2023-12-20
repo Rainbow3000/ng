@@ -20,6 +20,9 @@
     }
     .action-form-wrapper{
         width: 100%;
+        .form-error-text{
+            color: red;
+        }
         .form-item-wrapper{
             width: 100%;
             .form-title{

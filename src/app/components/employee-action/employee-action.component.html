@@ -14,14 +14,16 @@
                     <div nz-col nzSpan="24" class="form-container">
                         <form nz-form nz-row  class="form-item" [formGroup]="this.employeeForm">
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
-                                <label><span>*</span> Mã nhân viên</label>
+                                <label><span>*</span> Mã nhân viên</label><br/>
+                                <span class="form-error-text">{{errorsMessage.employeeCode}}</span>
                                 <nz-input-group [nzSuffix]="inputClearTpl">
                                   <input type="text" nz-input  name="code" formControlName="code" />
                                 </nz-input-group>                  
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
-                                <label><span>*</span> Họ và tên</label>
+                                <label><span>*</span> Họ và tên</label><br/>
+                                <span class="form-error-text">{{errorsMessage.fullName}}</span>
                                 <nz-input-group [nzSuffix]="inputClearTpl">
                                   <input type="text" nz-input name="fullName" formControlName="fullName" />
                                 </nz-input-group>       
@@ -37,15 +39,16 @@
                                 <label nzFor="">Giới tính</label>
                                 <nz-form-control >
                                   <nz-select formControlName="gender" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                    <nz-option nzLabel="Nam" nzValue="1"></nz-option>
+                                    <nz-option nzLabel="Nữ" nzValue="2"></nz-option>
+                                    <nz-option nzLabel="Khác" nzValue="3"></nz-option>
                                   </nz-select>
                                 </nz-form-control>
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
-                                <label><span>*</span>Điện thoại</label>
+                                <label><span>*</span>Điện thoại</label><br/>
+                                <span class="form-error-text">{{errorsMessage.phoneNumber}}</span>
                                 <nz-input-group [nzSuffix]="inputClearTpl">
                                   <input type="text" nz-input name="phoneNumber" formControlName="phoneNumber" />
                                 </nz-input-group>       
@@ -74,29 +77,29 @@
                                 <label nzFor="">Chức vụ</label>
                                 <nz-form-control >
                                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="positionId" >
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                    <nz-option nzLabel="CEO" nzValue="1"></nz-option>
+                                    <nz-option nzLabel="Giám đốc sản xuất" nzValue="2"></nz-option>
+                                    <nz-option nzLabel="Giám đốc trung tâm" nzValue="3"></nz-option>
+                                    <nz-option nzLabel="Kế toán" nzValue="4"></nz-option>
+                                    <nz-option nzLabel="Lập trình viên" nzValue="5"></nz-option>
                                   </nz-select>
+                                 
                                 </nz-form-control>
                             </nz-form-item >
                             <nz-form-item  nz-col nzSpan="6" class="input-item"  >
-                                <label nzFor="">Đơn vị</label>
-                                <nz-form-control >
-                                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="unitId">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-                                  </nz-select>
-                                </nz-form-control>
+                                  <label nzFor="">Đơn vị</label>                        
+                                  <app-tree-select [formGroupItem]="getWorkInfoDto"/>         
                             </nz-form-item >
                             <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                                 <label nzFor="">Người quản lý trực tiếp</label>
                                 <nz-form-control >
                                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="managerId">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                    <nz-option nzLabel="Nguyễn Văn Sơn" nzValue="1"></nz-option>
+                                    <nz-option nzLabel="Nguyễn Xuân công" nzValue="2"></nz-option>
+                                    <nz-option nzLabel="Hà Đức Huy" nzValue="3"></nz-option>
+                                    <nz-option nzLabel="Cao Thị Thùy Linh" nzValue="4"></nz-option>
+                                    <nz-option nzLabel="Trần Đăng Hiệu" nzValue="5"></nz-option>
+                                    <nz-option nzLabel="Nguyễn Tuấn Minh" nzValue="6"></nz-option>
                                   </nz-select>
                                 </nz-form-control>
                             </nz-form-item >
@@ -104,9 +107,9 @@
                                 <label nzFor="">Trạng thái lao động</label>
                                 <nz-form-control >
                                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="status">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                    <nz-option nzLabel="Đang làm việc" nzValue="1"></nz-option>
+                                    <nz-option nzLabel="Đã nghỉ việc" nzValue="2"></nz-option>
+                             
                                   </nz-select>
                                 </nz-form-control>
                             </nz-form-item >
@@ -114,9 +117,9 @@
                                 <label nzFor="">Loại hợp đồng</label>
                                 <nz-form-control >
                                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="contractType">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                    <nz-option nzLabel="Hợp đồng thử việc" nzValue="1"></nz-option>
+                                    <nz-option nzLabel="Hợp đồng chính thức" nzValue="2"></nz-option>
+                                    <nz-option nzLabel="Hợp đồng học việc" nzValue="3"></nz-option>
                                   </nz-select>
                                 </nz-form-control>
                             </nz-form-item >
@@ -124,9 +127,10 @@
                                 <label nzFor="">Tính chất công việc</label>
                                 <nz-form-control >
                                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="workType">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                    <nz-option nzLabel="Làm việc từ xa" nzValue="1"></nz-option>
+                                    <nz-option nzLabel="Toàn thời gian" nzValue="2"></nz-option>
+                                    <nz-option nzLabel="Bán thời gian" nzValue="3"></nz-option>
+                                    <nz-option nzLabel="Theo mùa trong năm" nzValue="4"></nz-option>
                                   </nz-select>
                                 </nz-form-control>
                             </nz-form-item >
@@ -219,9 +223,9 @@
                                 <label nzFor="">Ngân hàng</label>
                                 <nz-form-control >
                                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="bank">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                    <nz-option nzLabel="Techcombank" nzValue="1"></nz-option>
+                                    <nz-option nzLabel="BIDV" nzValue="2"></nz-option>
+                                    <nz-option nzLabel="MB Bank" nzValue="3"></nz-option>
                                   </nz-select>
                                 </nz-form-control>
                             </nz-form-item >
@@ -521,9 +525,10 @@
                       <label nzFor="">Quan hệ</label>
                       <nz-form-control >
                         <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="relational">
-                          <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                          <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                          <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                          <nz-option nzLabel="Bố" nzValue="1"></nz-option>
+                          <nz-option nzLabel="Mẹ" nzValue="2"></nz-option>
+                          <nz-option nzLabel="Vợ" nzValue="3"></nz-option>
+                          <nz-option nzLabel="Chồng" nzValue="4"></nz-option>
                         </nz-select>
                       </nz-form-control>
                   </nz-form-item >
