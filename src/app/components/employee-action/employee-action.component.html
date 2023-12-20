@@ -458,17 +458,6 @@
                 <p class="ant-upload-text">Chỉ hỗ trợ đính kèm tài liệu(.doc, .excel, .pdf) và file ảnh với dung lượng tối đa 20Mb</p>
              
             </nz-upload>
-
-            <div nz-col nzSpan="24" class="footer-btn">
-                <button nz-button >
-                  <span nz-icon nzType="close"></span>
-                  Hủy bỏ
-                </button>
-                <button nz-button nzDanger nzType="primary">
-                  <span nz-icon nzType="save"></span>
-                  Lưu
-                </button>
-            </div>
                
             </div>
         </nz-tab>
@@ -542,21 +531,8 @@
                 </form>
           </div>
       </div>
-    
-  
-
-        <div nz-col nzSpan="24" class="footer-btn">
-            <button nz-button >
-              <span nz-icon nzType="close"></span>
-              Hủy bỏ
-            </button>
-            <button nz-button nzDanger nzType="primary">
-              <span nz-icon nzType="save"></span>
-              Lưu
-            </button>
-        </div>
            
-          </div>
+      </div>
 
         </nz-tab>
         <nz-tab nzTitle="Thông tin hợp đồng lao động">
@@ -578,20 +554,20 @@
                         <nz-form-item  nz-col nzSpan="6" class="input-item">
                             <label>Lương Gross</label>
                             <nz-form-control>
-                              <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="grossSalary"></nz-input-number>
+                              <nz-input-number  style="width: 100%;" [nzFormatter]="formater" [nzMin]="1"  [nzStep]="1" formControlName="grossSalary"></nz-input-number>
                             </nz-form-control>
                         </nz-form-item >
     
     
                         <nz-form-item  nz-col nzSpan="6" class="input-item">
                             <label class="date-lable">Lương Net</label>
-                            <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName ="netSalary"></nz-input-number>
+                            <nz-input-number  style="width: 100%;" [nzFormatter]="formater"  [nzMin]="1"  [nzStep]="1" formControlName ="netSalary"></nz-input-number>
                         </nz-form-item >
                         
                         <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                             <label nzFor="">Lương cơ bản</label>
                             <nz-form-control >
-                              <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="basicSalary"></nz-input-number>
+                              <nz-input-number  style="width: 100%;" [nzFormatter]="formater" [nzMin]="1"  [nzStep]="1" formControlName="basicSalary"></nz-input-number>
                             </nz-form-control>
                         </nz-form-item >
     
@@ -600,7 +576,7 @@
                         <nz-form-item  nz-col nzSpan="6" class="input-item">
                             <label>Lương đóng bảo hiểm</label>
                             <nz-form-control>
-                              <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="insuranceSalary"></nz-input-number>
+                              <nz-input-number  style="width: 100%;" [nzFormatter]="formater" [nzMin]="1"  [nzStep]="1" formControlName="insuranceSalary"></nz-input-number>
                             </nz-form-control>
                         </nz-form-item >
     
@@ -631,7 +607,7 @@
                           </tr>    
                           
                            <div nz-col nzSpan="24" *ngFor="let control of allowanceSalarys.controls; index as i">
-                             <form nz-row nz-form class="salary-form" [formGroup]="getAllowanceSalaryDto">
+                             <form nz-row nz-form class="salary-form" [formGroup]="control">
                                  <td nz-col nzSpan="1">
                                    <nz-form-item class="input-item">
                                      <nz-form-control>
@@ -653,7 +629,7 @@
                                  <td nz-col nzSpan="9">
                                    <nz-form-item class="input-item">
                                      <nz-form-control>
-                                       <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="value"></nz-input-number>
+                                       <nz-input-number  style="width: 100%;" [nzFormatter]="formater" [nzMin]="1"  [nzStep]="1" formControlName="value"></nz-input-number>
                                      </nz-form-control>
                                    </nz-form-item >
                                  </td>
@@ -701,7 +677,7 @@
                           <th nz-col nzSpan="9"></th>
                         </tr>        
                         <div nz-col nzSpan="24" *ngFor="let control of deductibleSalarys.controls; index as i">
-                          <form nz-row nz-form class="salary-form" [formGroup]="getDeductibleSalaryDto">
+                          <form nz-row nz-form class="salary-form" [formGroup]="control">
                               <td nz-col nzSpan="1">
                                 <nz-form-item class="input-item">
                                   <nz-form-control>
@@ -723,7 +699,7 @@
                               <td nz-col nzSpan="9">
                                 <nz-form-item class="input-item">
                                   <nz-form-control>
-                                    <nz-input-number  style="width: 100%;"  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="value"></nz-input-number>
+                                    <nz-input-number  style="width: 100%;" [nzFormatter]="formater" [nzMin]="1"  [nzStep]="1" formControlName="value"></nz-input-number>
                                   </nz-form-control>
                               </nz-form-item >
                               </td>
@@ -757,21 +733,21 @@
               </div>
           </div>
 
-        <div nz-col nzSpan="24" class="footer-btn">
-            <button nz-button >
-              <span nz-icon nzType="close"></span>
-              Hủy bỏ
-            </button>
-            <button nz-button nzDanger nzType="primary" (click)="handleSaveForm()">
-              <span nz-icon nzType="save"></span>
-              Lưu
-            </button>
+          
         </div>
-           
-        </div>
-        </nz-tab>
-      </nz-tabset>
-
+      </nz-tab>
+    </nz-tabset>
+    <div nz-col nzSpan="24" class="footer-btn">
+        <button nz-button >
+          <span nz-icon nzType="close"></span>
+          Hủy bỏ
+        </button>
+        <button nz-button nzDanger nzType="primary" (click)="handleSaveForm()">
+          <span nz-icon nzType="save"></span>
+          Lưu
+        </button>
+    </div>
+    
 </div>
 
 
