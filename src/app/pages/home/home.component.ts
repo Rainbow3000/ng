@@ -16,7 +16,9 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.employeeService.getListEmployee().subscribe(data => this.employeeList = data);
+    this.employeeService.getListEmployee().subscribe(response => {  
+          this.employeeList = response.data;   
+    });
   }
   handleShowComponentCreate(value:number){
      this.cr.setComponentRendering = value; 

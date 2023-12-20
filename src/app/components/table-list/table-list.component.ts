@@ -1,20 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ComponentRedering } from '../../../services/componentRedering.service';
-
-
-interface IEmployee{
-  id: number;
-  employeeName: string;
-  employeeCode: string;
-  position:string,
-  manager:string,
-  dob:string,
-  gender:string,
-  phoneNumber:string,
-  status:string,
-  email:string
-}
-
+import { EmployeeDto } from '../../../dtos/employeeDto';
 
 @Component({
   selector: 'app-table-list',
@@ -22,6 +8,8 @@ interface IEmployee{
   styleUrl: './table-list.component.scss'
 })
 export class TableListComponent implements OnInit {
+  
+  @Input()listOfData:EmployeeDto[];
     ngOnInit(): void {
      
     }
@@ -37,21 +25,6 @@ export class TableListComponent implements OnInit {
     }
     
 
-    listOfData:IEmployee[] = [
-      {
-        id:1,
-        employeeCode:"nv-1",
-        employeeName:"Nguyễn Đức Thịnh",
-        position:"Thực tập",
-        manager:"Nguyễn Văn Sơn",
-        dob:"22/12/2023",
-        gender:"Nam",
-        phoneNumber:"02385235928",
-        status:"Đang làm việc",
-        email:"nguyenducthinh0401@gmail.com"
-      }
-    ]
-
     listOfSelection = [
       {
         text: 'Select All Row',
@@ -62,24 +35,24 @@ export class TableListComponent implements OnInit {
       {
         text: 'Select Odd Row',
         onSelect: () => {
-          this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 !== 0));
+          this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.employeeId, index % 2 !== 0));
           this.refreshCheckedStatus();
         }
       },
       {
         text: 'Select Even Row',
         onSelect: () => {
-          this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 === 0));
+          this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.employeeId, index % 2 === 0));
           this.refreshCheckedStatus();
         }
       }
     ];
     checked = false;
     indeterminate = false;
-    listOfCurrentPageData: readonly IEmployee[] = [];
-    setOfCheckedId = new Set<number>();
+    listOfCurrentPageData: readonly EmployeeDto[] = [];
+    setOfCheckedId = new Set<string>();
   
-    updateCheckedSet(id: number, checked: boolean): void {
+    updateCheckedSet(id: string, checked: boolean): void {
       if (checked) {
         this.setOfCheckedId.add(id);
       } else {
@@ -87,23 +60,23 @@ export class TableListComponent implements OnInit {
       }
     }
   
-    onItemChecked(id: number, checked: boolean): void {
+    onItemChecked(id: string, checked: boolean): void {
       this.updateCheckedSet(id, checked);
       this.refreshCheckedStatus();
     }
   
     onAllChecked(value: boolean): void {
-      this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.id, value));
+      this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.employeeId, value));
       this.refreshCheckedStatus();
     }
   
-    onCurrentPageDataChange($event: readonly IEmployee[]): void {
+    onCurrentPageDataChange($event: readonly EmployeeDto[]): void {
       this.listOfCurrentPageData = $event;
       this.refreshCheckedStatus();
     }
   
     refreshCheckedStatus(): void {
-      this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.id));
-      this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.id)) && !this.checked;
+      this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.employeeId));
+      this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.employeeId)) && !this.checked;
     }
 }

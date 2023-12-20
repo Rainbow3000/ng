@@ -25,16 +25,16 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of rowSelectionTable.data ; index as i">
-            <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+            <td [nzChecked]="setOfCheckedId.has(data.employeeId)" (nzCheckedChange)="onItemChecked(data.employeeId, $event)"></td>
             <td>{{ i + 1 }}</td>
-            <td>{{ data.employeeCode }}</td>
+            <td>{{ data.code }}</td>
             <td>
                 <div class="table-user-wrapper">
                     <div class="avatar">
                         NN
                     </div>
                     <div class="info-wrapper">
-                        <span>{{data.employeeName}}</span>
+                        <span>{{data.fullName}}</span>
                         <span class="info-item">
                             <span nz-icon>
                                 <svg>
@@ -58,14 +58,14 @@
                                 </svg>
                             </span>
                              &nbsp;
-                            {{data.email}}
+                            {{data.personalEmail}}
                         </span>
                     </div>
                 </div>
             </td>
-            <td>{{ data.position }}</td>
-            <td>{{ data.manager }}</td>
-            <td>{{ data.status }}</td>
+            <td>{{ data.workInfoDto.positionId }}</td>
+            <td>{{ data.workInfoDto.managerId }}</td>
+            <td>{{ data.workInfoDto.status }}</td>
             <td class="table-icon-list">
                 <div class="icon-wrapper">
                     <span nz-icon nzType="eye" nzTheme="outline"></span>

@@ -170,9 +170,9 @@
                                 <label nzFor="">Loại giấy tờ</label>
                                 <nz-form-control >
                                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="identifyType">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                    <nz-option nzLabel="CMND" nzValue="1"></nz-option>
+                                    <nz-option nzLabel="CCCD" nzValue="2"></nz-option>
+                            
                                   </nz-select>
                                 </nz-form-control>
                             </nz-form-item >
@@ -445,19 +445,20 @@
                     </nz-table>
                   </div>
               </div>
-
-              <nz-upload
-              nzType="drag"
-              [nzMultiple]="true"
-              nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              
-            >
-                <p class="ant-upload-drag-icon">
-                  <span nz-icon nzType="inbox"></span>
-                </p>
-                <p class="ant-upload-text">Chỉ hỗ trợ đính kèm tài liệu(.doc, .excel, .pdf) và file ảnh với dung lượng tối đa 20Mb</p>
+              <form style="margin-top: 30px;" nz-form nz-col nzSpan="24" class="form-item form-group" [formGroup]="getFileDto">
+                <nz-upload
+                nzType="drag"
+                [nzMultiple]="true"
+                nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
              
-            </nz-upload>
+              >
+                  <p class="ant-upload-drag-icon">
+                    <span nz-icon nzType="inbox"></span>
+                  </p>
+                  <p class="ant-upload-text">Chỉ hỗ trợ đính kèm tài liệu(.doc, .excel, .pdf) và file ảnh với dung lượng tối đa 20Mb</p>
+               
+              </nz-upload>
+              </form>
                
             </div>
         </nz-tab>
