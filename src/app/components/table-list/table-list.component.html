@@ -2,7 +2,6 @@
     <div nz-col nzSpan="24">
         <h3>Danh sách nhân viên</h3>
     </div>
-
     <div nz-col nzSpan="24">
         <nz-table
         #rowSelectionTable
@@ -30,8 +29,8 @@
             <td>{{ data.code }}</td>
             <td>
                 <div class="table-user-wrapper">
-                    <div class="avatar">
-                        {{data.fullName.split("")[0].split('')[0].toUpperCase()}}{{data.fullName.split("")[(data.fullName.split("").length) - 1].split("")[0].toUpperCase()}}
+                    <div #avatar class="avatar">
+                        {{getCharName(data?.fullName)}}
                         
                     </div>
                     <div class="info-wrapper">

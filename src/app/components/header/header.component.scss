@@ -39,6 +39,30 @@
                     display: flex;
                     align-items: center;
                     cursor: pointer;
+                    position: relative;
+                    &:hover .header-action{
+                        display: flex;
+                    }
+                    .header-action{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: max-content;
+                        height: auto;
+                        padding: 25px 50px;
+                        position: absolute;
+                        top: 68px;
+                        right: 0;
+                        background-color: #FFFFFF;
+                        border: 1px solid rgba(128, 128, 128, 0.164);
+                        border-radius: 5px;
+                        list-style: none;
+                        z-index: 999;
+                        display: none;
+                        &:hover{
+                            color: gray;
+                        }
+                    }
                     img{
                         width: auto;
                         height: 36px;

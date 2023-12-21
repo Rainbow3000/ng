@@ -1,16 +1,25 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ComponentRedering } from '../../../services/componentRedering.service';
 import { EmployeeDto } from '../../../dtos/employeeDto';
 import {WORK_STATUS,WORK_TYPE,GENDER,BANK,CONTRACT_TYPE,IDENTIFY_TYPE,POSITION,MANAGER} from '../../../enum/enum'
 import { EmployeeService } from '../../../services/employee.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import {getCharName} from '../../../helper/getCharName'
+import {randomColor} from '../../../helper/randomColor'
 @Component({
   selector: 'app-table-list',
   templateUrl: './table-list.component.html',
   styleUrl: './table-list.component.scss'
 })
-export class TableListComponent implements OnInit {
+export class TableListComponent implements AfterViewChecked {
   
+  
+  constructor(private cr:ComponentRedering, private employeeService:EmployeeService,private message: NzMessageService){
 
+  }
+  ngAfterViewChecked(): void {
+     this.avatarRef.nativeElement.style.backgroundColor = randomColor(); 
+  }
   WORK_STATUS:any = WORK_STATUS
   WORK_TYPE:any =WORK_TYPE
   GENDER:any = GENDER
@@ -19,16 +28,16 @@ export class TableListComponent implements OnInit {
   IDENTIFY_TYPE:any = IDENTIFY_TYPE
   POSITION:any = POSITION
   MANAGER:any = MANAGER
-  
+  getCharName = getCharName
+  randomColor = randomColor
 
   @Input()listOfData:EmployeeDto[];
-    ngOnInit(): void {
-     
-    }
+  @ViewChild('avatar') avatarRef: ElementRef;
 
-    constructor(private cr:ComponentRedering, private employeeService:EmployeeService){
-
+    createMessage(type: string,messageText:string): void {
+      this.message.create(type,messageText);
     }
+  
 
 
     handleShowComponentCreate(value:number,employee:EmployeeDto){
@@ -93,12 +102,27 @@ export class TableListComponent implements OnInit {
       this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.employeeId)) && !this.checked;
     }
 
+    handleShowErrText(err:any){
+        this.createMessage('error',err.error.message)
+    }
+
 
     handleDeleteEmployee(employeeId:string){
-      this.employeeService.deleteEmployee(employeeId).subscribe(data =>{
-        this.employeeService.getListEmployee().subscribe(response =>{
-          this.listOfData = response.data ;
-        })
-      })
+
+      const isConfirm = confirm("Bạn có chắc muốn xóa nhân viên này không ?");
+      if(isConfirm){
+        this.employeeService.deleteEmployee(employeeId).subscribe(
+          data => {
+          this.createMessage('success','Xóa nhân viên thành công')
+          this.employeeService.getListEmployee().subscribe(response =>{
+            this.listOfData = response.data ;
+          })
+        }, 
+
+        err => this.handleShowErrText(err)
+        
+        )
+      }
+
     }
 }

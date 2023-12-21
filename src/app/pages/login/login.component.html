@@ -1,0 +1,31 @@
+
+<div class="form-wrapper">
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+        <img src="http://test-hrm.orenda.vn/assets/media/logos/hrm.svg" alt="">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Vui lòng nhập tài khoản">
+            <nz-input-group nzPrefixIcon="user">
+              <input type="text" nz-input formControlName="userName" placeholder="Tên đăng nhập" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Vui lòng nhập mật khẩu">
+            <nz-input-group nzPrefixIcon="lock">
+              <input type="password" nz-input formControlName="password" placeholder="Mật khẩu" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <div nz-row class="login-form-margin">
+          <div nz-col [nzSpan]="12">
+            <label nz-checkbox >
+              <span>Nhớ mật khẩu</span>
+            </label>
+          </div>
+          <div nz-col [nzSpan]="12">
+            <a class="login-form-forgot">Quên mật khẩu</a>
+          </div>
+        </div>
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Đăng nhập</button>
+    </form>
+</div>

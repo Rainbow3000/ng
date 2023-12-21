@@ -8,7 +8,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -36,6 +36,10 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { EmployeeTitlePipe } from '../custom/pipe/employeeTitle';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { TreeSelectComponent } from './components/tree-select/tree-select.component';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { LoginComponent } from './pages/login/login.component';
+import { MyInterceptor } from '../services/interceptor.service';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 registerLocaleData(vi);
 
 @NgModule({ 
@@ -49,7 +53,8 @@ registerLocaleData(vi);
     EmployeeActionComponent,
     AddressFormComponent,
     EmployeeTitlePipe,
-    TreeSelectComponent
+    TreeSelectComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -74,10 +79,17 @@ registerLocaleData(vi);
     NzUploadModule,
     NzInputNumberModule,
     NzToolTipModule,
-    NzTreeSelectModule
+    NzTreeSelectModule,
+    NzMessageModule,
+    NzAlertModule
   ],
   providers: [
-    { provide: NZ_I18N, useValue: en_US }
+    { provide: NZ_I18N, useValue: en_US },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MyInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

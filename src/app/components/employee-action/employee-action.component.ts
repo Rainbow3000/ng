@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ComponentRedering } from '../../../services/componentRedering.service';
 import { EmployeeService } from '../../../services/employee.service';
 import { EmployeeDto } from '../../../dtos/employeeDto';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-employee-action',
@@ -35,7 +36,7 @@ export class EmployeeActionComponent implements OnInit {
   educationForm:FormGroup
   employeeForm:FormGroup
 
-  constructor(private fb : FormBuilder, private cr : ComponentRedering, private employeeService:EmployeeService){
+  constructor(private fb : FormBuilder, private cr : ComponentRedering, private employeeService:EmployeeService , private message: NzMessageService){
   
   }
   formater(inputNumberValue:number){
@@ -237,6 +238,13 @@ export class EmployeeActionComponent implements OnInit {
      })
   }
 
+
+
+  createMessage(type: string,messageText:string): void {
+    this.message.create(type,messageText);
+  }
+
+
   caculateSalary(){
     const salary = this.getSalaryInfoDto.value; 
     return 123
@@ -325,6 +333,22 @@ export class EmployeeActionComponent implements OnInit {
     this.cr.setComponentRendering = value; 
   }
 
+  validateVietnamesePhoneNumber(phoneNumber:string) {
+    var regexPattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    return regexPattern.test(phoneNumber);
+  }
+
+  handleShowErrText(err:any){
+    if(typeof err.error.message  === 'object'){
+      for(let item of err.error.message){      
+        const obj = Object.keys(item);        
+        this.createMessage('error',item[obj[0]]);
+      }  
+      return;
+    }
+    this.createMessage('error',err.error.message)
+}
+
   handleSaveForm(){
     let flag = 0;  
     if(this.employeeForm.value.code.trim().length === 0){
@@ -340,9 +364,19 @@ export class EmployeeActionComponent implements OnInit {
     if(this.employeeForm.value.phoneNumber.trim().length === 0){
       this.errorsMessage.phoneNumber = "Số điện thoại không được để trống"
       flag = 1;
+    }else {
+      const isValid = this.validateVietnamesePhoneNumber(this.employeeForm.value.phoneNumber.trim());
+      if(!isValid){
+        this.errorsMessage.phoneNumber = "Số điện thoại không hợp lệ"
+        flag = 1;
+      } 
     }
 
-    if(flag === 1) return;
+    if(flag === 1) {
+      this.createMessage('error','Giá trị nhập vào không hợp lệ')
+      return; 
+    };
+
     let employeeCreateDto = this.employeeForm.value
     employeeCreateDto.workInfoDto.status = parseInt(employeeCreateDto.workInfoDto.status); 
     employeeCreateDto.workInfoDto.contractType = parseInt(employeeCreateDto.workInfoDto.contractType); 
@@ -359,15 +393,23 @@ export class EmployeeActionComponent implements OnInit {
     }
 
     if(this.formMode === "UPDATE"){
-      this.employeeService.updateEmployee(this.employeeUpdate?.employeeId,employeeCreateDto).subscribe(data =>{
+      this.employeeService.updateEmployee(this.employeeUpdate?.employeeId,employeeCreateDto).subscribe(
+        data =>{
+        this.createMessage('success','Cập nhật thông tin nhân viên thành công')
         this.handleSetComponentRendering(1);
         return; 
-    })
+        },
+        err => this.handleShowErrText(err)
+    )
     }
 
-    this.employeeService.createEmployee(employeeCreateDto).subscribe(data =>{
+    this.employeeService.createEmployee(employeeCreateDto).subscribe(
+      data =>{
+        this.createMessage('success','Tạo nhân viên thành công')
         this.handleSetComponentRendering(1);
-    })
+      },
+      err => this.handleShowErrText(err)
+    )
     
   }
 

@@ -11,9 +11,13 @@ import { EmployeeDto } from '../../../dtos/employeeDto';
 export class HomeComponent implements OnInit {
   
   employeeList:EmployeeDto[]; 
-
+  componentRendering:number; 
   constructor(private cr: ComponentRedering,private employeeService:EmployeeService){
+    this.componentRendering = cr.getComponentRendering;
 
+    this.cr.$_componentRenderValue.subscribe((newValue) => {
+      this.componentRendering = newValue;
+    });
   }
   ngOnInit(): void {
     this.employeeService.getListEmployee().subscribe(response => {  
@@ -24,4 +28,5 @@ export class HomeComponent implements OnInit {
      this.cr.setComponentRendering = value; 
      this.cr.setFormMode = 'CREATE'
   }
+
 }

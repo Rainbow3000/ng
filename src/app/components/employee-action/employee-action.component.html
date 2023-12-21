@@ -14,7 +14,7 @@
                     <div nz-col nzSpan="24" class="form-container">
                         <form nz-form nz-row  class="form-item" [formGroup]="this.employeeForm">
                           <nz-form-item  nz-col nzSpan="6" class="input-item">
-                            <label><span>*</span> Mã nhân viên</label> <span class="form-error-text">{{errorsMessage.employeeCode}}</span><br/>
+                            <label><span>*</span> Mã nhân viên</label> &nbsp; <span class="form-error-text">{{errorsMessage.employeeCode}}</span><br/>
                             
                                 <nz-input-group [nzSuffix]="inputClearTpl">
                                   <input type="text" nz-input  name="code" formControlName="code" />
@@ -22,7 +22,7 @@
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
-                                <label><span>*</span> Họ và tên</label> <span class="form-error-text">{{errorsMessage.fullName}}</span><br/>
+                                <label><span>*</span> Họ và tên</label> &nbsp; <span class="form-error-text">{{errorsMessage.fullName}}</span><br/>
                                 
                                 <nz-input-group [nzSuffix]="inputClearTpl">
                                   <input type="text" nz-input name="fullName" formControlName="fullName" />
@@ -47,7 +47,7 @@
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
-                                <label><span>*</span>Điện thoại</label> <span class="form-error-text">{{errorsMessage.phoneNumber}}</span><br/>
+                                <label><span>*</span>Điện thoại</label> &nbsp; <span class="form-error-text">{{errorsMessage.phoneNumber}}</span><br/>
                                 
                                 <nz-input-group [nzSuffix]="inputClearTpl">
                                   <input type="text" nz-input name="phoneNumber" formControlName="phoneNumber" />

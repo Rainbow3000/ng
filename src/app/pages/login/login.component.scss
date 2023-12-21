@@ -1,0 +1,50 @@
+
+.form-wrapper{
+    width:100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(128, 128, 128, 0.192);
+    form{
+        background-color: #FFFFFF;
+        width: 400px;
+        border: 0.5px solid #eeeeee;
+        padding: 50px;
+        border-radius: 5px;
+        img{
+            margin-bottom: 30px;
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+        input{
+            height: 35px;
+             width: 100%;
+        }
+
+        button{
+            height: 50px;
+            background-color: orangered;
+            border: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+            &:hover{
+                background-color: rgba(255, 68, 0, 0.822);
+            }
+        }
+    }
+}
+
+
+  .login-form-margin {
+    margin-bottom: 16px;
+  }
+
+  .login-form-forgot {
+    float: right;
+  }
+
+  .login-form-button {
+    width: 100%;
+  }
