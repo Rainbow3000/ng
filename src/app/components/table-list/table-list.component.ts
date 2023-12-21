@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ComponentRedering } from '../../../services/componentRedering.service';
 import { EmployeeDto } from '../../../dtos/employeeDto';
-
+import {WORK_STATUS,WORK_TYPE,GENDER,BANK,CONTRACT_TYPE,IDENTIFY_TYPE,POSITION,MANAGER} from '../../../enum/enum'
+import { EmployeeService } from '../../../services/employee.service';
 @Component({
   selector: 'app-table-list',
   templateUrl: './table-list.component.html',
@@ -9,22 +10,34 @@ import { EmployeeDto } from '../../../dtos/employeeDto';
 })
 export class TableListComponent implements OnInit {
   
+
+  WORK_STATUS:any = WORK_STATUS
+  WORK_TYPE:any =WORK_TYPE
+  GENDER:any = GENDER
+  BANK:any = BANK
+  CONTRACT_TYPE:any = CONTRACT_TYPE
+  IDENTIFY_TYPE:any = IDENTIFY_TYPE
+  POSITION:any = POSITION
+  MANAGER:any = MANAGER
+  
+
   @Input()listOfData:EmployeeDto[];
     ngOnInit(): void {
      
     }
 
-    constructor(private cr:ComponentRedering){
+    constructor(private cr:ComponentRedering, private employeeService:EmployeeService){
 
     }
 
 
-    handleShowComponentCreate(value:number){
+    handleShowComponentCreate(value:number,employee:EmployeeDto){
+      this.cr.setEmployeeUpdate = employee;  
       this.cr.setComponentRendering = value; 
+      this.cr.setUserNameUpdate = employee.fullName;
       this.cr.setFormMode = "UPDATE"
     }
     
-
     listOfSelection = [
       {
         text: 'Select All Row',
@@ -78,5 +91,14 @@ export class TableListComponent implements OnInit {
     refreshCheckedStatus(): void {
       this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.employeeId));
       this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.employeeId)) && !this.checked;
+    }
+
+
+    handleDeleteEmployee(employeeId:string){
+      this.employeeService.deleteEmployee(employeeId).subscribe(data =>{
+        this.employeeService.getListEmployee().subscribe(response =>{
+          this.listOfData = response.data ;
+        })
+      })
     }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
+import { EmployeeDto } from "../dtos/employeeDto";
 
 @Injectable({
     providedIn: "root",
@@ -11,8 +12,42 @@ import { Observable, Subject } from "rxjs";
     private formModeSubject = new Subject<string>();
     $_formModeValue = this.componentRenderSubject.asObservable();
 
+    private userNameUpdateSubject = new Subject<string>();
+    $_userNameUpdatetValue = this.userNameUpdateSubject.asObservable();
+
+    private employeeUpdateSubject = new Subject<EmployeeDto>();
+    $_employeeUpdatetValue = this.userNameUpdateSubject.asObservable();
+
+
     private _componentRendering: number = 1;
     private _formMode: string = "CREATE";
+    private _userNameUpdate:string = ""
+    private _employeeUpdate:EmployeeDto;
+
+    get getEmployeeUpdate():EmployeeDto{
+      return this._employeeUpdate; 
+    }
+
+    set setEmployeeUpdate(value:EmployeeDto){
+      if (this._employeeUpdate !== value) {
+        this._employeeUpdate = value;
+        this.employeeUpdateSubject.next(value);
+      }
+    }
+
+
+
+
+    get getUserNameUpdate():string{
+      return this._userNameUpdate; 
+    }
+
+    set setUserNameUpdate(value:string){
+      if (this._userNameUpdate !== value) {
+        this._userNameUpdate = value;
+        this.userNameUpdateSubject.next(value);
+      }
+    }
 
 
     get getFormMode():string{

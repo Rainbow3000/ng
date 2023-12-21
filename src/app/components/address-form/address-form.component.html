@@ -8,17 +8,16 @@
         </nz-form-control>
     </nz-form-item >
 
-    <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+    <nz-form-item  nz-col nzSpan="6" class="input-item">
         <label nzFor="">Quận/Huyện</label>
         <nz-form-control >
           <nz-select (ngModelChange)="handleChageDistrict($event)" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="district">
             <nz-option *ngFor="let item of districts" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>
-           
           </nz-select>
         </nz-form-control>
     </nz-form-item >
 
-    <nz-form-item  nz-col nzSpan="6" class="input-item"  >
+    <nz-form-item  nz-col nzSpan="6" class="input-item" >
         <label nzFor="">Xã/Phường</label>
         <nz-form-control >
           <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="wards">

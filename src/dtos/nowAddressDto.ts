@@ -4,6 +4,4 @@ export interface NowAddressDto{
     district:string,
     wards:string,
     houseNumber:string,
-    createdBy:string,
-    modifiedBy:string
 }

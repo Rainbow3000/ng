@@ -7,6 +7,4 @@ export interface ExperienceDto{
     comparePerson:string,
     isCheckedCompare:boolean,
     note:string,
-    createdBy:string,
-    modifiedBy:string
 }

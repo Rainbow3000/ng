@@ -1,9 +1,7 @@
 
 export interface UrgentContactDto{
     employeeId:string,
-    fullname:string,
+    fullName:string,
     relational:string,
     phoneNumber:string,
-    createdBy:string,
-    modifiedBy:string
 }

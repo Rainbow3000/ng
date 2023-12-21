@@ -6,6 +6,4 @@ export interface SalaryInfoDto{
     basicSalary:string,
     insuranceSalary:string,
     totalSalary:string,
-    createdBy:string,
-    modifiedBy:string
 }

@@ -1,12 +1,10 @@
 export interface EducationDto{
     employeeId:string,
-    fromYear:string,
-    toYear:string,
+    fromYear:number,
+    toYear:number,
     educationPlace:string,
-    specification:string,
+    specialized:string,
     degree:string,
     classification:string,
     graduationYear:string,
-    createdBy:string,
-    modifiedBy:string
 }

@@ -1,6 +1,6 @@
 <div nz-row class="action-wrapper">
     <div  nz-col nzSpan="24" class="action-title">
-        <span nz-col nzSpan="23">{{formMode | employeeTitle:"Nguyễn Đức Thịnh"}}</span>
+        <span nz-col nzSpan="23">{{formMode | employeeTitle:userNameUpdate.toString()}}</span>
         <span (click)="handleSetComponentRendering(1)" nz-col nzSpan="1" nz-icon nzType="close" nzTheme="outline"></span>
     </div>
     <nz-tabset nz-col nzSpan="24" class="action-nav">
@@ -8,22 +8,22 @@
             <div class="action-form-wrapper">
                 <div nz-row class="form-item-wrapper">
                     <div  nz-col nzSpan="24" class="form-title">
-                        <img src="../../../assets/images/overviewInfo.png" alt="">
+                        <img src="assets/images/overviewInfo.png" alt="">
                         <h3>Thông tin chung</h3>
                     </div>                  
                     <div nz-col nzSpan="24" class="form-container">
                         <form nz-form nz-row  class="form-item" [formGroup]="this.employeeForm">
-                            <nz-form-item  nz-col nzSpan="6" class="input-item">
-                                <label><span>*</span> Mã nhân viên</label><br/>
-                                <span class="form-error-text">{{errorsMessage.employeeCode}}</span>
+                          <nz-form-item  nz-col nzSpan="6" class="input-item">
+                            <label><span>*</span> Mã nhân viên</label> <span class="form-error-text">{{errorsMessage.employeeCode}}</span><br/>
+                            
                                 <nz-input-group [nzSuffix]="inputClearTpl">
                                   <input type="text" nz-input  name="code" formControlName="code" />
                                 </nz-input-group>                  
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
-                                <label><span>*</span> Họ và tên</label><br/>
-                                <span class="form-error-text">{{errorsMessage.fullName}}</span>
+                                <label><span>*</span> Họ và tên</label> <span class="form-error-text">{{errorsMessage.fullName}}</span><br/>
+                                
                                 <nz-input-group [nzSuffix]="inputClearTpl">
                                   <input type="text" nz-input name="fullName" formControlName="fullName" />
                                 </nz-input-group>       
@@ -47,8 +47,8 @@
                             </nz-form-item >
         
                             <nz-form-item  nz-col nzSpan="6" class="input-item">
-                                <label><span>*</span>Điện thoại</label><br/>
-                                <span class="form-error-text">{{errorsMessage.phoneNumber}}</span>
+                                <label><span>*</span>Điện thoại</label> <span class="form-error-text">{{errorsMessage.phoneNumber}}</span><br/>
+                                
                                 <nz-input-group [nzSuffix]="inputClearTpl">
                                   <input type="text" nz-input name="phoneNumber" formControlName="phoneNumber" />
                                 </nz-input-group>       
@@ -67,7 +67,7 @@
         
                 <div nz-row class="form-item-wrapper">
                     <div  nz-col nzSpan="24" class="form-title">
-                        <img src="../../../assets/images/overviewInfo.png" alt="">
+                        <img src="assets/images/overviewInfo.png" alt="">
                         <h3>Thông tin công việc</h3>
     
                     </div>
@@ -161,7 +161,7 @@
         
                 <div nz-row class="form-item-wrapper">
                     <div  nz-col nzSpan="24" class="form-title">
-                        <img src="../../../assets/images/identifyNumber.png" alt="">
+                        <img src="assets/images/identifyNumber.png" alt="">
                         <h3>Thông tin khác</h3>
                     </div>
                     <div  nz-col nzSpan="24" class="form-container">
@@ -170,8 +170,8 @@
                                 <label nzFor="">Loại giấy tờ</label>
                                 <nz-form-control >
                                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="identifyType">
-                                    <nz-option nzLabel="CMND" nzValue="1"></nz-option>
-                                    <nz-option nzLabel="CCCD" nzValue="2"></nz-option>
+                                    <nz-option nzLabel="Căn cước công dân" nzValue="1"></nz-option>
+                                    <nz-option nzLabel="Chứng minh thư" nzValue="2"></nz-option>
                             
                                   </nz-select>
                                 </nz-form-control>
@@ -246,7 +246,7 @@
         
                 <div nz-row class="form-item-wrapper">
                     <div  nz-col nzSpan="24" class="form-title">
-                        <img src="../../../assets/images/educationInfo.png" alt="">
+                        <img src="assets/images/educationInfo.png" alt="">
                         <h3>Trình độ học vấn</h3>
                     </div>
                     <div nz-col nzSpan="24" class="form-container">
@@ -340,7 +340,7 @@
 
                 <div nz-row class="form-item-wrapper">
                     <div  nz-col nzSpan="20" class="form-title">
-                        <img src="../../../assets/images/educationInfo.png" alt="">
+                        <img src="assets/images/educationInfo.png" alt="">
                         <h3>Kinh nghiệm làm việc</h3>
                     </div>
 
@@ -431,7 +431,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr >
+                        <!-- <tr >
                           <td>1</td>
                           <td>nguyenducthinh.pdf</td>
                           <td>20/12/2023</td>
@@ -440,7 +440,7 @@
                               <span nz-icon nzType="eye" nzTheme="outline"></span> 
                           </div>                  
                           </td>
-                        </tr>
+                        </tr> -->
                       </tbody>
                     </nz-table>
                   </div>
@@ -466,11 +466,11 @@
           <div class="action-form-wrapper">
             <div nz-row class="form-item-wrapper">
                 <div  nz-col nzSpan="24" class="form-title">
-                    <img src="../../../assets/images/permanentResident.png" alt="">
+                    <img src="assets/images/permanentResident.png" alt="">
                     <h3>Hộ khẩu thường trú</h3>
                 </div>
                 <div nz-col nzSpan="24" class="form-container">
-                   <app-address-form [formGroupItem]="getPermanentResidenceDto">
+                   <app-address-form [formGroupItem]="getPermanentResidenceDto" [addressItem] = "employeeUpdate && employeeUpdate.permanentResidenceDto">
 
                    </app-address-form>
                 </div>
@@ -478,28 +478,28 @@
 
             <div nz-row class="form-item-wrapper">
               <div  nz-col nzSpan="24" class="form-title">
-                  <img src="../../../assets/images/contactAddress.png" alt="">
+                  <img src="assets/images/contactAddress.png" alt="">
                   <h3>Địa chỉ hiện tại</h3>
               </div>
               <div nz-col nzSpan="24" class="form-container">
-                 <app-address-form [formGroupItem]="getNowAddressDto"></app-address-form>
+                 <app-address-form [formGroupItem]="getNowAddressDto" [addressItem] = "employeeUpdate && employeeUpdate.nowAddressDto"></app-address-form>
               </div>
           </div>
 
 
           <div nz-row class="form-item-wrapper">
             <div  nz-col nzSpan="24" class="form-title">
-                <img src="../../../assets/images/contactAddress.png" alt="">
+                <img src="assets/images/contactAddress.png" alt="">
                 <h3>Quê quán</h3>
             </div>
             <div nz-col nzSpan="24" class="form-container">
-               <app-address-form [formGroupItem]="getHometownDto"></app-address-form>
+               <app-address-form [formGroupItem]="getHometownDto" [addressItem] = "employeeUpdate && employeeUpdate.hometownDto"></app-address-form>
             </div>
         </div>
 
         <div nz-row class="form-item-wrapper">
           <div  nz-col nzSpan="24" class="form-title">
-              <img src="../../../assets/images/contactUrgent.png" alt="">
+              <img src="assets/images/contactUrgent.png" alt="">
               <h3>Liên hệ khẩn cấp</h3>
           </div>
           <div  nz-col nzSpan="24" class="form-container">
@@ -540,7 +540,7 @@
           <div class="action-form-wrapper">
             <div nz-row class="form-item-wrapper">
                 <div  nz-col nzSpan="24" class="form-title">
-                    <img src="../../../assets/images/employeeSalary.png" alt="">
+                    <img src="assets/images/employeeSalary.png" alt="">
                     <h3>Thông tin lương</h3>
                 </div>
                 <div  nz-col nzSpan="24" class="form-container">
@@ -581,13 +581,13 @@
                             </nz-form-control>
                         </nz-form-item >
     
-                        <nz-form-item  nz-col nzSpan="6" class="input-item">
+                        <nz-form-item   nz-col nzSpan="6" class="input-item">
                           <label>Lương tổng</label>
                           <nz-form-control>
-                            <input nz-input value="16,234923" name="email" disabled="true" type="text" id="email" placeholder="" class="disable-input">
+                            <nz-input-number style="width: 100%;" [nzFormatter]="formater" nz-input [nzMin]="1" val [nzStep]="1" formControlName="totalSalary"  name="email"  type="text" id="email" placeholder="" class="disable-input"/>
                           </nz-form-control>
                       </nz-form-item >
-                      </form>
+                      </form> 
                 </div>
             </div>
     
@@ -595,7 +595,7 @@
            
             <div nz-row class="form-item-wrapper">
                 <div  nz-col nzSpan="24" class="form-title">
-                    <img src="../../../assets/images/employeeAllowanceList.png" alt="">
+                    <img src="assets/images/employeeAllowanceList.png" alt="">
                     <h3>Các khoản phụ cấp</h3>
                 </div>
                 <div nz-col nzSpan="24" class="form-container">
@@ -620,9 +620,9 @@
                                    <nz-form-item class="input-urgent-item"  >         
                                        <nz-form-control >
                                          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="allowanceName">
-                                           <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                           <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                           <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                           <nz-option nzLabel="Phụ cấp điện thoại" nzValue="1"></nz-option>
+                                           <nz-option nzLabel="Phụ cấp đi lại" nzValue="2"></nz-option>
+                                           <nz-option nzLabel="Phụ cấp hàng tháng" nzValue="3"></nz-option>
                                          </nz-select>
                                        </nz-form-control>
                                  </nz-form-item >
@@ -666,7 +666,7 @@
 
             <div nz-row class="form-item-wrapper">
               <div  nz-col nzSpan="24" class="form-title">
-                  <img src="../../../assets/images/employeeDeductibleList.png" alt="">
+                  <img src="assets/images/employeeDeductibleList.png" alt="">
                   <h3>Các khoản khấu trừ</h3>
               </div>
               <div nz-col nzSpan="24" class="form-container">
@@ -690,9 +690,8 @@
                                 <nz-form-item class="input-urgent-item"  >         
                                     <nz-form-control >
                                       <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="deductibleName">
-                                        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                        <nz-option nzLabel="Khấu trừ ăn trưa" nzValue="1"></nz-option>
+                      
                                       </nz-select>
                                     </nz-form-control>
                               </nz-form-item >

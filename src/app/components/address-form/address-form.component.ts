@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ProvincesService } from '../../../services/provinces.service';
+import { ComponentRedering } from '../../../services/componentRedering.service';
+import { EmployeeDto } from '../../../dtos/employeeDto';
 
 @Component({
   selector: 'app-address-form',
@@ -12,16 +14,24 @@ export class AddressFormComponent implements OnInit{
   provinces : any[]
   districts:any[]
   wards:any[]
-
-  constructor(private provincesService: ProvincesService){
+  provinceUpdate:string
+  districtUpdate:string
+  wardsUpdate:string
+  employeeUpdate:EmployeeDto
+  constructor(private provincesService: ProvincesService,private cr : ComponentRedering  ){
     
   }
    ngOnInit(): void {
       this.provincesService.getProvinces().subscribe((data)=> {
         this.provinces = data;   
+        if(this.cr.getFormMode === "UPDATE"){
+            this.districts = this.provinces.find(item => item.name === this.addressItem?.city)?.districts     
+            this.wards = this.districts?.find(item => item.name ===this.addressItem?.district)?.wards
+        }
       });   
+      
     }
-
+  @Input() addressItem:any;
   @Input() formGroupItem:FormGroup; 
 
   handleChangeCity(prov:any){

@@ -15,39 +15,39 @@ export class TreeSelectComponent {
     {
       title: 'Công ty cổ phần Orenda',
       value: '1',
-      key: '0-0',
+      key: '1',
       children: [
         {
           title: '-- Khối văn phòng',
           value: '2',
-          key: '0-0-1',
+          key: '2',
           children: [
             {
               title: '---- Phòng CNTT',
               value: '3',
-              key: '0-0-1'
+              key: '3'
             },
             {
               title: '---- Phòng hành chính nhân sự',
               value: '4',
-              key: '0-0-2'
+              key: '4'
             }
           ]
         },
         {
           title: '-- Khối kinh doanh và Marketing',
           value: '5',
-          key: '0-0-2',
+          key: '5',
           children: [
             {
               title: '---- Phòng kinh doanh',
               value: '6',
-              key: '0-0-1'
+              key: '6'
             },
             {
               title: '---- Phòng CMD',
               value: '7',
-              key: '0-0-2'
+              key: '7'
             }
           ]
         }

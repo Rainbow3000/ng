@@ -15,6 +15,7 @@ interface IDataResponse{
 
 
 export class EmployeeService{
+    
     constructor(private httpClient: HttpClient){
 
     }
@@ -31,11 +32,11 @@ export class EmployeeService{
     }
 
     updateEmployee(employeeId: string, employee: EmployeeDto): Observable<EmployeeDto> {
-        return this.httpClient.put<EmployeeDto>(`${this._baseUrl}/${ employeeId }`, employee);
+        return this.httpClient.put<EmployeeDto>(`${this._baseUrl}/Employees/${ employeeId }`, employee);
     }
 
     deleteEmployee(employeeId: string): Observable<any> {
-        return this.httpClient.delete(`${this._baseUrl}/${ employeeId}`);
+        return this.httpClient.delete(`${this._baseUrl}/Employees/${ employeeId}`);
     }
 
 }
