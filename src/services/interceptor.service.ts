@@ -14,13 +14,16 @@ export class MyInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-   
-    const modifiedRequest = request.clone({
-      setHeaders: {
-        'Authorization': `Bearer ${ JSON.parse(this.user) !== null && JSON.parse(this.user).accessToken}`,
-      },
-    });
+    if (request.url.includes('api/Employees')) {
+      const modifiedRequest = request.clone({
+        setHeaders: {
+          'Authorization': `Bearer ${ JSON.parse(this.user) !== null && JSON.parse(this.user).accessToken}`,
+        },
+      });
+      return next.handle(modifiedRequest);
+    }else{
+      return next.handle(request);
+    }
 
-    return next.handle(modifiedRequest);
   }
 }

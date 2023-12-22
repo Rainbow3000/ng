@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.employeeService.getListEmployee().subscribe(response => {  
+    this.employeeService.getListEmployee({}).subscribe(response => {  
           this.employeeList = response.data;   
     });
   }

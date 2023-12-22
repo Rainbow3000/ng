@@ -4,7 +4,11 @@ import { ComponentRedering } from '../../../services/componentRedering.service';
 import { EmployeeService } from '../../../services/employee.service';
 import { EmployeeDto } from '../../../dtos/employeeDto';
 import { NzMessageService } from 'ng-zorro-antd/message';
-
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs';
+import { FileDto } from '../../../dtos/fileDto';
+import moment from 'moment'
+import { FileUpload } from '../../models/file-upload.model';
 @Component({
   selector: 'app-employee-action',
   templateUrl: './employee-action.component.html',
@@ -12,8 +16,9 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class EmployeeActionComponent implements OnInit {
 
-
-
+  selectedFiles?: FileList;
+  currentFileUpload?: FileUpload;
+  percentage = 0;
   errorsMessage = {
     employeeCode:"",
     fullName:"",
@@ -35,10 +40,16 @@ export class EmployeeActionComponent implements OnInit {
   workInfoForm:FormGroup
   educationForm:FormGroup
   employeeForm:FormGroup
-
-  constructor(private fb : FormBuilder, private cr : ComponentRedering, private employeeService:EmployeeService , private message: NzMessageService){
-  
+  files:FileDto[] = []
+  constructor(private storage: AngularFireStorage,private fb : FormBuilder, private cr : ComponentRedering, private employeeService:EmployeeService , private message: NzMessageService){
+    
   }
+
+ 
+  
+
+
+
   formater(inputNumberValue:number){
     return `${inputNumberValue}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }
@@ -239,16 +250,49 @@ export class EmployeeActionComponent implements OnInit {
   }
 
 
+  pushUpload(event:any) {
+    const file = event.fileList[0];
+
+    const filePath = 'files/' + file.name;
+    const fileRef = this.storage.ref(filePath);
+
+    return new Promise<any>((resolve, reject) => {
+        const task = this.storage.upload(filePath, file,{
+          contentType: 'image/png',
+        });
+        task.snapshotChanges().pipe(
+            finalize(() => fileRef.getDownloadURL().subscribe(
+                res => {     
+                  console.log(res);
+                      
+                    resolve(res);       
+                  }
+                ,
+                err => reject(err))
+            )
+        ).subscribe(downloadUrl =>{
+          console.log(downloadUrl);
+          
+          // const fileData = {
+          //   fileName:filePath,
+          //   uploadDate: moment().format(),
+          //   fileUrl:downloadUrl
+          // }
+          
+          // this.files.push(fileData)
+          // this.employeeForm.get('fileDtos')?.patchValue(this.files);
+          
+        } );
+    })
+    
+}
+  
+
 
   createMessage(type: string,messageText:string): void {
     this.message.create(type,messageText);
   }
 
-
-  caculateSalary(){
-    const salary = this.getSalaryInfoDto.value; 
-    return 123
-  }
 
   
   get getWorkInfoDto():any{
@@ -414,3 +458,7 @@ export class EmployeeActionComponent implements OnInit {
   }
 
 }
+function uuid() {
+  throw new Error('Function not implemented.');
+}
+

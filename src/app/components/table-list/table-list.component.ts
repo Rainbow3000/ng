@@ -13,12 +13,13 @@ import {randomColor} from '../../../helper/randomColor'
 })
 export class TableListComponent implements AfterViewChecked {
   
-  
   constructor(private cr:ComponentRedering, private employeeService:EmployeeService,private message: NzMessageService){
 
   }
   ngAfterViewChecked(): void {
-     this.avatarRef.nativeElement.style.backgroundColor = randomColor(); 
+    // if(this.avatarRef.nativeElement !== null){
+    //   this.avatarRef.nativeElement.style.backgroundColor = 'blue'; 
+    // }
   }
   WORK_STATUS:any = WORK_STATUS
   WORK_TYPE:any =WORK_TYPE
@@ -32,7 +33,7 @@ export class TableListComponent implements AfterViewChecked {
   randomColor = randomColor
 
   @Input()listOfData:EmployeeDto[];
-  @ViewChild('avatar') avatarRef: ElementRef;
+  @ViewChild('avatar') avatarRef: any;
 
     createMessage(type: string,messageText:string): void {
       this.message.create(type,messageText);
@@ -114,7 +115,7 @@ export class TableListComponent implements AfterViewChecked {
         this.employeeService.deleteEmployee(employeeId).subscribe(
           data => {
           this.createMessage('success','Xóa nhân viên thành công')
-          this.employeeService.getListEmployee().subscribe(response =>{
+          this.employeeService.getListEmployee({}).subscribe(response =>{
             this.listOfData = response.data ;
           })
         }, 

@@ -40,6 +40,13 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { LoginComponent } from './pages/login/login.component';
 import { MyInterceptor } from '../services/interceptor.service';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from '../environments/environment';
+import en from '@angular/common/locales/en';
+
+
 registerLocaleData(vi);
 
 @NgModule({ 
@@ -58,6 +65,8 @@ registerLocaleData(vi);
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -81,7 +90,9 @@ registerLocaleData(vi);
     NzToolTipModule,
     NzTreeSelectModule,
     NzMessageModule,
-    NzAlertModule
+    NzAlertModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

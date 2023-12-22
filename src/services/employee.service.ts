@@ -2,11 +2,13 @@ import { Injectable } from "@angular/core";
 import { EmployeeDto } from "../dtos/employeeDto";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { FormBuilder } from "@angular/forms";
 
 interface IDataResponse{
     data: EmployeeDto[],
     statusCode:number
 }
+
 
 @Injectable({
     providedIn:'root'
@@ -16,14 +18,25 @@ interface IDataResponse{
 
 export class EmployeeService{
     
-    constructor(private httpClient: HttpClient){
+    constructor(private httpClient: HttpClient, private fb:FormBuilder){
 
     }
 
     _baseUrl:string = "https://localhost:7075/api"
 
 
-    getListEmployee(): Observable<IDataResponse> {
+    getListEmployee(filter:any): Observable<IDataResponse> {
+        const keys = Object.keys(filter); 
+        let filterString = ""; 
+        for(let key of keys){
+            if(filter[key] !== null){
+                filterString += `${key}=${filter[key]}`
+            }
+        }  
+        if(filterString.trim().length > 0){
+            return this.httpClient.get<IDataResponse>(`${this._baseUrl}/Employees?${filterString}`);   
+        } 
+        
         return this.httpClient.get<IDataResponse>(`${this._baseUrl}/Employees`);
     }
 
