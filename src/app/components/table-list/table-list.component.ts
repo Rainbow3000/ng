@@ -47,6 +47,13 @@ export class TableListComponent implements AfterViewChecked {
       this.cr.setUserNameUpdate = employee.fullName;
       this.cr.setFormMode = "UPDATE"
     }
+
+    handleShowComponentViewDetails(value:number,employee:EmployeeDto){
+      this.cr.setEmployeeUpdate = employee;  
+      this.cr.setComponentRendering = value; 
+      this.cr.setUserNameUpdate = employee.fullName;
+      this.cr.setFormMode = "VIEW"
+    }
     
     listOfSelection = [
       {

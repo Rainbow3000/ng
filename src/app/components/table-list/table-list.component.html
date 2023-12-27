@@ -67,7 +67,7 @@
             <td>{{ MANAGER[data.workInfoDto.managerId] }}</td>
             <td>{{ WORK_STATUS[data.workInfoDto.status] }}</td>
             <td class="table-icon-list">
-                <div class="icon-wrapper">
+                <div class="icon-wrapper" (click)="handleShowComponentViewDetails(3,data)" >
                     <span nz-icon nzType="eye" nzTheme="outline"></span>
                 </div>
                 <div class="icon-wrapper" (click)="handleShowComponentCreate(2,data)">

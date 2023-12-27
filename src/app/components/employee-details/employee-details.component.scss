@@ -1,0 +1,367 @@
+
+.employee-top{
+    background-color: #FFFFFF;
+    height: 170px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    .back-icon{
+        left: 10px;
+        top: 10px;
+        position: absolute;
+        font-size: 22px;
+        color: #FF7D01;
+        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        span{
+            cursor: pointer;
+        }
+    }
+    .employee-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-weight: 500;
+        position: relative;
+       .user-name{
+        margin-top: 10px;
+        font-size: 20px;
+       }
+        .upload-icon{
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            background-color: #EEEEEE;
+            cursor: pointer;
+            position: absolute;
+            top: 45%;
+            left: 52%;
+        }
+        .top-info-wrapper{
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+}
+
+.info-item{
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 20px;
+    font-weight: bold;
+    span{
+        &:first-child{
+            color: #718096;
+        }
+
+        &:last-child{
+            color: #000000a6;
+        }
+    }
+}     
+
+.employee-main{
+    display: flex;
+    align-items: flex-start;
+    .main-left{
+        width: calc(100% - 170px);
+        ul{
+            list-style: none;
+            color: #4A5568;
+            width: 100%;
+            height: 100%;
+            li{
+                width: 100%;
+                margin-top: 30px;
+                font-size: 16px;
+                a{
+                    color: inherit;
+                }
+                a.active{
+                    color: orangered;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .main-right{
+        font-size: 22px;
+        width: 100%;
+        height: 100%;
+        padding-top: 30px;
+        .title{
+            margin: 0 20px;
+        }
+
+        div{
+            span{
+                cursor: pointer;
+                &:nth-child(2){
+                    cursor: default;
+                }
+            }
+        }
+        .main-title{
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+            .delete-icon{
+                color: red;
+                cursor: pointer;
+            }
+            .done-icon{
+                color: green;
+                cursor: pointer;
+                margin-left: 10px;
+            }
+
+            .wapper-action.hidden{
+                display: none;
+            }
+        }
+    }
+}
+
+.content{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    display: none;
+    nz-form-control{
+        display: flex;
+        align-items: center;
+    }
+    .content-item{
+        width: 100%;
+        display: flex;
+        flex-direction: row !important;
+        align-items: center;
+        color: #000000;
+        margin-top: 10px;
+        nz-select{
+            width: 50%;
+        }
+        input{
+            width: 50%;
+            color: #333;
+            font-weight: 500;
+        }
+
+        nz-date-picker{
+            width: 50%;
+        }
+        span{
+            &:first-child{
+                color: #00000096;
+                display: block;
+                width: 40%;
+            }
+
+            &:last-child{
+                margin-left: 50px;
+                color: #000000b4;
+            }
+        }
+    }
+}
+
+
+.content.open{
+    display: flex;
+}
+
+.other-wapper{
+    margin: 10px 0;
+    font-size: 16px;
+    .title-file-upload{
+        width: 100%;
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        .btn-list{
+            display: flex;
+            align-items: center;
+            .btn{
+                width: max-content;
+                padding: 5px 10px;
+                background-color: #FFFFFF;
+                border: 0.5px solid rgba(128, 128, 128, 0.459);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 5px;
+                cursor: pointer;
+                &:first-child{
+                    font-weight: bold;
+                    margin-right: 10px;
+                    border: 0.5px solid #FF7D01;
+                    color: #FF7D01;
+                }
+            }
+        }
+    }
+    .wrapper-item{
+        display: flex;
+        align-items: center;
+        background-color: #FFFFFF;
+        padding: 20px 15px;
+        .title-content{
+            font-weight: 500;
+        }
+        .item-container{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .address-item{
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            nz-select{
+                width: 50%;
+            }
+            .address-title{
+                display: block;
+                width: 40%            
+            }
+            
+            input{
+                color: #333;
+                font-weight: 500;
+                width: 50%;
+            }
+        }
+
+        .address-item.last{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 0;
+            transform: translateY(-50%);
+        }
+       
+    }
+    .title{
+        width: 100%;
+        font-size: 16px;
+        font-weight:500;
+        color: #00948a;
+        margin: 0 !important;
+        margin-top: 10px;
+    }
+
+    .option{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        span{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+        }
+    }
+}
+
+.contract-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .add-btn{
+        width: max-content;
+        padding: 5px 10px;
+        font-size: 16px;
+        border: 0.5px solid #FF7D01;
+        color: #FF7D01;
+        background-color: #FFFFFF;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+}
+
+.hidden{
+   display: none; 
+}
+
+.input-disable{
+    cursor: default !important;
+    background-color: #FFFFFF !important;
+    border: none !important;
+}
+
+.input-disable-hidden{
+    cursor: default !important;
+    background-color: #FFFFFF !important;
+    border: none !important;
+    display: none;
+}
+
+
+
+.input-padding-value{
+    cursor: default !important;
+    background-color: #FFFFFF !important;
+    border: none !important;
+}
+
+.other-wapper.experience{
+    display: none;
+}
+
+.other-wapper.employee{
+    display: none;
+}
+
+.other-wapper.employee-open{
+    display: block;
+}
+
+
+.other-wapper.bhxh{
+    display: none;
+}
+
+.other-wapper.bhxh-open{
+    display: block;
+}
+
+.other-wapper.contract{
+    display: none;
+}
+
+.other-wrapper.contract-open{
+    display: block;
+}
+
+.content.salary{
+    display: flex;
+}
+
+.ant-form-item{
+    margin-bottom: 0;
+}
+
+.other-wapper.assets{
+    display: none;
+}
+
+.other-wapper.assets-open{
+    display: block;
+}

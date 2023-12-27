@@ -45,6 +45,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
 import en from '@angular/common/locales/en';
+import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 
 
 registerLocaleData(vi);
@@ -61,7 +62,8 @@ registerLocaleData(vi);
     AddressFormComponent,
     EmployeeTitlePipe,
     TreeSelectComponent,
-    LoginComponent
+    LoginComponent,
+    EmployeeDetailsComponent
   ],
   imports: [
     BrowserModule,
