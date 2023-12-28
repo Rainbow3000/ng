@@ -181,10 +181,10 @@ export class EmployeeActionComponent implements OnInit {
         code:this.employeeUpdate.code,
         fullName:this.employeeUpdate.fullName,
         dob:this.employeeUpdate.dob,
-        gender:this.employeeUpdate.gender,
+        gender:this.employeeUpdate.gender.toString(),
         phoneNumber:this.employeeUpdate.phoneNumber,
         organEmail:this.employeeUpdate.organEmail,
-        identifyType:this.employeeUpdate.identifyType,
+        identifyType:this.employeeUpdate.identifyType.toString(),
         identifyNumber:this.employeeUpdate.identifyNumber,
         identifyDateRange:this.employeeUpdate.identifyDateRange,
         identifyIssuedBy:this.employeeUpdate.identifyIssuedBy,
@@ -439,17 +439,23 @@ export class EmployeeActionComponent implements OnInit {
     if(this.formMode === "UPDATE"){
       this.employeeService.updateEmployee(this.employeeUpdate?.employeeId,employeeCreateDto).subscribe(
         data =>{
-        this.createMessage('success','Cập nhật thông tin nhân viên thành công')
-        this.handleSetComponentRendering(1);
-        return; 
+          this.createMessage('success','Cập nhật thông tin nhân viên thành công')
+          this.employeeService.getListEmployee({}).subscribe(response =>{
+            this.employeeService.setEmployees = response.data;
+          })
+          this.handleSetComponentRendering(1);
         },
         err => this.handleShowErrText(err)
     )
+        return;
     }
 
     this.employeeService.createEmployee(employeeCreateDto).subscribe(
       data =>{
         this.createMessage('success','Tạo nhân viên thành công')
+        this.employeeService.getListEmployee({}).subscribe(response =>{
+          this.employeeService.setEmployees = response.data;
+        })
         this.handleSetComponentRendering(1);
       },
       err => this.handleShowErrText(err)

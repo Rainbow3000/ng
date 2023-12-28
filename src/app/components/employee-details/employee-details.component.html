@@ -1,13 +1,13 @@
 <div nz-row class="employee-details-container">
     <div class="employee-top" nz-col nzSpan="24">
-        <div class="back-icon">
-            <span nz-icon nzType="icon">
+        <div (click)="handleSetComponentRendering(1)" class="back-icon">
+            <span nz-icon >
                 <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="arrow-left" aria-hidden="true"><path d="M872 474H286.9l350.2-304c5.6-4.9 2.2-14-5.2-14h-88.5c-3.9 0-7.6 1.4-10.5 3.9L155 487.8a31.96 31.96 0 000 48.3L535.1 866c1.5 1.3 3.3 2 5.2 2h91.5c7.4 0 10.8-9.2 5.2-14L286.9 550H872c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path></svg>
             </span>
         </div>
         <div nz-col nzSpan="6" class="employee-info">
             <img src="http://test-hrm.orenda.vn/assets/media/icons/user.png" alt="">
-            <span class="user-name">Nguyễn Đức Thịnh</span>
+            <span class="user-name">{{employeeUpdate.fullName}}</span>
             <span>ORD1000 - Lập trình viên</span>
             <div class="upload-icon">
                 <span nz-icon nzType="cloud-upload" nzTheme="outline"></span>
@@ -16,36 +16,35 @@
        <div nz-col nzSpan="6" class="top-info-wrapper">
             <div class="info-item">
                 <span>Đơn vị</span>
-                <span>Công ty cổ phần Orenda</span>
+                <span>{{UNIT_TYPE[employeeUpdate.workInfoDto.unitId]}}</span>
             </div>
 
             <div class="info-item">
                 <span>Ngày sinh</span>
-                <span>18/01/1999</span>
+                <span>{{employeeUpdate.dob !== null ? employeeUpdate.dob:'Chưa cập nhật' }}</span>
             </div>
        </div>
 
        <div nz-col nzSpan="6" class="top-info-wrapper">
             <div class="info-item">
                 <span>Email cơ quan</span>
-                <span>Công ty cổ phần Orenda</span>
+                <span>{{employeeUpdate.organEmail !== null ? employeeUpdate.organEmail:'Chưa cập nhật'}}</span>
             </div>
 
             <div class="info-item">
                 <span>Điện thoại</span>
-                <span>0363578628</span>
+                <span>{{employeeUpdate.phoneNumber}}</span>
             </div>
         </div>
-
         <div nz-col nzSpan="6" class="top-info-wrapper">
             <div class="info-item">
                 <span>Nghỉ phép</span>
-                <span>Công ty cổ phần Orenda</span>
+                <span>Chưa có đơn nghỉ phép</span>
             </div>
 
             <div class="info-item">
                 <span>Đi muộn (Tháng này)</span>
-                <span>18/01/1999</span>
+                <span>Số ngày đi muộn:0</span>
             </div>
         </div>    
     </div>
@@ -80,69 +79,61 @@
                         </span>
                     </div>
                 </div>
-                <form  nz-form [ngClass]="infoBasicOpen === true ? 'content open':''" class="content" nz-col nzSpan="24">
+                <form [formGroup]="employeeForm" nz-form [ngClass]="infoBasicOpen === true ? 'content open':''" class="content" nz-col nzSpan="24">
                     <nz-form-item nz-col nzSpan="12">                      
                         <div class="content-item ">
                             <span>Loại giấy tờ:</span>                        
-                            <nz-select [nzDisabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="Chọn ngân hàng">
-                                <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                            <nz-select formControlName="identifyType" [nzDisabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="Chọn loại giấy tờ">
+                                <nz-option nzLabel="Căn cước công dân" nzValue="1"></nz-option>
+                                <nz-option nzLabel="Chứng minh thư" nzValue="2"></nz-option>
                             </nz-select>
-                            <input [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''" value="1234" class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                            <input [value]="IDENTIFY_TYPE[employeeUpdate.identifyType]" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                         </div>
 
                         <div class="content-item">
                             <span>Ngày cấp:</span>
-                            <nz-date-picker [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" [nzDisabled]="hiddenEditInfoBasic" ></nz-date-picker>
-
-                            <input [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''" value="1234" class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                            <nz-date-picker formControlName="identifyDateRange" nzPlaceHolder="Chọn thời điểm" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" [nzDisabled]="hiddenEditInfoBasic" ></nz-date-picker>
+                            <input [value]="employeeUpdate.identifyDateRange" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                         </div>
                         <div class="content-item">
                             <span>Mã số thuế:</span>
-                            <input value="123" [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable':''" nz-input name="tax-code" type="text">
+                            <input formControlName="taxtCode" [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                            <input [value]="employeeUpdate.taxtCode" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                         </div>
                         <div class="content-item">
-                            <span>Nơi cấp MST:</span>
-                               <input value="123" [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
-                        </div>
+                                <span>Nơi cấp MST:</span>
+                               <input formControlName="taxtCodeIssuedBy" [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                               <input [value]="employeeUpdate.taxtCodeIssuedBy" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                            </div>
 
                         <div class="content-item">
                             <span>Email cá nhân:</span>
-                               <input value="123" [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
+                               <input formControlName="personalEmail"  [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                               <input [value]="employeeUpdate.personalEmail" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                         </div>
                     </nz-form-item>
                     <nz-form-item nz-col nzSpan="12">
                         <div class="content-item">
                             <span>Số giấy tờ:</span>
-                               <input value="123" [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
+                               <input formControlName="identifyNumber"  [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                               <input [value]="employeeUpdate.identifyNumber" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                         </div>
                         <div class="content-item">
                             <span>Nơi cấp:</span>
-                               <input value="123" [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
+                               <input formControlName="identifyIssuedBy" [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                               <input [value]="employeeUpdate.identifyIssuedBy" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                         </div>
                         <div class="content-item">
                             <span>Ngày cấp MST:</span>
-                            <nz-date-picker [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" [nzDisabled]="hiddenEditInfoBasic" ></nz-date-picker>
-
-                            <input [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''" value="1234" class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
-
+                            <nz-date-picker formControlName="taxtCodeDateRange" nzPlaceHolder="Chọn thời điểm" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" [nzDisabled]="hiddenEditInfoBasic" ></nz-date-picker>
+                            <input [value]="employeeUpdate.taxtCodeDateRange" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                         </div>
-                        <div class="content-item">
-                            <span>Nơi cấp mã số thuế:</span>
-                               <input value="123" [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
-                        </div>
-
+                       
                         <div class="content-item">
                             <span>Số tài khoản ngân hàng:</span>
-                               <input value="123" [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
-                        </div>
+                               <input formControlName="bankAccount" [disabled]="hiddenEditInfoBasic" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                               <input [value]="BANK[employeeUpdate.bank]" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                            </div>
 
                     </nz-form-item>
 
@@ -171,7 +162,7 @@
                                 <td nzEllipsis>{{ data.address }}</td>
                                 <td nzEllipsis class="option">
                                     <div>
-                                        <span nzType="icon">
+                                        <span nz-icon>
                                             <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="edit" aria-hidden="true"><path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path></svg>
                                         </span>
                                     </div>
@@ -206,7 +197,7 @@
                                 <td nzEllipsis>{{ data.address }}</td>                            
                                 <td nzEllipsis class="option">
                                     <div>
-                                        <span nzType="icon">
+                                        <span nz-icon>
                                             <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="edit" aria-hidden="true"><path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path></svg>
                                         </span>
                                     </div>
@@ -227,8 +218,8 @@
                     <span *ngIf="infoEmployeeOpen === false" nz-icon nzType="plus-square" nzTheme="outline" (click)="handleChangeStateInfoEmployee(0)"></span>
                     <span *ngIf="infoEmployeeOpen === true" nz-icon nzType="minus-square" nzTheme="outline" 
                     (click)="handleChangeStateInfoEmployee(0)"></span>
-                    <span class="title">Thông tin nhân sự</span>
-                    <span nzType="icon" [ngClass]="hiddenEditInfoEmployee === false ? 'hidden':''" (click)="handleChangeEditInfoEmployee()">
+                    <span  class="title">Thông tin nhân sự</span>
+                    <span nz-icon  [ngClass]="hiddenEditInfoEmployee === false ? 'hidden':''" (click)="handleChangeEditInfoEmployee()">
                         <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="edit" aria-hidden="true"><path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path></svg>
                     </span>
 
@@ -245,90 +236,80 @@
 
                 <div  [ngClass]="infoEmployeeOpen === false? 'other-wapper employee':'other-wapper employee-open' " nz-col nzSpan="24">
                     <span class="title">Hộ khẩu thường chú</span>
-                    <form nz-form class="wrapper-item" nz-col nzSpan="24">
+                    <form [formGroup]="getPermanentResidenceDto" nz-form class="wrapper-item" nz-col nzSpan="24">
                         <nz-form-item nz-col nzSpan="12">
                             <div class="address-item">
                                 <span class="address-title">Tỉnh/Thành phố:</span>
-                                <nz-select [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="Chọn ngân hàng">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-                                </nz-select>
-                                <input [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''" value="1234" class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                                <nz-select (ngModelChange)="handleChangeCity($event)" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="city" [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option *ngFor="let item of provinces" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>      
+                                  </nz-select>                           
+                                <input [value]="employeeUpdate.permanentResidenceDto.city" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
 
                             </div>
 
                             <div class="address-item">
                                 <span class="address-title">Xã/Phường:</span>
-                                <nz-select [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="Chọn ngân hàng">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+
+                                <nz-select formControlName="wards" [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option *ngFor="let item of wards" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>      
                                 </nz-select>
-                                <input [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''" value="1234" class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+        
+                                <input [value]="employeeUpdate.permanentResidenceDto.wards" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
 
                             </div>
                         </nz-form-item>
                         <nz-form-item nz-col nzSpan="12">
                             <div class="address-item">
                                 <span class="address-title">Quận/Huyện:</span>
-                                <nz-select [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="Chọn ngân hàng">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                <nz-select (ngModelChange)="handleChageDistrict($event)" [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="district">
+                                    <nz-option *ngFor="let item of districts" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>
                                 </nz-select>
-                                <input [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''" value="1234" class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                                <input [value]="employeeUpdate.permanentResidenceDto.district" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                             </div>
 
                             <div class="address-item">
                                 <span class="address-title">Số nhà đường phố:</span>
-                                <input value="123" [disabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
+                                <input formControlName="houseNumber"  [disabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable input-disable-hidden':''" nz-input name="tax-code" type="text">
+                                <input [value]="employeeUpdate.permanentResidenceDto.houseNumber" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                             </div>
                         </nz-form-item>
                     </form>
                 </div>
                 <div [ngClass]="infoEmployeeOpen === false? 'other-wapper employee':'other-wapper employee-open' "  nz-col nzSpan="24">
                     <span class="title">Địa chỉ hiện tại</span>
-                    <form nz-form class="wrapper-item" nz-col nzSpan="24">
+                    <form [formGroup]="getNowAddressDto" nz-form class="wrapper-item" nz-col nzSpan="24">
                         <nz-form-item nz-col nzSpan="12">
                             <div class="address-item">
                                 <span class="address-title">Tỉnh/Thành phố:</span>
-                                <nz-select [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="Chọn ngân hàng">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-                                </nz-select>
-                                <input [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''" value="1234" class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                                <nz-select (ngModelChange)="handleChangeCity($event)" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="city" [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option *ngFor="let item of provinces" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>      
+                                  </nz-select>                           
+                                <input [value]="employeeUpdate.nowAddressDto.city" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
 
                             </div>
 
                             <div class="address-item">
                                 <span class="address-title">Xã/Phường:</span>
-                                <nz-select [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="Chọn ngân hàng">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                <nz-select formControlName="wards" [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                    <nz-option *ngFor="let item of wards" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>      
                                 </nz-select>
-                                <input [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''" value="1234" class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                                <input [value]="employeeUpdate.nowAddressDto.wards"  [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
 
                             </div>
                         </nz-form-item>
                         <nz-form-item nz-col nzSpan="12">
                             <div class="address-item">
                                 <span class="address-title">Quận/Huyện:</span>
-                                <nz-select [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="Chọn ngân hàng">
-                                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                <nz-select (ngModelChange)="handleChageDistrict($event)" [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="district">
+                                    <nz-option *ngFor="let item of districts" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>
                                 </nz-select>
-                                <input [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''" value="1234" class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                                <input [value]="employeeUpdate.nowAddressDto.district" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                             </div>
 
                             <div class="address-item">
                                 <span class="address-title">Số nhà đường phố:</span>
-                                <input value="123" [disabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
+                                <input formControlName="houseNumber"  [disabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                                <input [value]="employeeUpdate.nowAddressDto.city" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                             </div>
                         </nz-form-item>
                     </form>
@@ -337,33 +318,33 @@
                 <div [ngClass]="infoEmployeeOpen === false? 'other-wapper employee':'other-wapper employee-open' " >
                     <span class="title">Liên hệ khẩn cấp</span>
                     <div>
-                        <form nz-form class="wrapper-item" nz-col nzSpan="24">
+                        <form [formGroup]="getUrgentContactDto" nz-form class="wrapper-item" nz-col nzSpan="24">
                             <nz-form-item nz-col nzSpan="12" >
                                 <div class="address-item">
                                     <span class="address-title">Họ và tên:</span>
-                                     <input value="123" [disabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
+                                     <input formControlName="fullName" [disabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                                     <input [value]="employeeUpdate.urgentContactDto.fullName" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                                 </div>
     
                                 <div class="address-item">
-                                    <span class="address-title">Điện thoại:</span>
-                                     <input value="123" [disabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
+                                    <span  class="address-title">Điện thoại:</span>
+                                     <input formControlName="phoneNumber"  [disabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                                     <input [value]="employeeUpdate.urgentContactDto.phoneNumber" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                                 </div>
                             </nz-form-item>
 
                             <nz-form-item nz-col nzSpan="12" >
                                 <div class="address-item last">
                                     <span class="address-title">Quan hệ:</span>
-                                    <nz-select [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="Chọn ngân hàng">
-                                        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                    <nz-select [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                                        <nz-option nzLabel="Bố" nzValue="1"></nz-option>
+                                        <nz-option nzLabel="Mẹ" nzValue="2"></nz-option>
+                                        <nz-option nzLabel="Vợ" nzValue="3"></nz-option>
+                                        <nz-option nzLabel="Chồng" nzValue="4"></nz-option>
                                     </nz-select>
-                                    <input [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''" value="1234" class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                                    <input [value]="employeeUpdate.urgentContactDto.relational !== null ? RELATION_TYPE[employeeUpdate.urgentContactDto.relational]:''" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                                 </div>
-
-                                                 
+                                          
                             </nz-form-item>
                         </form>
                       
@@ -405,7 +386,7 @@
                                 <td nzEllipsis>{{ data.address }}</td>                            
                                 <td nzEllipsis class="option">
                                     <div>
-                                        <span nzType="icon">
+                                        <span nz-icon>
                                             <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="edit" aria-hidden="true"><path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path></svg>
                                         </span>
                                     </div>
@@ -447,7 +428,7 @@
                                 <td nzEllipsis>{{ data.address }}</td>                            
                                 <td nzEllipsis class="option">
                                     <div>
-                                        <span nzType="icon">
+                                        <span nz-icon>
                                             <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="edit" aria-hidden="true"><path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path></svg>
                                         </span>
                                     </div>
@@ -472,7 +453,7 @@
                             <span *ngIf="infoContractOpen === true" nz-icon nzType="minus-square" nzTheme="outline" 
                             (click)="handleChangeStateInfoContract(0)"></span>
                             <span class="title">Thông tin hợp đồng lao động</span>
-                            <span nzType="icon" [ngClass]="hiddenEditSalaryInfo === false ? 'hidden':''" (click)="handleChangeEditSalaryInfo()">
+                            <span nz-icon [ngClass]="hiddenEditSalaryInfo === false ? 'hidden':''" (click)="handleChangeEditSalaryInfo()">
                                 <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="edit" aria-hidden="true"><path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path></svg>
                             </span>
         
@@ -514,7 +495,7 @@
                                 <td nzEllipsis>{{ data.address }}</td>
                                 <td nzEllipsis class="option">
                                     <div>
-                                        <span nzType="icon">
+                                        <span nz-icon>
                                             <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="edit" aria-hidden="true"><path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path></svg>
                                         </span>
                                     </div>
@@ -530,54 +511,55 @@
 
                     <div class="other-wapper">
                         <span class="title">Thông tin lương</span>
-                        <form nz-form [ngClass]="infoContractOpen === false?'content':'content salary'" nz-col nzSpan="24">
+                        <form [formGroup]="getSalaryInfoDto" nz-form [ngClass]="infoContractOpen === false?'content':'content salary'" nz-col nzSpan="24">
                             <nz-form-item nz-col nzSpan="12">
                                 <div class="content-item">
                                     <span>Bậc lương:</span>
-                                      <input value="123" [disabled]="hiddenEditSalaryInfo" [ngClass]="hiddenEditSalaryInfo === true ? 'input-disable':''" nz-input name="tax-code" type="text">
+                                    <input formControlName="levelSalary" [disabled]="hiddenEditSalaryInfo" [ngClass]="hiddenEditSalaryInfo === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                                    <input [value]="employeeUpdate.salaryInfoDto.levelSalary" [ngClass]="hiddenEditSalaryInfo === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                                 </div>
                                 <div class="content-item">
                                     <span>Lương Net:</span>
-                                      <input value="123" [disabled]="hiddenEditSalaryInfo" [ngClass]="hiddenEditSalaryInfo === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
+                                    <input formControlName="netSalary"  [disabled]="hiddenEditSalaryInfo" [ngClass]="hiddenEditSalaryInfo === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                                    <input [value]="employeeUpdate.salaryInfoDto.netSalary" [ngClass]="hiddenEditSalaryInfo === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                                 </div>
-                                <div class="content-item">
+                                <form nz-form [formGroup]="employeeForm" class="content-item">
                                     <span>Ngân hàng:</span>
-                                    <nz-select [nzDisabled]="hiddenEditSalaryInfo" [ngClass]="hiddenEditSalaryInfo === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="Chọn ngân hàng">
-                                        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                                        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                                        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                                    <nz-select formControlName="bank" [nzDisabled]="hiddenEditSalaryInfo" [ngClass]="hiddenEditSalaryInfo === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="Chọn ngân hàng">
+                                        <nz-option nzLabel="Techcombank" nzValue="1"></nz-option>
+                                        <nz-option nzLabel="BIDV" nzValue="2"></nz-option>
+                                        <nz-option nzLabel="MB Bank" nzValue="3"></nz-option>                                   
                                     </nz-select>
-                                    <input [ngClass]="hiddenEditSalaryInfo === false ? 'input-disable-hidden':''" value="1234" class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
-                                </div>
+                                    <input [value]="BANK[employeeUpdate.bank]" [ngClass]="hiddenEditSalaryInfo === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                                </form>
                                 
                             </nz-form-item>
                             <nz-form-item nz-col nzSpan="12">
                                 <div class="content-item">
                                     <span>Lương Gross:</span>
-                                      <input value="123" [disabled]="hiddenEditSalaryInfo" [ngClass]="hiddenEditSalaryInfo === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
+                                    <input value="123" formControlName="grossSalary"  [disabled]="hiddenEditSalaryInfo" [ngClass]="hiddenEditSalaryInfo === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                                     <input [value]="employeeUpdate.salaryInfoDto.grossSalary" [ngClass]="hiddenEditSalaryInfo === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">  
                                 </div>
                                 <div class="content-item">
                                     <span>Lương cơ bản:</span>
-                                      <input value="123" [disabled]="hiddenEditSalaryInfo" [ngClass]="hiddenEditSalaryInfo === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-
+                                    <input formControlName="basicSalary" [disabled]="hiddenEditSalaryInfo" [ngClass]="hiddenEditSalaryInfo === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                                    <input [value]="employeeUpdate.salaryInfoDto.basicSalary" [ngClass]="hiddenEditSalaryInfo === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                                 </div>
-                                <div class="content-item">
+                                <form nz-form [formGroup]="employeeForm" class="content-item">
                                     <span>Số tài khoản ngân hàng:</span>
-                                      <input value="123" [disabled]="hiddenEditSalaryInfo" [ngClass]="hiddenEditSalaryInfo === true ? 'input-disable':''" nz-input name="tax-code" type="text">
-                                </div>
-                               
-        
+                                      <input formControlName="bankAccount" [disabled]="hiddenEditSalaryInfo" [ngClass]="hiddenEditSalaryInfo === true ? 'input-disable-hidden':''" nz-input name="tax-code" type="text">
+                                      <input [value]="employeeUpdate.bankAccount" [ngClass]="hiddenEditSalaryInfo === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                                </form>
+                                  
                             </nz-form-item>
         
                             
                         </form>
                     </div>
 
-                    <div class="other-wapper">
+                    <div  class="other-wapper">
                         <span class="title">Các khoản phụ cấp</span>
-                        <nz-table #fixedTable [nzData]="listOfData" nzTableLayout="fixed">
+                        <nz-table #fixedTable  nzTableLayout="fixed">
                             <thead>
                               <tr>
                                 <th>#</th>
@@ -586,27 +568,19 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let data of fixedTable.data">
-                                <td>{{ data.name }}</td>
-                                <td>{{ data.age }}</td>
-                                <td nzEllipsis class="option">
-                                    <div>
-                                        <span nzType="icon">
-                                            <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="edit" aria-hidden="true"><path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path></svg>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span nz-icon nzType="delete" nzTheme="outline"></span>
-                                    </div>
-                                </td>                          
+                              <tr *ngFor="let item of employeeUpdate.allowanceSalaryDtos; index as i">
+                                <td>{{i + 1}}</td>
+                                <td>{{ ALLOWANCE_TYPE[item.allowanceName] }}</td>
+                                <td>{{ item.value }}</td>
+                                                 
                               </tr>
                             </tbody>
                           </nz-table>
-                    </div>
+                        </div>
 
                     <div class="other-wapper">
                         <span class="title">Các khoản khẩu trừ</span>
-                        <nz-table #fixedTable [nzData]="listOfData" nzTableLayout="fixed">
+                        <nz-table #fixedTable  nzTableLayout="fixed">
                             <thead>
                               <tr>
                                 <th>#</th>
@@ -615,19 +589,11 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let data of fixedTable.data">
-                                <td>{{ data.name }}</td>
-                                <td>{{ data.age }}</td>
-                                <td nzEllipsis class="option">
-                                    <div>
-                                        <span nzType="icon">
-                                            <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="edit" aria-hidden="true"><path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path></svg>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span nz-icon nzType="delete" nzTheme="outline"></span>
-                                    </div>
-                                </td>                          
+                              <tr *ngFor="let item of employeeUpdate.deductibleSalaryDtos; index as i">
+                                <td>{{ i + 1}}</td>
+                                <td>{{ DEDUCTIBLE_TYPE[item.deductibleName]}}</td>
+                                <td>{{ item.value }}</td>
+
                               </tr>
                             </tbody>
                           </nz-table>
@@ -656,7 +622,7 @@
                                 <td nzEllipsis>{{ data.address }}</td>
                                 <td nzEllipsis class="option">
                                     <div>
-                                        <span nzType="icon">
+                                        <span nz-icon>
                                             <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="edit" aria-hidden="true"><path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path></svg>
                                         </span>
                                     </div>
@@ -702,7 +668,7 @@
                             <td nzEllipsis>{{ data.address }}</td>
                             <td nzEllipsis class="option">
                                 <div>
-                                    <span nzType="icon">
+                                    <span nz-icon>
                                         <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="edit" aria-hidden="true"><path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path></svg>
                                     </span>
                                 </div>

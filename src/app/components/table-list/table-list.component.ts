@@ -11,16 +11,28 @@ import {randomColor} from '../../../helper/randomColor'
   templateUrl: './table-list.component.html',
   styleUrl: './table-list.component.scss'
 })
-export class TableListComponent implements AfterViewChecked {
+export class TableListComponent implements AfterViewChecked, OnInit {
   
   constructor(private cr:ComponentRedering, private employeeService:EmployeeService,private message: NzMessageService){
 
+  }
+  ngOnInit(): void {
+    this.limit = 10; 
+    this.offset = 0; 
+    this.employeeService.getListEmployee({limit:this.limit,offset:this.offset}).subscribe(response => {  
+      this.employeeService.setEmployees = response.data;
+      this.listOfData = this.employeeService.getEmployees;
+      this.totalSizeTable = response.totalSize;
+});
   }
   ngAfterViewChecked(): void {
     // if(this.avatarRef.nativeElement !== null){
     //   this.avatarRef.nativeElement.style.backgroundColor = 'blue'; 
     // }
   }
+
+  limit:number
+  offset:number
   WORK_STATUS:any = WORK_STATUS
   WORK_TYPE:any =WORK_TYPE
   GENDER:any = GENDER
@@ -31,7 +43,7 @@ export class TableListComponent implements AfterViewChecked {
   MANAGER:any = MANAGER
   getCharName = getCharName
   randomColor = randomColor
-
+  totalSizeTable:number;
   @Input()listOfData:EmployeeDto[];
   @ViewChild('avatar') avatarRef: any;
 
@@ -47,6 +59,7 @@ export class TableListComponent implements AfterViewChecked {
       this.cr.setUserNameUpdate = employee.fullName;
       this.cr.setFormMode = "UPDATE"
     }
+
 
     handleShowComponentViewDetails(value:number,employee:EmployeeDto){
       this.cr.setEmployeeUpdate = employee;  

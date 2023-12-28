@@ -50,9 +50,7 @@ export class FilterComponent implements OnInit {
     return this.employeeForm.get('workInfoDto')
   }
 
-  handleGetFilterEmployee(){
-    console.log('aa');
-    
+  handleGetFilterEmployee(){   
     const {code,gender} = this.employeeForm.value; 
     const workDto = this.employeeForm.get('workInfoDto')
     const {positionId,unitId,contractType,status} = workDto?.value;

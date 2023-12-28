@@ -60,6 +60,36 @@ export const WORK_TYPE = {
 }
 
 
+export const UNIT_TYPE = {
+    null:'Chưa cập nhật',
+    1:'Công ty cổ phần Orenda',
+    2:'Khối văn phòng',
+    3:'Phòng CNTT',
+    4:'Phòng hành chính nhân sự',
+    5:'Khối kinh doanh và Marketing',
+    6:'Phòng kinh doanh',
+    7:'Phòng CMD'
+}
+
+export const RELATION_TYPE = {
+    null:'Chưa cập nhật',
+    1:'Bố',
+    2:'Mẹ',
+    3:'Vợ',
+    4:'Chồng'
+}
+
+
+export const ALLOWANCE_TYPE = {
+    1:"Phụ cấp điện thoại",
+    2:"Phụ cấp đi lại",
+    3:"Phụ cấp hàng tháng"
+}
+
+export const DEDUCTIBLE_TYPE ={
+    1:"Khấu trừ ăn trưa"
+}
+
 
 
 

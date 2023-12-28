@@ -165,14 +165,14 @@
                         <h3>Thông tin khác</h3>
                     </div>
                     <div  nz-col nzSpan="24" class="form-container">
-                        <form nz-form nz-row class="form-item" [formGroup]="this.employeeForm">
+                        <form nz-form nz-row class="form-item" [formGroup]="employeeForm">
                             <nz-form-item  nz-col nzSpan="6" class="input-item"  >
                                 <label nzFor="">Loại giấy tờ</label>
                                 <nz-form-control >
                                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="identifyType">
                                     <nz-option nzLabel="Căn cước công dân" nzValue="1"></nz-option>
-                                    <nz-option nzLabel="Chứng minh thư" nzValue="2"></nz-option>
-                            
+                                    <nz-option nzLabel="Chứng minh nhân dân" nzValue="2"></nz-option>
+                                  
                                   </nz-select>
                                 </nz-form-control>
                             </nz-form-item >

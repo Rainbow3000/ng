@@ -9,6 +9,10 @@
         [nzData]="listOfData"
         (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
         nzBordered 
+        [nzTotal] = totalSizeTable
+        [nzFrontPagination] = true
+        [nzPageSize] = "10"
+       
       >
         <thead nz-row>
           <tr>

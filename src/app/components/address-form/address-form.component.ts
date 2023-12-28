@@ -39,7 +39,6 @@ export class AddressFormComponent implements OnInit{
   }
 
   handleChageDistrict(dis:any){
-    
     this.wards = this.districts?.find(item => item.name === dis).wards
   }
 

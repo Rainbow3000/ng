@@ -6,7 +6,8 @@ import { FormBuilder } from "@angular/forms";
 
 interface IDataResponse{
     data: EmployeeDto[],
-    statusCode:number
+    statusCode:number,
+    totalSize:number
 }
 
 
@@ -24,17 +25,26 @@ export class EmployeeService{
 
     _baseUrl:string = "https://localhost:7075/api"
 
+    employees:EmployeeDto[];
+
+    get getEmployees(){
+        return this.employees
+    }
+
+    set setEmployees(data:EmployeeDto[]){
+        this.employees = data;
+    }
 
     getListEmployee(filter:any): Observable<IDataResponse> {
         const keys = Object.keys(filter); 
         let filterString = ""; 
         for(let key of keys){
             if(filter[key] !== null){
-                filterString += `${key}=${filter[key]}`
+                filterString += `${key}=${filter[key]}&`
             }
         }  
         if(filterString.trim().length > 0){
-            return this.httpClient.get<IDataResponse>(`${this._baseUrl}/Employees?${filterString}`);   
+            return this.httpClient.get<IDataResponse>(`${this._baseUrl}/Employees?${filterString.slice(0,filterString.length - 1)}`);   
         } 
         
         return this.httpClient.get<IDataResponse>(`${this._baseUrl}/Employees`);
