@@ -16,20 +16,32 @@ import { EmployeeDto } from "../dtos/employeeDto";
     $_userNameUpdatetValue = this.userNameUpdateSubject.asObservable();
 
     private employeeUpdateSubject = new Subject<EmployeeDto>();
-    $_employeeUpdatetValue = this.userNameUpdateSubject.asObservable();
+    $_employeeUpdatetValue = this.employeeUpdateSubject.asObservable();
 
-
+    private isLoadingSubject = new Subject<boolean>();
+    $_isLoadingValue = this.isLoadingSubject.asObservable();  
     private _componentRendering: number = 1;
     private _formMode: string = "CREATE";
     private _userNameUpdate:string = ""
     private _employeeUpdate:EmployeeDto;
+    private _isLoading:boolean = false;
+
+    get getIsLoading(){
+      return this._isLoading;
+    }
+
+    set setIsLoading(value:boolean){
+       if(this._isLoading !== value){
+        this._isLoading = value;
+       }
+    }
 
     get getEmployeeUpdate():EmployeeDto{
       return this._employeeUpdate; 
     }
 
     set setEmployeeUpdate(value:EmployeeDto){
-      if (this._employeeUpdate !== value) {
+      if (JSON.stringify(this._employeeUpdate) !== JSON.stringify(value)) {
         this._employeeUpdate = value;
         this.employeeUpdateSubject.next(value);
       }

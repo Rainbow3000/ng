@@ -1,0 +1,115 @@
+
+.wrapper-item{
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 20px 15px;
+    .title-content{
+        font-weight: 500;
+    }
+    .item-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .address-item{
+        width: 100%;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        nz-select{
+            width: 50%;
+        }
+        .address-title{
+            display: block;
+            width: 40%            
+        }
+        
+        input{
+            color: #333;
+            width: 50%;
+        }
+    }
+
+    .address-item.last{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 0;
+        transform: translateY(-50%);
+    }
+   
+}
+
+.hidden{
+    display: none; 
+ }
+ 
+ .input-disable{
+     cursor: default !important;
+     background-color: #FFFFFF !important;
+     border: none !important;
+     outline: none;
+ }
+ 
+ .input-disable-hidden{
+     cursor: default !important;
+     background-color: #FFFFFF !important;
+     border: none !important;
+     display: none;
+ }
+ 
+ 
+ 
+ .input-padding-value{
+     cursor: default !important;
+     background-color: #FFFFFF !important;
+     border: none !important;
+ }
+ 
+ .other-wapper.experience{
+     display: none;
+ }
+ 
+ .other-wapper.employee{
+     display: none;
+ }
+ 
+ .other-wapper.employee-open{
+     display: block;
+ }
+ 
+ 
+ .other-wapper.bhxh{
+     display: none;
+ }
+ 
+ .other-wapper.bhxh-open{
+     display: block;
+ }
+ 
+ .other-wapper.contract{
+     display: none;
+ }
+ 
+ .other-wrapper.contract-open{
+     display: block;
+ }
+ 
+ .content.salary{
+     display: flex;
+ }
+ 
+ .ant-form-item{
+     margin-bottom: 0;
+ }
+ 
+ .other-wapper.assets{
+     display: none;
+ }
+ 
+ .other-wapper.assets-open{
+     display: block;
+ }
+ 

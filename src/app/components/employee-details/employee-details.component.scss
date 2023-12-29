@@ -6,8 +6,12 @@
     align-items: center;
     position: relative;
     .back-icon{
+        .link{
+            color: inherit;
+        }
         left: 10px;
         top: 10px;
+        z-index: 2;
         position: absolute;
         font-size: 22px;
         color: #FF7D01;
@@ -156,8 +160,7 @@
         }
         input{
             width: 50%;
-            color: #333;
-            font-weight: 500;
+            color: #333;          
         }
 
         nz-date-picker{
@@ -242,7 +245,7 @@
             
             input{
                 color: #333;
-                font-weight: 500;
+              
                 width: 50%;
             }
         }

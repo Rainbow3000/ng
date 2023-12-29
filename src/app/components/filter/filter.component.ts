@@ -55,16 +55,49 @@ export class FilterComponent implements OnInit {
     const workDto = this.employeeForm.get('workInfoDto')
     const {positionId,unitId,contractType,status} = workDto?.value;
     const filterObject = {
-      code:code,
+      codeOrName:code,
       gender:gender,
       positionId:positionId,
       unitId:unitId,
       contractType:contractType,
-      status:status
-    };
-   
-    this.employeeService.getListEmployee(filterObject).subscribe(data =>{
-      console.log(data);     
+      workStatus:status,
+      limit:10,
+      offset:0
+    };  
+    this.employeeService.getListEmployee(filterObject).subscribe(response => {
+      this.employeeService.setEmployees = response.data;
+    })
+  }
+
+  handleResetFilter(){
+    this.employeeForm = this.fb.group({
+      code:'',
+      fullName:'',
+      dob:null,
+      gender:null,
+      phoneNumber:'',
+      organEmail:null,
+      identifyType:null,
+      identifyNumber:null,
+      identifyDateRange:null,
+      identifyIssuedBy:null,
+      taxtCode:null,
+      taxtCodeDateRange:null,
+      taxtCodeIssuedBy:null,
+      personalEmail:null,
+      bank:null,
+      bankAccount:null,
+      workInfoDto: this.fb.group({         
+          positionId:null,
+          unitId:null,
+          managerId:null,
+          status:null,
+          contractType:null,
+          workType:null,
+          timeKeeperCode:null,
+          isExemptTimeKeeper:false,
+          googleCalendarId:null,
+      })
     })
   }
 }

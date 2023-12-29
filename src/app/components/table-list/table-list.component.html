@@ -3,17 +3,10 @@
         <h3>Danh sách nhân viên</h3>
     </div>
     <div nz-col nzSpan="24">
-        <nz-table
-        #rowSelectionTable
-        nzShowSizeChanger
-        [nzData]="listOfData"
-        (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
-        nzBordered 
-        [nzTotal] = totalSizeTable
-        [nzFrontPagination] = true
-        [nzPageSize] = "10"
-       
-      >
+      <nz-table #rowSelectionTable nzSize="small" [nzData]="employeeList" [nzTotal]="totalSizeTable"
+                [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" [nzFrontPagination]="false"
+                [nzPageSizeOptions]="[5, 10, 20, 30, 40]"
+                (nzQueryParams)="onQueryParamsChange($event)" nzBordered>
         <thead nz-row>
           <tr>
             <th></th>

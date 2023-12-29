@@ -1,15 +1,14 @@
 import { Injectable } from "@angular/core";
 import { EmployeeDto } from "../dtos/employeeDto";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, Subject, map } from "rxjs";
 import { FormBuilder } from "@angular/forms";
 
 interface IDataResponse{
-    data: EmployeeDto[],
+    data: any,
     statusCode:number,
     totalSize:number
 }
-
 
 @Injectable({
     providedIn:'root'
@@ -25,29 +24,32 @@ export class EmployeeService{
 
     _baseUrl:string = "https://localhost:7075/api"
 
-    employees:EmployeeDto[];
+     private employeesSubject = new Subject<EmployeeDto[]>();
+     $_employees = this.employeesSubject.asObservable();;
+     employees:EmployeeDto[]
 
     get getEmployees(){
         return this.employees
     }
 
-    set setEmployees(data:EmployeeDto[]){
-        this.employees = data;
+    set setEmployees(value:EmployeeDto[]){ 
+        
+        if( JSON.stringify(this.employees) !== JSON.stringify(value)) {
+            this.employees = value; 
+           this.employeesSubject.next(value);
+         }
     }
 
-    getListEmployee(filter:any): Observable<IDataResponse> {
+    getListEmployee(filter:any): Observable<IDataResponse>{
         const keys = Object.keys(filter); 
         let filterString = ""; 
         for(let key of keys){
             if(filter[key] !== null){
                 filterString += `${key}=${filter[key]}&`
             }
-        }  
-        if(filterString.trim().length > 0){
-            return this.httpClient.get<IDataResponse>(`${this._baseUrl}/Employees?${filterString.slice(0,filterString.length - 1)}`);   
-        } 
-        
-        return this.httpClient.get<IDataResponse>(`${this._baseUrl}/Employees`);
+        }        
+       return this.httpClient.get<IDataResponse>(`${this._baseUrl}/Employees?${filterString.slice(0,filterString.length - 1)}`)
+       
     }
 
     createEmployee(employee: EmployeeDto): Observable<IDataResponse> {

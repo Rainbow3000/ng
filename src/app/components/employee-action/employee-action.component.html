@@ -470,7 +470,7 @@
                     <h3>Hộ khẩu thường trú</h3>
                 </div>
                 <div nz-col nzSpan="24" class="form-container">
-                   <app-address-form [formGroupItem]="getPermanentResidenceDto" [addressItem] = "employeeUpdate && employeeUpdate.permanentResidenceDto">
+                   <app-address-form nz-form class="wrapper-item" nz-col nzSpan="24" [formGroupItem]="getPermanentResidenceDto" [addressItem] = "employeeUpdate && employeeUpdate.permanentResidenceDto">
 
                    </app-address-form>
                 </div>
@@ -482,7 +482,7 @@
                   <h3>Địa chỉ hiện tại</h3>
               </div>
               <div nz-col nzSpan="24" class="form-container">
-                 <app-address-form [formGroupItem]="getNowAddressDto" [addressItem] = "employeeUpdate && employeeUpdate.nowAddressDto"></app-address-form>
+                 <app-address-form nz-form class="wrapper-item" nz-col nzSpan="24" [formGroupItem]="getNowAddressDto" [addressItem] = "employeeUpdate && employeeUpdate.nowAddressDto"></app-address-form>
               </div>
           </div>
 

@@ -45,11 +45,6 @@ export class EmployeeActionComponent implements OnInit {
     
   }
 
- 
-  
-
-
-
   formater(inputNumberValue:number){
     return `${inputNumberValue}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }
@@ -383,14 +378,16 @@ export class EmployeeActionComponent implements OnInit {
   }
 
   handleShowErrText(err:any){
-    if(typeof err.error.message  === 'object'){
+    if(typeof err.error.message  === 'object' && err.error.message.length > 0){
       for(let item of err.error.message){      
         const obj = Object.keys(item);        
         this.createMessage('error',item[obj[0]]);
       }  
       return;
+    }else{
+      this.createMessage('error',err.error.Message)
+      return;
     }
-    this.createMessage('error',err.error.message)
 }
 
   handleSaveForm(){
@@ -440,9 +437,7 @@ export class EmployeeActionComponent implements OnInit {
       this.employeeService.updateEmployee(this.employeeUpdate?.employeeId,employeeCreateDto).subscribe(
         data =>{
           this.createMessage('success','Cập nhật thông tin nhân viên thành công')
-          this.employeeService.getListEmployee({}).subscribe(response =>{
-            this.employeeService.setEmployees = response.data;
-          })
+          this.employeeService.getListEmployee({})
           this.handleSetComponentRendering(1);
         },
         err => this.handleShowErrText(err)
@@ -453,9 +448,7 @@ export class EmployeeActionComponent implements OnInit {
     this.employeeService.createEmployee(employeeCreateDto).subscribe(
       data =>{
         this.createMessage('success','Tạo nhân viên thành công')
-        this.employeeService.getListEmployee({}).subscribe(response =>{
-          this.employeeService.setEmployees = response.data;
-        })
+        this.employeeService.getListEmployee({})
         this.handleSetComponentRendering(1);
       },
       err => this.handleShowErrText(err)
@@ -464,7 +457,3 @@ export class EmployeeActionComponent implements OnInit {
   }
 
 }
-function uuid() {
-  throw new Error('Function not implemented.');
-}
-

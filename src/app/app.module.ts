@@ -46,6 +46,9 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
 import en from '@angular/common/locales/en';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
+import { AddressFormDetailsComponent } from './components/address-form-details/address-form-details.component';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { OverlayComponent } from './components/overlay/overlay.component';
 
 
 registerLocaleData(vi);
@@ -63,7 +66,9 @@ registerLocaleData(vi);
     EmployeeTitlePipe,
     TreeSelectComponent,
     LoginComponent,
-    EmployeeDetailsComponent
+    EmployeeDetailsComponent,
+    AddressFormDetailsComponent,
+    OverlayComponent
   ],
   imports: [
     BrowserModule,
@@ -95,6 +100,7 @@ registerLocaleData(vi);
     NzAlertModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
+    NzSpinModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

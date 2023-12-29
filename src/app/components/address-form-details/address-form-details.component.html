@@ -1,0 +1,38 @@
+<form [formGroup]="formGroupItem" nz-form class="wrapper-item" nz-col nzSpan="24">
+    <nz-form-item nz-col nzSpan="12">
+        <div class="address-item">
+            <span class="address-title">Tỉnh/Thành phố:</span>
+            <nz-select (ngModelChange)="handleChangeCity($event)" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="city" [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                <nz-option *ngFor="let item of provinces" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>      
+              </nz-select>                           
+            <input [value]="addressItem.city" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+
+        </div>
+
+        <div class="address-item">
+            <span class="address-title">Xã/Phường:</span>
+
+            <nz-select formControlName="wards" [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--">
+                <nz-option *ngFor="let item of wards" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>      
+            </nz-select>
+
+            <input [value]="addressItem.wards" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+
+        </div>
+    </nz-form-item>
+    <nz-form-item nz-col nzSpan="12">
+        <div class="address-item">
+            <span class="address-title">Quận/Huyện:</span>
+            <nz-select (ngModelChange)="handleChageDistrict($event)" [nzDisabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable-hidden':''" nzShowSearch nzAllowClear nzShowSearch nzAllowClear nzPlaceHolder="--Chọn--" formControlName="district">
+                <nz-option *ngFor="let item of districts" [nzLabel]="item.name" [nzValue]="item.name"></nz-option>
+            </nz-select>
+            <input [value]="addressItem.district" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+        </div>
+
+        <div class="address-item">
+            <span class="address-title">Số nhà đường phố:</span>
+            <input formControlName="houseNumber"  [disabled]="hiddenEditInfoEmployee" [ngClass]="hiddenEditInfoEmployee === true ? 'input-disable input-disable-hidden':''" nz-input name="tax-code" type="text">
+            <input [value]="addressItem.houseNumber" [ngClass]="hiddenEditInfoEmployee === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+        </div>
+    </nz-form-item>
+</form>

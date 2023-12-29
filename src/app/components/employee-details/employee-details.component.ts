@@ -6,6 +6,7 @@ import {WORK_STATUS,WORK_TYPE,GENDER,BANK,CONTRACT_TYPE,IDENTIFY_TYPE,POSITION,M
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { FileDto } from '../../../dtos/fileDto';
 import { ProvincesService } from '../../../services/provinces.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-employee-details',
   templateUrl: './employee-details.component.html',
@@ -13,7 +14,7 @@ import { ProvincesService } from '../../../services/provinces.service';
 })
 export class EmployeeDetailsComponent implements OnInit{
 
-  constructor(private cr: ComponentRedering, private fb : FormBuilder, private provincesService:ProvincesService){}
+  constructor(private cr: ComponentRedering, private fb : FormBuilder, private provincesService:ProvincesService, private employeeService: EmployeeService,private message: NzMessageService){}
 
   listOfData: Array<{ name: string; age: number; address: string }> = [];
   hiddenEditInfoBasic : boolean = true 
@@ -56,14 +57,18 @@ export class EmployeeDetailsComponent implements OnInit{
   provinceUpdate:string
   districtUpdate:string
   wardsUpdate:string
+  errorsMessage = {
+    employeeCode:"",
+    fullName:"",
+    phoneNumber:""
+  }
   ngOnInit(): void {
+
     this.provincesService.getProvinces().subscribe((data)=> {
       this.provinces = data;   
-      // if(this.cr.getFormMode === "UPDATE"){
-      //     this.districts = this.provinces.find(item => item.name === this.addressItem?.city)?.districts     
-      //     this.wards = this.districts?.find(item => item.name ===this.addressItem?.district)?.wards
-      // }
-    });   
+    }); 
+    
+    this.cr.$_employeeUpdatetValue.subscribe(data => this.employeeUpdate = data);
 
     this.formMode = this.cr.getFormMode; 
     if(this.formMode === "VIEW"){
@@ -312,5 +317,98 @@ handleSetComponentRendering(value:number){
   this.cr.setComponentRendering = value; 
 }
 
-  
+
+createMessage(type: string,messageText:string): void {
+  this.message.create(type,messageText);
 }
+
+validateVietnamesePhoneNumber(phoneNumber:string) {
+  var regexPattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  return regexPattern.test(phoneNumber);
+}
+
+handleShowErrText(err:any){
+  if(typeof err.error.message  === 'object' && err.error.message.length > 0){
+    for(let item of err.error.message){      
+      const obj = Object.keys(item);        
+      this.createMessage('error',item[obj[0]]);
+    }  
+    return;
+  }else{
+    this.createMessage('error',err.error.Message)
+    return;
+  }
+ 
+}
+
+
+
+handleUpdateEmployee(type:string){
+  let flag = 0;  
+    if(this.employeeForm.value.code.trim().length === 0){
+      this.errorsMessage.employeeCode = "Mã nhân viên không được để trống"
+      flag = 1;
+    }
+
+    if(this.employeeForm.value.fullName.trim().length === 0){
+      this.errorsMessage.fullName = "Tên không được để trống"
+      flag = 1;
+    }
+
+    if(this.employeeForm.value.phoneNumber.trim().length === 0){
+      this.errorsMessage.phoneNumber = "Số điện thoại không được để trống"
+      flag = 1;
+    }else {
+      const isValid = this.validateVietnamesePhoneNumber(this.employeeForm.value.phoneNumber.trim());
+      if(!isValid){
+        this.errorsMessage.phoneNumber = "Số điện thoại không hợp lệ"
+        flag = 1;
+      } 
+    }
+
+    if(flag === 1) {
+      this.createMessage('error','Giá trị nhập vào không hợp lệ')
+      return; 
+    };
+
+    let employeeCreateDto = this.employeeForm.value
+    employeeCreateDto.workInfoDto.status = parseInt(employeeCreateDto.workInfoDto.status); 
+    employeeCreateDto.workInfoDto.contractType = parseInt(employeeCreateDto.workInfoDto.contractType); 
+    employeeCreateDto.workInfoDto.workType = parseInt(employeeCreateDto.workInfoDto.workType); 
+    employeeCreateDto.identifyType = parseInt(employeeCreateDto.identifyType); 
+    employeeCreateDto.gender = parseInt(employeeCreateDto.gender); 
+    employeeCreateDto.bank = parseInt(employeeCreateDto.bank)
+    if(employeeCreateDto.organEmail?.trim().length === 0){
+      employeeCreateDto.organEmail = null; 
+    }
+
+    if(employeeCreateDto.personalEmail?.trim().length === 0){
+      employeeCreateDto.personalEmail = null; 
+    }
+
+    if(this.formMode === "VIEW"){
+      this.employeeService.updateEmployee(this.employeeUpdate?.employeeId,employeeCreateDto).subscribe(
+        response =>{
+          this.createMessage('success','Cập nhật thông tin nhân viên thành công')
+          this.cr.setEmployeeUpdate = response.data;      
+        },
+        err => this.handleShowErrText(err)
+    )
+    }
+
+    
+    if(type === 'info-basic'){
+      this.hiddenEditInfoBasic = true; 
+    }
+
+    if(type === 'info-employee'){
+      this.hiddenEditInfoEmployee = true;
+    }
+
+    if(type === 'info-contract'){
+      this.hiddenEditSalaryInfo = true
+    }
+    
+  }
+}
+
