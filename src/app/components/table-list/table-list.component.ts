@@ -46,7 +46,6 @@ export class TableListComponent implements OnInit {
     this.limit = 10;
     this.offset = 0;
     this.getList();
-    this.cr.setIsLoading = true;
     this.employeeService.$_employees.subscribe(
       (data) => (this.employeeList = data)
     );

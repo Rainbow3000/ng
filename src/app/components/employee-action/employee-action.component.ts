@@ -15,7 +15,10 @@ import { FileUpload } from '../../models/file-upload.model';
   styleUrl: './employee-action.component.scss',
 })
 export class EmployeeActionComponent implements OnInit {
-
+  
+  constructor(private storage: AngularFireStorage,private fb : FormBuilder, private cr : ComponentRedering, private employeeService:EmployeeService , private message: NzMessageService){
+    
+  }
   selectedFiles?: FileList;
   currentFileUpload?: FileUpload;
   percentage = 0;
@@ -41,9 +44,6 @@ export class EmployeeActionComponent implements OnInit {
   educationForm:FormGroup
   employeeForm:FormGroup
   files:FileDto[] = []
-  constructor(private storage: AngularFireStorage,private fb : FormBuilder, private cr : ComponentRedering, private employeeService:EmployeeService , private message: NzMessageService){
-    
-  }
 
   formater(inputNumberValue:number){
     return `${inputNumberValue}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')

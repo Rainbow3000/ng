@@ -94,7 +94,7 @@
                         <div class="content-item">
                             <span>Ngày cấp:</span>
                             <nz-date-picker formControlName="identifyDateRange" nzPlaceHolder="Chọn thời điểm" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" [nzDisabled]="hiddenEditInfoBasic" ></nz-date-picker>
-                            <input [value]="employeeUpdate.identifyDateRange.split('T')[0]" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                            <input [value]="employeeUpdate.identifyDateRange !== null && employeeUpdate.identifyDateRange.split('T')[0]" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                         </div>
                         <div class="content-item">
                             <span>Mã số thuế:</span>
@@ -127,7 +127,7 @@
                         <div class="content-item">
                             <span>Ngày cấp MST:</span>
                             <nz-date-picker formControlName="taxtCodeDateRange" nzPlaceHolder="Chọn thời điểm" [ngClass]="hiddenEditInfoBasic === true ? 'input-disable-hidden':''" [nzDisabled]="hiddenEditInfoBasic" ></nz-date-picker>
-                            <input [value]="employeeUpdate.taxtCodeDateRange.split('T')[0]" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
+                            <input [value]="employeeUpdate.taxtCodeDateRange !== null && employeeUpdate.taxtCodeDateRange.split('T')[0]" [ngClass]="hiddenEditInfoBasic === false ? 'input-disable-hidden':''"  class="input-padding-value" disabled="true" nz-input name="tax-code" type="text">
                         </div>
                        
                         <div class="content-item">

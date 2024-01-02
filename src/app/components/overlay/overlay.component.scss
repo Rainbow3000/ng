@@ -1,4 +1,4 @@
-#overlay{
+.overlay{
     top: 0;
     left: 0;
     right: 0;
@@ -12,6 +12,6 @@
     display: none;
 }
 
-.active{
+.overlay.active{
     display: flex;
 }

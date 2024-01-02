@@ -19,7 +19,8 @@ import { EmployeeDto } from "../dtos/employeeDto";
     $_employeeUpdatetValue = this.employeeUpdateSubject.asObservable();
 
     private isLoadingSubject = new Subject<boolean>();
-    $_isLoadingValue = this.isLoadingSubject.asObservable();  
+    $_isLoadingValue = this.isLoadingSubject.asObservable(); 
+
     private _componentRendering: number = 1;
     private _formMode: string = "CREATE";
     private _userNameUpdate:string = ""
@@ -32,7 +33,7 @@ import { EmployeeDto } from "../dtos/employeeDto";
 
     set setIsLoading(value:boolean){
        if(this._isLoading !== value){
-        this._isLoading = value;
+        this._isLoading = value;        
        }
     }
 
