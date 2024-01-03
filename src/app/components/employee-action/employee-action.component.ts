@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ComponentRedering } from '../../../services/componentRedering.service';
 import { EmployeeService } from '../../../services/employee.service';
@@ -9,6 +9,7 @@ import { finalize } from 'rxjs';
 import { FileDto } from '../../../dtos/fileDto';
 import moment from 'moment'
 import { FileUpload } from '../../models/file-upload.model';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 @Component({
   selector: 'app-employee-action',
   templateUrl: './employee-action.component.html',
@@ -45,6 +46,7 @@ export class EmployeeActionComponent implements OnInit {
   employeeForm:FormGroup
   files:FileDto[] = []
 
+  
   formater(inputNumberValue:number){
     return `${inputNumberValue}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }
@@ -122,6 +124,7 @@ export class EmployeeActionComponent implements OnInit {
 
      if(this.formMode === "UPDATE"){
        this.employeeUpdate = this.cr.getEmployeeUpdate;
+
        if(this.employeeUpdate?.educationDtos?.length > 0){
         this.employeeUpdate.educationDtos.forEach(item =>{
           this.educationForm = this.fb.group({
@@ -202,7 +205,7 @@ export class EmployeeActionComponent implements OnInit {
         }),
         educationDtos:this.educations,
         experienceDtos:this.experiences,
-        fileDtos:[null],
+        fileDtos:this.employeeUpdate.fileDtos,
         permanentResidenceDto:this.fb.group({
           city:this.employeeUpdate.permanentResidenceDto.city,
           district:this.employeeUpdate.permanentResidenceDto.district,
@@ -242,47 +245,37 @@ export class EmployeeActionComponent implements OnInit {
         const total = basicSalary + grossSalary + netSalary + insuranceSalary; 
         formControl?.patchValue(total ,{emitEvent: false})
      })
-  }
+  } 
 
 
-  pushUpload(event:any) {
-    const file = event.fileList[0];
 
-    const filePath = 'files/' + file.name;
-    const fileRef = this.storage.ref(filePath);
-
-    return new Promise<any>((resolve, reject) => {
-        const task = this.storage.upload(filePath, file,{
-          contentType: 'image/png',
-        });
-        task.snapshotChanges().pipe(
-            finalize(() => fileRef.getDownloadURL().subscribe(
-                res => {     
-                  console.log(res);
-                      
-                    resolve(res);       
-                  }
-                ,
-                err => reject(err))
-            )
-        ).subscribe(downloadUrl =>{
-          console.log(downloadUrl);
-          
-          // const fileData = {
-          //   fileName:filePath,
-          //   uploadDate: moment().format(),
-          //   fileUrl:downloadUrl
-          // }
-          
-          // this.files.push(fileData)
-          // this.employeeForm.get('fileDtos')?.patchValue(this.files);
-          
-        } );
-    })
-    
-}
   
+   async handleChange(event:any) {
 
+    const file = event.target.files[0]; 
+
+    const filePath = `/files/${file.name}`;
+    const storageRef = this.storage.ref(filePath)
+    
+    const uploadTask = this.storage.upload(filePath,file);
+    uploadTask.snapshotChanges().pipe(
+      finalize(() => {
+        storageRef.getDownloadURL().subscribe(downloadURL => {
+ 
+           const fileItem ={
+              fileName:file.name,
+              fileUrl:downloadURL,
+              uploadDate:null
+           }
+
+          this.files = [...this.files,fileItem];          
+        });
+      })
+    ).subscribe();
+
+    return uploadTask.percentageChanges();
+      
+  }
 
   createMessage(type: string,messageText:string): void {
     this.message.create(type,messageText);
@@ -293,6 +286,14 @@ export class EmployeeActionComponent implements OnInit {
   get getWorkInfoDto():any{
     return this.employeeForm.get('workInfoDto')
   }
+
+  // get getEducationDto():any{
+  //   return this.employeeForm.get('educationDtos')
+  // }
+
+  // get getExperienceDto():any{
+  //   return this.employeeForm.get('experienceDtos')
+  // }
 
   get getPermanentResidenceDto():any{
     return this.employeeForm.get('permanentResidenceDto')
@@ -318,6 +319,8 @@ export class EmployeeActionComponent implements OnInit {
   get getFileDto():any{
     return this.employeeForm.get('fileDtos')
   }
+
+
 
 
   handleAddForm(type:string){
@@ -390,6 +393,14 @@ export class EmployeeActionComponent implements OnInit {
     }
 }
 
+
+ deleteFileStorage(name: string,fileUrl:string): void {
+  const storageRef = this.storage.ref('/files');
+  storageRef.child(name).delete();
+  this.employeeUpdate.fileDtos = this.employeeUpdate.fileDtos.filter(item => item.fileUrl !== fileUrl); 
+  this.handleSaveForm(); 
+}
+
   handleSaveForm(){
     let flag = 0;  
     if(this.employeeForm.value.code.trim().length === 0){
@@ -425,6 +436,7 @@ export class EmployeeActionComponent implements OnInit {
     employeeCreateDto.identifyType = parseInt(employeeCreateDto.identifyType); 
     employeeCreateDto.gender = parseInt(employeeCreateDto.gender); 
     employeeCreateDto.bank = parseInt(employeeCreateDto.bank)
+    employeeCreateDto.fileDtos = this.files;
     if(employeeCreateDto.organEmail?.trim().length === 0){
       employeeCreateDto.organEmail = null; 
     }
@@ -434,6 +446,9 @@ export class EmployeeActionComponent implements OnInit {
     }
 
     if(this.formMode === "UPDATE"){
+      if(this.employeeUpdate.fileDtos !== null){
+        employeeCreateDto.fileDtos = [...this.employeeUpdate.fileDtos,...this.files]; 
+      }
       this.employeeService.updateEmployee(this.employeeUpdate?.employeeId,employeeCreateDto).subscribe(
         data =>{
           this.createMessage('success','Cập nhật thông tin nhân viên thành công')

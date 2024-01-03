@@ -38,6 +38,7 @@
                 }
             }
             .form-item{
+
                 .input-item{
                     padding: 0 5px;
                     // &:nth-child(4n + 1) {
@@ -167,6 +168,8 @@
                 justify-content: center !important;
                 align-items: center !important;
             }
+
+         
             
             .text-area-item{
                 overflow: hidden;
@@ -183,6 +186,14 @@
                 font-weight: bold;
                 cursor: pointer;
                 border-radius: 50%;
+                a{
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: inherit;
+                }
             }
 
             .disable-input{
@@ -206,6 +217,23 @@
         margin-bottom: 20px;
         button{
             margin: 0 10px;
+        }
+    }
+
+    .input-wrapper{
+        width: 100%;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 1px dotted gray;
+        cursor: pointer;
+        &:hover{
+            border: 1px dotted rgba(128, 128, 128, 0.486);
+        }
+        .upload-icon{
+            font-size: 20px;
         }
     }
 

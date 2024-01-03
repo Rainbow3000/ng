@@ -263,7 +263,7 @@
                               </tr>        
                               <div nz-col nzSpan="24" *ngFor="let control of educations.controls; index as i">                               
                                     <form nz-form nz-row class="education-form" [formGroup]="control">
-                                        <nz-form-item nz-col nzSpan="3">    
+                                        <nz-form-item nz-col nzSpan="3">   
                                           <nz-form-control>
                                             <nz-input-group [nzSuffix]="inputClearTpl">
                                               <input type="number" nz-input name="fromYear" formControlName="fromYear"/>
@@ -364,15 +364,15 @@
                                
                               </tr>        
                               <div nz-col nzSpan="24"  *ngFor="let control of experiences.controls; index as i" >                               
-                                    <form nz-form nz-row class="education-form" [formGroup]="control">
+                                    <form nz-form nz-row class="education-form" [formGroup]="experienceForm">
                                         <nz-form-item nz-col nzSpan="3">                                 
                                           <nz-form-control class="text-area-wrapper">
-                                            <textarea class="text-area-item" nz-input placeholder="" nzAutosize formControlName="fromYear"></textarea>
+                                            <textarea class="text-area-item" nz-input placeholder="" nzAutosize formControlName="fromDay"></textarea>
                                           </nz-form-control>
                                         </nz-form-item >
                                         <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize formControlName="toYear"></textarea>
+                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize formControlName="toDay"></textarea>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
@@ -387,7 +387,7 @@
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
                                             <nz-form-control class="text-area-wrapper">
-                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize formControlName="personCompare"></textarea>
+                                              <textarea class="text-area-item" nz-input placeholder="" nzAutosize formControlName="comparePerson"></textarea>
                                             </nz-form-control>
                                           </nz-form-item >
                                           <nz-form-item nz-col nzSpan="3">                                 
@@ -431,34 +431,36 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <!-- <tr >
-                          <td>1</td>
-                          <td>nguyenducthinh.pdf</td>
-                          <td>20/12/2023</td>
+                        <tr *ngFor="let item of employeeUpdate?.fileDtos; index as i">
+                          <td>{{i + 1}}</td>
+                          <td>{{item.fileName}}</td>
+                           <td>{{item.uploadDate}}</td>
                           <td class="table-file-action">                         
-                            <div class="wrapper-icon">
-                              <span nz-icon nzType="eye" nzTheme="outline"></span> 
-                          </div>                  
-                          </td>
-                        </tr> -->
+                              <div class="wrapper-icon">
+                                  <a [href]="item.fileUrl"><span nz-icon nzType="eye" nzTheme="outline"></span></a>                                                 
+                              </div>      
+                              <div (click)="deleteFileStorage(item.fileName,item.fileUrl)" class="wrapper-icon" style="margin-left: 10px;">
+                                <span nz-icon nzType="delete" nzTheme="outline"></span>                     
+                              </div>                 
+                        </td>
+                        </tr>
                       </tbody>
                     </nz-table>
                   </div>
               </div>
-              <form style="margin-top: 30px;" nz-form nz-col nzSpan="24" class="form-item form-group" [formGroup]="getFileDto">
-                <nz-upload
-                nzType="drag"
-                [nzMultiple]="true"
-                onchange=""
-                
-              >
-                  <p class="ant-upload-drag-icon">
-                    <span nz-icon nzType="inbox"></span>
-                  </p>
-                  <p class="ant-upload-text">Chỉ hỗ trợ đính kèm tài liệu(.doc, .excel, .pdf) và file ảnh với dung lượng tối đa 20Mb</p>
+              <form style="margin-top: 30px;" nz-form nz-col nzSpan="24" class="form-item form-group" [formGroup]="getFileDto">             
+                    <input  style="display: none;" type="file" id="file-input" (change)="handleChange($event)">    
+                    <label for="file-input" class="input-wrapper">
+                      <span class="upload-icon" nz-icon nzType="plus" ></span >                   
+                      <p class="ant-upload-text">Chỉ hỗ trợ đính kèm tài liệu(.doc, .excel, .pdf) và file ảnh với dung lượng tối đa 20Mb</p>
+                  
+                    </label>
                
-              </nz-upload>
               </form>
+             
+              <div *ngFor="let item of files">             
+                  <a [href]="item.fileUrl">{{item.fileName}}</a>
+              </div>
                
             </div>
         </nz-tab>
